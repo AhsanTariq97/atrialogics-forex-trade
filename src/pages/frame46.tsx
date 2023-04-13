@@ -50,7 +50,7 @@ const Frame46Page = () => {
                     <h3 className='font-extrabold'>LIVE</h3>
                 </div>
                 <h3 className='text-xl font-bold'>BALANCE</h3>
-                <div className='px-6 py-3 border border-white rounded'>
+                <div className='px-6 py-3 border border-white rounded cursor-pointer'>
                     <h3 className='font-bold'>CHANGE LEVERAGE</h3>
                 </div>
                 {/* <div className='absolute -bottom-5 sm:-bottom-7 left-1/2 sm:border-b'>
@@ -59,8 +59,8 @@ const Frame46Page = () => {
             </div>
             <div className="relative py-8">
                 <div className="absolute z-10 p-4 text-5xl font-bold transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 sm:text-6xl min-w-max">100000.00 USD</div>
-                <div className="absolute left-0 z-0 w-full h-px bg-white top-1/2"></div>
-                <div className="absolute right-0 z-0 w-full h-px bg-white top-1/2"></div>
+                <div className="absolute left-0 z-0 hidden w-1/6 h-px bg-white lg:w-1/4 md:block top-1/2"></div>
+                <div className="absolute right-0 z-0 hidden w-1/6 h-px bg-white lg:w-1/4 md:block top-1/2"></div>
             </div>
             <div className='flex flex-col items-center justify-between px-4 py-16 space-y-12 md:px-16'>
                 <div className='flex flex-col items-start justify-between space-y-2 md:items-center'>
@@ -82,7 +82,7 @@ const Frame46Page = () => {
                 <button className='text-lg font-bold border border-white rounded-t text-[#EF4444] bg-white px-8 py-3'>PAYMENT HISTORY</button>
                 <button className='px-8 py-3 text-lg font-bold border border-white rounded-t'>TRADING HISTORY</button>
             </div>
-            <div className='bg-[#2F80ED] p-2 w-16 h-16 flex justify-center items-center rounded-full fixed bottom-24 right-8'>
+            <div className='bg-[#2F80ED] p-2 w-16 h-16 flex justify-center items-center rounded-full fixed bottom-24 right-8 cursor-pointer'>
                 <Image src='/assets/icons/earphones.svg' alt='' width={28} height={28} className='' />
             </div>
         </div>
@@ -91,7 +91,7 @@ const Frame46Page = () => {
                 <h4 className='font-semibold'>NO RECORDS FOUND IN LAST 7 DAYS</h4>
                 <button className='border border-[#2F80ED] rounded py-2 px-6 text-[#2F80ED] font-semibold'>SHOW ALL</button>
             </div>
-            <div className='bg-[#2F80ED] pt-0 p-2 w-16 h-16 flex justify-center items-center rounded-full'>
+            <div className='bg-[#2F80ED] pt-0 p-2 w-16 h-16 flex justify-center items-center rounded-full cursor-pointer'>
                 <p className='text-5xl text-white'>+</p>
             </div>
             <div className='flex flex-col items-center justify-between pt-8 space-y-6'>

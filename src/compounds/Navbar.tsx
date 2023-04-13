@@ -4,7 +4,7 @@ import NavAccountData from '../molecules/NavAccountData'
 
 const Navbar = () => {
   return (
-    <nav className='flex items-center justify-between'>
+    <nav className='grid grid-cols-3 items-center bg-[#FAFAFA] border-b border-[#D9D9D9]'>
         <LogoSection />
         <NavAccountData />
     </nav>
