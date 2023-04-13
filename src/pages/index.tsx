@@ -1,7 +1,10 @@
 import Head from 'next/head'
+import { useRouter } from 'next/router';
 
 
 export default function Home() {
+  const router = useRouter();
+
   return (
     <>
       <Head>
@@ -12,8 +15,20 @@ export default function Home() {
       </Head>
       <main>
         <h1 className="text-3xl font-bold">
-          Atria Logics Web Application
+         Forex Trade Web Application
         </h1>
+        <div className='flex gap-x-4 ml-4 mt-5'>
+        <button onClick={() => router.push('/login')} className='block rounded-md bg-green-400 color px-3.5 py-2.5'>
+          Goto Login
+        </button>
+        <button onClick={() => router.push('/frame46')} className='block rounded-md bg-blue-400 color px-3.5 py-2.5'>
+          Frame 46
+        </button>
+        <button onClick={() => router.push('/frame7')} className='block rounded-md bg-blue-400 color px-3.5 py-2.5'>
+          Frame 7
+        </button>
+        </div>
+       
       </main>
     </>
   )
