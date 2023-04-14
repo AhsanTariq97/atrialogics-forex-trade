@@ -1,12 +1,18 @@
 import React from 'react'
 import LogoSection from '../molecules/LogoSection'
 import NavAccountData from '../molecules/NavAccountData'
+import AccountData from '../atoms/AccountData'
 
 const Navbar = () => {
   return (
     <nav className='grid grid-cols-3 items-center bg-[#FAFAFA] border-b border-[#D9D9D9]'>
         <LogoSection />
         <NavAccountData />
+        <div className='grid grid-rows-3 xs:grid-rows-1 xs:grid-cols-3 col-start-2 xs:col-span-full'>
+          <AccountData heading1='BALANCE: ' amount1='10,000.00' heading2='EQUITY: ' amount2='10,000.00' smallScreen={true} />
+          <AccountData heading1='FREE FUNDS: ' amount1='10,000.00' heading2='MARGIN: ' amount2='0.00' smallScreen={true} />
+          <AccountData heading1='MARGIN LEVEL: ' amount1='0.00' percentage1='%' heading2='PROFIT: ' amount2='0.00' profit={true} smallScreen={true} />
+        </div>
     </nav>
   )
 }

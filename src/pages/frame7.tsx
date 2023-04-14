@@ -8,9 +8,9 @@ const Frame7Page = () => {
   return (
     <div className='bg-[#F4F8FD]'>
         <Navbar />
-        <div className='grid items-start grid-cols-3 mx-4 my-4'>
-          <FavoritesSection />
+        <div className='lg:grid items-start gird-cols-1 lg:grid-cols-3 mx-1 md:mx-4 my-4'>
           <ChartSection />
+          <FavoritesSection />
         </div>
         <PositionsAndOrders />
         

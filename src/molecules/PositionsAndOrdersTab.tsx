@@ -4,12 +4,12 @@ import React from 'react'
 const PositionsAndOrdersTab = () => {
   return (
     <div className='px-4 py-2'>
-        <div className='flex items-center justify-between w-full border-b-2 border-[#D9D9D9]'>
-            <div className='flex items-center justify-between'>
-                <h3 className='px-4 py-2 '>OPEN POSITIONS</h3>
-                <h3 className='px-4 py-2 text-[#2F80ED] border-b-2 border-[#2F80ED]'>PENDING ORDERS</h3>
-                <h3 className='px-4 py-2 '>FINANCE</h3>
-                <h3 className='px-4 py-2 '>CLOSED POSITIONS</h3>
+        <div className='flex items-center justify-between w-full border-b-2 border-[#D9D9D9] text-sm md:text-base'>
+            <div className='flex items-center justify-between space-x-2 md:space-x-4 '>
+                <h3 className='hidden sm:block px-1 py-2 '>OPEN POSITIONS</h3>
+                <h3 className='px-1 py-2 text-[#2F80ED] border-b-2 border-[#2F80ED]'>PENDING ORDERS</h3>
+                <h3 className='hidden sm:block px-1 py-2 '>FINANCE</h3>
+                <h3 className='hidden sm:block px-1 py-2 '>CLOSED POSITIONS</h3>
             </div>
             <div className='flex items-center justify-between space-x-2'>
                 <h4 className='text-[#535353] font-medium'>EXPAND LIST</h4>

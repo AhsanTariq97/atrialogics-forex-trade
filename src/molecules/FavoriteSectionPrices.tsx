@@ -11,10 +11,10 @@ const FavoriteSectionPrices = () => {
             <h3 className='text-[11px] font-medium text-[#535353] text-right'>SPREAD</h3>
             <h3 className='text-[11px] font-medium text-[#535353] text-right'>CHANGE</h3>
         </div>
+        <FavoritePriceCardBuySell image='/assets/flags/Rectangle 37.svg' name=' EURUSD' spread='1' change='0.01%' />
         <FavoritePriceCard image='/assets/flags/Rectangle 58.svg' name='GBPUSD' price='1.23072' spread='3' change='0.18%' />
         <FavoritePriceCard image='/assets/flags/Rectangle 54.svg' name='GBPUSD' price='1.23072' spread='9' change='0.18%' />
         <FavoritePriceCard image='/assets/flags/Rectangle 40.svg' name='XAUUSD' price='1967.69' priceColorRed={true} spread='38' change='0.23%' />
-        <FavoritePriceCardBuySell image='/assets/flags/Rectangle 37.svg' name=' EURUSD' spread='1' change='0.01%' />
     </div>
   )
 }

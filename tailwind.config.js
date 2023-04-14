@@ -7,7 +7,11 @@ module.exports = {
     "./src/compounds/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      screens: {
+        'xs': '520px',
+      }
+    },
   },
   plugins: [],
 }
