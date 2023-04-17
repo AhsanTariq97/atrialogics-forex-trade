@@ -6,3 +6,18 @@
     background: rgb(33,217,173);
     background: linear-gradient(180deg, rgba(33,217,173,1) 0%, rgba(145,183,225,1) 72%);
 }
+
+.phone-input {
+    border-radius: 0.25rem !important;
+    padding: 0.5rem !important;
+    background-color: #FBF6F64A !important;
+    font-size: 0.875rem !important;
+    line-height: 1.25rem !important;
+    border-width: 1px;
+    border-color: rgb(191 219 254);
+}
+
+.phone-input > * {
+    background-color: transparent;
+    outline: none;
+}

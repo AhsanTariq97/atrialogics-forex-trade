@@ -1,6 +1,6 @@
 import React from 'react'
 
-const PositionAndOrdersDetail = () => {
+const PositionAndOrdersPending = () => {
   return (
     <div className='flex flex-col items-center justify-between py-12'>
         <h1 className='text-3xl font-semibold'>NO RESULTS</h1>
@@ -9,4 +9,4 @@ const PositionAndOrdersDetail = () => {
   )
 }
 
-export default PositionAndOrdersDetail
+export default PositionAndOrdersPending

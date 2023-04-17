@@ -1,8 +1,28 @@
 import Head from 'next/head'
+import Link from 'next/link';
+import { useForm } from "react-hook-form";
+import validator from 'validator';
 import { useRouter } from 'next/router';
 
-
 export default function Home() {
+
+  function getFlagEmoji(countryCode: string) {
+    return countryCode.toUpperCase().replace(/./g, char => 
+        String.fromCodePoint(127397 + char.charCodeAt(0))
+    );
+  }
+
+  const { register, handleSubmit, reset, formState: { errors } } = useForm<{ email: string, password: string }>();
+  
+
+  const validateEmail = (email: string) => {
+    if (validator.isEmail(email)) {
+      return true
+    } else {
+      return 'Enter valid email'
+    } 
+  }
+
   const router = useRouter();
 
   return (
@@ -14,21 +34,43 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <h1 className="text-3xl font-bold">
-         Forex Trade Web Application
-        </h1>
-        <div className='flex gap-x-4 ml-4 mt-5'>
-        <button onClick={() => router.push('/login')} className='block rounded-md bg-green-400 color px-3.5 py-2.5'>
-          Goto Login
-        </button>
-        <button onClick={() => router.push('/frame46')} className='block rounded-md bg-blue-400 color px-3.5 py-2.5'>
-          Frame 46
-        </button>
-        <button onClick={() => router.push('/frame7')} className='block rounded-md bg-blue-400 color px-3.5 py-2.5'>
-          Frame 7
-        </button>
+      <div className='bg-[#FFFFF4] h-screen flex justify-center items-center'>
+        <div className='border border-[#5290F7] rounded p-8 max-w-md mx-auto'>
+            <form className='flex flex-col items-center justify-between w-full p-8 rounded bg-[#EFF6FF] space-y-8' onSubmit={handleSubmit((data) => {
+                  console.log(data)
+                  reset();
+                  if (validateEmail(data.email)) {
+                    router.push('/login2');
+                  } else {
+                    console.log('Email is not valid');
+                  }
+                })}>
+                <h1 className='text-4xl font-extrabold text-[#5290F7]'>Trading Crowd</h1>
+                <div className='w-full space-y-2'>
+                    <div className='flex flex-col items-start justify-between w-full space-y-1'>
+                        <label htmlFor='email' className='pl-0.5 text-xs'>Email</label>
+                        <input className={`${errors.email ? 'border border-red-600' : '' } border border-[#BFDBFE] rounded p-2 w-full bg-[#FFFFF4]`} {...register('email', {required: 'Required', validate: validateEmail })} />
+                        <p className='pl-2 text-xs text-red-600'>{errors.email?.message}</p>
+                    </div>
+                    <div className='flex flex-col items-start justify-between w-full space-y-1'>
+                        <label htmlFor="password" className='pl-0.5 text-xs'>PASSWORD</label>
+                        <input type="password" className='border border-[#BFDBFE] rounded p-2 w-full bg-[#FFFFF4]' {...register('password', { required: 'Required', minLength: {value: 8, message: 'Please enter 8 digit password'} })} />
+                        <p className='pl-2 text-xs text-red-600'>{errors.password?.message}</p>
+                        <p className='self-end text-xs font-medium'>Forgot your password?</p>
+                    </div>
+                </div>
+                <button className='bg-[#5290F7] rounded w-full text-[#FFFFF4] font-semibold py-3'>SIGN IN</button>
+            </form>
+            <div className='flex flex-col items-center justify-between py-2 space-y-2'>
+                <p className='pb-2 text-sm font-medium'>Don't have an account?</p>
+                <button className='text-[#5290F7] rounded w-full border border-[#7EA1F9] text-sm font-extrabold py-3'>TRY DEMO</button>
+                <div className='rounded border border-[#7EA1F9] text-[9px] flex justify-between items-center space-x-2 px-2'>
+                    <p className='text-base'>{getFlagEmoji('gb')}</p>
+                    <p>EN</p>
+                </div>
+            </div>
         </div>
-       
+      </div>
       </main>
     </>
   )
