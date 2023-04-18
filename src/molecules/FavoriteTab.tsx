@@ -4,9 +4,9 @@ import { AiOutlineSearch } from "react-icons/ai";
 
 const FavoriteTab = () => {
   return (
-    <div className='flex flex-col items-center justify-between px-3 mt-8 sm:mt-20'>
-        <div className='grid grid-cols-2 items-center w-full xs:space-x-4 space-y-2 xs:space-y-0'>
-            <div className='col-span-2 xs:col-span-1 flex items-center justify-center'>
+    <div className='flex flex-col items-center justify-between px-3'>
+        <div className='grid items-center w-full grid-cols-2 space-y-2 xs:space-x-4 xs:space-y-0'>
+            <div className='flex items-center justify-center col-span-2 xs:col-span-1'>
                 <div className='flex items-center justify-start space-x-2 border-b-2 border-[#2F80ED] text-[#2F80ED] px-2 py-1'>
                     <h3 className='text-sm'>FAVORITES</h3>
                     <FaStar />
