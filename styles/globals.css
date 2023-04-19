@@ -7,6 +7,15 @@
     background: linear-gradient(180deg, rgba(33,217,173,1) 0%, rgba(145,183,225,1) 72%);
 }
 
+.blur-background {
+    filter: blur(2px);
+}
+
+.bg-gradient-navSidebar {
+    background: rgb(78,131,150);
+    background: linear-gradient(180deg, rgba(78,131,150,1) 0%, rgba(0,155,188,1) 100%); 
+}
+
 .phone-input {
     border-radius: 0.25rem !important;
     padding: 0.5rem !important;

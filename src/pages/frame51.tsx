@@ -16,7 +16,11 @@ const Frame46Page = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <div className='text-white bg-gradient'>
+        <div className='relative text-white bg-gradient bg'>
+            <div className='absolute z-10 flex flex-col items-center justify-between w-3/4 px-8 py-24 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 bg-gradient'>
+                <h2 className='text-2xl font-semibold'>Your account is verified. Upload your documents in Profile section to proceed with Operation</h2>
+                <button className='p-1 text-2xl font-semibold border rounded-full'>OK</button>
+            </div>
             <Frame54Navbar setActiveFrame54Tab={setActiveFrame54Tab} />
             <div className='relative flex flex-col items-center justify-between px-4 py-16 pb-12 space-y-4 sm:flex-row md:px-16 sm:space-y-0'>
                 <div className='bg-[#EB5757] py-3 px-8 rounded-[20px]'>
@@ -26,9 +30,6 @@ const Frame46Page = () => {
                 <div className='px-6 py-3 border border-white rounded cursor-pointer'>
                     <h3 className='font-bold'>CHANGE LEVERAGE</h3>
                 </div>
-                {/* <div className='absolute -bottom-5 sm:-bottom-7 left-1/2 sm:border-b'>
-                    <h1 className='text-5xl font-bold -translate-x-1/2 sm:text-6xl min-w-max'>100000.00 USD</h1>
-                </div> */}
             </div>
             <div className="relative py-8">
                 <div className="absolute z-10 p-4 text-5xl font-bold transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 sm:text-6xl min-w-max">100000.00 USD</div>

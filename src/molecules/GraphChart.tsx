@@ -40,7 +40,7 @@ import {
     scales: {
         y: {
             beginAtZero: false,
-            position: 'right',
+            // position: 'right',
         },
     },
     barPercentage: 1,
