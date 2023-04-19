@@ -10,22 +10,27 @@ const PositionsAndOrdersTab = ({ activeTab, setActiveTab }: MyProps ) => {
 
     const [showSidebar, setShowSidebar] = useState(false)
 
+    const onTabClick = (e: any) => {
+        setActiveTab(e.target.textContent)
+        setShowSidebar(prev => !prev)
+    } 
+
   return (
     <div className='px-4 py-2'>
         <div className='flex items-center justify-between w-full border-b-2 border-[#D9D9D9] text-sm md:text-base'>
             <div className='relative flex items-center justify-between space-x-2 md:space-x-4 '>
                 <Image src={`${showSidebar ? '/assets/icons/menu-close.svg' : '/assets/icons/menu-hamburger.svg'}`} className='sm:hidden brightness-0' alt='' width={20} height={20} onClick={() => setShowSidebar(prev => !prev)} />
-                <h3 className={`hidden sm:block px-1 py-2 ${activeTab === 'OPEN POSITIONS' ? 'text-[#2F80ED] border-b-2 border-[#2F80ED]' : ''}`} onClick={(e) => setActiveTab(e.target.textContent)}>OPEN POSITIONS</h3>
-                <h3 className={`hidden sm:block px-1 py-2 ${activeTab === 'PENDING ORDERS' ? 'text-[#2F80ED] border-b-2 border-[#2F80ED]' : ''}`} onClick={(e) => setActiveTab(e.target.textContent)}>PENDING ORDERS</h3>
-                <h3 className={`hidden sm:block px-1 py-2 ${activeTab === 'FINANCE' ? 'text-[#2F80ED] border-b-2 border-[#2F80ED]' : ''}`} onClick={(e) => setActiveTab(e.target.textContent)}>FINANCE</h3>
-                <h3 className={`hidden sm:block px-1 py-2 ${activeTab === 'CLOSED POSITIONS' ? 'text-[#2F80ED] border-b-2 border-[#2F80ED]' : ''}`} onClick={(e) => setActiveTab(e.target.textContent)}>CLOSED POSITIONS</h3>
+                <h3 className={`hidden sm:block px-1 py-2 ${activeTab === 'OPEN POSITIONS' ? 'text-[#2F80ED] border-b-2 border-[#2F80ED]' : ''}`} onClick={onTabClick}>OPEN POSITIONS</h3>
+                <h3 className={`hidden sm:block px-1 py-2 ${activeTab === 'PENDING ORDERS' ? 'text-[#2F80ED] border-b-2 border-[#2F80ED]' : ''}`} onClick={onTabClick}>PENDING ORDERS</h3>
+                <h3 className={`hidden sm:block px-1 py-2 ${activeTab === 'FINANCE' ? 'text-[#2F80ED] border-b-2 border-[#2F80ED]' : ''}`} onClick={onTabClick}>FINANCE</h3>
+                <h3 className={`hidden sm:block px-1 py-2 ${activeTab === 'CLOSED POSITIONS' ? 'text-[#2F80ED] border-b-2 border-[#2F80ED]' : ''}`} onClick={onTabClick}>CLOSED POSITIONS</h3>
                 {/* Displaying one for small screen based on active */}
                 <h3 className={`sm:hidden px-1 py-2 text-[#2F80ED] border-b-2 border-[#2F80ED]`}>{activeTab}</h3>
                 {showSidebar && <div className='absolute px-8 py-2 -left-4 top-8 sm:hidden bg-slate-300'>
-                    <h3 className={`px-1 py-2 w-max ${activeTab === 'OPEN POSITIONS' ? 'text-[#2F80ED]' : ''}`} onClick={(e) => setActiveTab(e.target.textContent)}>OPEN POSITIONS</h3>
-                    <h3 className={`px-1 py-2 w-max ${activeTab === 'PENDING ORDERS' ? 'text-[#2F80ED]' : ''}`} onClick={(e) => setActiveTab(e.target.textContent)}>PENDING ORDERS</h3>
-                    <h3 className={`px-1 py-2 w-max ${activeTab === 'FINANCE' ? 'text-[#2F80ED]' : ''}`} onClick={(e) => setActiveTab(e.target.textContent)}>FINANCE</h3>
-                    <h3 className={`px-1 py-2 w-max ${activeTab === 'CLOSED POSITIONS' ? 'text-[#2F80ED]' : ''}`} onClick={(e) => setActiveTab(e.target.textContent)}>CLOSED POSITIONS</h3>
+                    <h3 className={`px-1 py-2 w-max ${activeTab === 'OPEN POSITIONS' ? 'text-[#2F80ED]' : ''}`} onClick={onTabClick}>OPEN POSITIONS</h3>
+                    <h3 className={`px-1 py-2 w-max ${activeTab === 'PENDING ORDERS' ? 'text-[#2F80ED]' : ''}`} onClick={onTabClick}>PENDING ORDERS</h3>
+                    <h3 className={`px-1 py-2 w-max ${activeTab === 'FINANCE' ? 'text-[#2F80ED]' : ''}`} onClick={onTabClick}>FINANCE</h3>
+                    <h3 className={`px-1 py-2 w-max ${activeTab === 'CLOSED POSITIONS' ? 'text-[#2F80ED]' : ''}`} onClick={onTabClick}>CLOSED POSITIONS</h3>
                 </div>}
             </div>
             {(activeTab === 'FINANCE' || activeTab === 'CLOSED POSITIONS') && <div className='hidden xl:flex items-center justify-center space-x-8 text-[#535353]'>

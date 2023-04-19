@@ -1,4 +1,4 @@
-const validateCaptcha = (response_key) => {
+const validateCaptcha = (response_key: any) => {
     return new Promise((resolve, reject) => {
       const secret_key = process.env.RECAPTCHA_SECRET_KEY
   
@@ -21,3 +21,5 @@ const validateCaptcha = (response_key) => {
         })
     })
 }
+
+export {}
