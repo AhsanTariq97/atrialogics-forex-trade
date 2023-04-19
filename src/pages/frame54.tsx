@@ -47,7 +47,7 @@ const Frame46Page = () => {
             </nav>
             <div className='flex flex-col items-center justify-between'>
                 <h2 className='text-2xl font-bold'>Accounts</h2>
-                <div className='relative flex flex-col items-center justify-between px-4 py-16 pb-12 space-y-4 sm:flex-row md:px-16 sm:space-y-0'>
+                <div className='relative flex flex-col items-center justify-between sm:flex-row'>
                     <h3>LIVE</h3>
                     <h3>BALANCE</h3>
                     <h3>CHANGE LEVERAGE</h3>

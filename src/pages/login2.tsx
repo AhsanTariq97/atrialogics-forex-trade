@@ -19,7 +19,7 @@ const LoginPage = () => {
                     <p>EN</p>
                 </div>
                 <p className='text-sm font-semibold text-[#003960]'>Already a user?</p>
-                <button className='bg-[#5290F7] text-sm font-semibold rounded text-white py-2 px-6'>SIGN IN</button>
+                <Link href='/'><button className='bg-[#5290F7] text-sm font-semibold rounded text-white py-2 px-6'>SIGN IN</button></Link>
             </div>
         </nav>
         <section className='flex flex-col items-center justify-center py-32 mx-auto space-y-8 md:flex-row md:space-y-0'>
