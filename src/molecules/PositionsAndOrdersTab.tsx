@@ -10,7 +10,7 @@ const PositionsAndOrdersTab = ({ activeTab, setActiveTab }: MyProps ) => {
 
     const [showSidebar, setShowSidebar] = useState(false)
 
-    const onTabClick = (e) => {
+    const onTabClick = (e: any) => {
         setActiveTab(e.target.textContent);
         setShowSidebar(prev => !prev)
     }

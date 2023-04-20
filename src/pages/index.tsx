@@ -49,12 +49,12 @@ export default function Home() {
                 <div className='w-full space-y-2'>
                     <div className='flex flex-col items-start justify-between w-full space-y-1'>
                         <label htmlFor='email' className='pl-0.5 text-xs'>Email</label>
-                        <input className={`${errors.email ? 'border border-red-600' : '' } border border-[#BFDBFE] rounded p-2 w-full bg-[#FFFFF4]`} {...register('email', {required: 'Required', validate: validateEmail })} />
+                        <input className={`${errors.email ? 'border border-red-600' : '' } border border-[#BFDBFE] rounded p-2 w-full bg-[#FFFFF4]`} {...register('email', {required: 'Enter your email', validate: validateEmail })} />
                         <p className='pl-2 text-xs text-red-600'>{errors.email?.message}</p>
                     </div>
                     <div className='flex flex-col items-start justify-between w-full space-y-1'>
                         <label htmlFor="password" className='pl-0.5 text-xs'>PASSWORD</label>
-                        <input type="password" className='border border-[#BFDBFE] rounded p-2 w-full bg-[#FFFFF4]' {...register('password', { required: 'Required', minLength: {value: 8, message: 'Please enter 8 digit password'} })} />
+                        <input type="password" className='border border-[#BFDBFE] rounded p-2 w-full bg-[#FFFFF4]' {...register('password', { required: 'Enter your password', minLength: {value: 8, message: 'Please enter 8 digit password'} })} />
                         <p className='pl-2 text-xs text-red-600'>{errors.password?.message}</p>
                         <p className='self-end text-xs font-medium'>Forgot your password?</p>
                     </div>
