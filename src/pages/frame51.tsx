@@ -2,8 +2,10 @@ import React, {useState} from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
 import Frame54Navbar from '../compounds/Frame54Navbar'
+import Link from 'next/link'
+import DownloadTradingFooter from '../molecules/DownloadTradingFooter'
 
-const Frame46Page = () => {
+const Frame51Page = () => {
 
     const [activeFrame54Tab, setActiveFrame54Tab ] = useState('')
 
@@ -16,10 +18,11 @@ const Frame46Page = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <div className='relative text-white bg-gradient bg'>
-            <div className='absolute z-10 flex flex-col items-center justify-between w-3/4 px-8 py-24 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 bg-gradient'>
+        <div className='relative text-white bg-gradient'>
+            <div className='absolute top-0 left-0 z-20 w-full h-full bg-black/25'></div>
+            <div className='absolute z-30 flex flex-col items-center justify-between w-3/4 px-8 py-12 space-y-12 -translate-x-1/2 -translate-y-1/2 md:py-20 md:space-y-8 top-1/2 left-1/2 rounded-xl bg-gradient'>
                 <h2 className='text-2xl font-semibold'>Your account is verified. Upload your documents in Profile section to proceed with Operation</h2>
-                <button className='p-1 text-2xl font-semibold border rounded-full'>OK</button>
+                <Link href='/frame46'><button className='p-2 text-2xl font-semibold border rounded-full'>OK</button></Link>
             </div>
             <Frame54Navbar setActiveFrame54Tab={setActiveFrame54Tab} />
             <div className='relative flex flex-col items-center justify-between px-4 py-16 pb-12 space-y-4 sm:flex-row md:px-16 sm:space-y-0'>
@@ -68,29 +71,11 @@ const Frame46Page = () => {
             <div className='bg-[#2F80ED] pt-0 p-2 w-16 h-16 flex justify-center items-center rounded-full cursor-pointer'>
                 <p className='text-5xl text-white'>+</p>
             </div>
-            <div className='flex flex-col items-center justify-between pt-8 space-y-6'>
-                <h2 className='text-3xl font-semibold text-center'>Download trading platform</h2>
-                <div className='flex items-center justify-between space-x-6'>
-                    <div className='p-2 border border-black rounded-full'>
-                        <Image src='/assets/icons/apple.svg' alt='' width={31} height={31} className='' />
-                    </div>
-                    <div className='p-2 border border-black rounded-full'>
-                        <Image src='/assets/icons/android.svg' alt='' width={31} height={31} className='' />
-                    </div>
-                    <div className='p-2 border border-black rounded-full'>
-                        <Image src='/assets/icons/windows.svg' alt='' width={31} height={31} className='' />
-                    </div>
-                </div>
-                <div className='flex items-center justify-between space-x-2'>
-                    <Image src='/assets/icons/copyright.svg' alt='' width={16} height={16} className='' />
-                    <h5>MATCH-TRADE</h5>
-                </div>
-                <p className='text-sm'>Contact us at <a className='text-[#2F80ED]' href="mailto:support@match-trade.com">support@match-trade.com</a> if you encounter any problems  Version: v.0.36.2-1067-master</p>
-            </div>
+            <DownloadTradingFooter />
         </div>
       </main>
     </>
   )
 }
 
-export default Frame46Page
+export default Frame51Page
