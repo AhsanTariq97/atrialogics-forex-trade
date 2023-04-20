@@ -2,10 +2,18 @@ import React, {useState} from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
 import Frame54Navbar from '../compounds/Frame54Navbar'
+import DownloadTradingFooter from '../molecules/DownloadTradingFooter'
+import Link from 'next/link'
 
 const Frame46Page = () => {
 
-    const [activeFrame54Tab, setActiveFrame54Tab ] = useState('')
+    const [activeFrame54Tab, setActiveFrame54Tab ] = useState('TRADING COPY')
+    
+    const [activeHistoryTab, setActiveHistoryTab ] = useState('PAYMENT HISTORY')
+
+    const onHistoryTabClick = (e: any) => {
+        setActiveHistoryTab(e.target.textContent)
+    }
 
   return (
     <>
@@ -26,9 +34,6 @@ const Frame46Page = () => {
                 <div className='px-6 py-3 border border-white rounded cursor-pointer'>
                     <h3 className='font-bold'>CHANGE LEVERAGE</h3>
                 </div>
-                {/* <div className='absolute -bottom-5 sm:-bottom-7 left-1/2 sm:border-b'>
-                    <h1 className='text-5xl font-bold -translate-x-1/2 sm:text-6xl min-w-max'>100000.00 USD</h1>
-                </div> */}
             </div>
             <div className="relative py-8">
                 <div className="absolute z-10 p-4 text-5xl font-bold transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 sm:text-6xl min-w-max">100000.00 USD</div>
@@ -46,46 +51,49 @@ const Frame46Page = () => {
                 </div>
                 <div className='flex flex-col items-center justify-center w-full space-y-4 lg:space-y-0 lg:space-x-4 lg:flex-row'>
                     <button className='text-lg font-bold border border-[#10B981] rounded bg-[#10B981] min-w-56 w-[295px] py-3'>DEPOSIT</button>
-                    <button className='text-lg font-bold border border-[#EF4444] rounded text-[#EF4444] min-w-56 w-[295px] py-3'>WITHDRAW</button>
+                    <Link href='/frame48'><button className='text-lg font-bold border border-[#EF4444] rounded text-[#EF4444] min-w-56 w-[295px] py-3'>WITHDRAW</button></Link>
                     <button className='text-lg font-bold border border-[#355881] rounded text-[#355881] min-w-56 w-[295px] py-3'>INTERNAL TRANSFER</button>
                     <button className='text-lg font-bold border border-[#2F80ED] rounded bg-[#2F80ED] min-w-56 w-[295px] py-3'>GO & TRADE</button>
                 </div>
             </div>
             <div className='flex items-center justify-start px-4 pt-8 md:px-16'>
-                <button className='text-lg font-bold border border-white rounded-t text-[#EF4444] bg-white px-8 py-3'>PAYMENT HISTORY</button>
-                <button className='px-8 py-3 text-lg font-bold border border-white rounded-t'>TRADING HISTORY</button>
+                <button className={`text-lg font-bold border border-white rounded-t ${activeHistoryTab === 'PAYMENT HISTORY' ? 'text-[#EF4444] bg-white' : ''} px-8 py-3`} onClick={onHistoryTabClick}>PAYMENT HISTORY</button>
+                <button className={`text-lg font-bold border border-white rounded-t ${activeHistoryTab === 'TRADING HISTORY' ? 'text-[#DAA418] bg-white' : ''} px-8 py-3 `} onClick={onHistoryTabClick}>TRADING HISTORY</button>
             </div>
             <div className='bg-[#2F80ED] p-2 w-16 h-16 flex justify-center items-center rounded-full fixed bottom-24 right-8 cursor-pointer'>
                 <Image src='/assets/icons/earphones.svg' alt='' width={28} height={28} className='' />
             </div>
         </div>
-        <div className='flex flex-col items-center justify-between px-4 py-16 space-y-24'>
-            <div className='flex flex-col items-center justify-between w-full py-4 space-y-3 shadow-lg rounded-xl'>
-                <h4 className='font-semibold'>NO RECORDS FOUND IN LAST 7 DAYS</h4>
-                <button className='border border-[#2F80ED] rounded py-2 px-6 text-[#2F80ED] font-semibold'>SHOW ALL</button>
-            </div>
-            <div className='bg-[#2F80ED] pt-0 p-2 w-16 h-16 flex justify-center items-center rounded-full cursor-pointer'>
-                <p className='text-5xl text-white'>+</p>
-            </div>
-            <div className='flex flex-col items-center justify-between pt-8 space-y-6'>
-                <h2 className='text-3xl font-semibold text-center'>Download trading platform</h2>
-                <div className='flex items-center justify-between space-x-6'>
-                    <div className='p-2 border border-black rounded-full'>
-                        <Image src='/assets/icons/apple.svg' alt='' width={31} height={31} className='' />
+        <div className='flex flex-col items-center justify-between px-4 pb-16 space-y-24'>
+            {activeHistoryTab === 'PAYMENT HISTORY' && 
+                <>
+                    <div className='flex flex-col items-center justify-between w-full py-4 pt-16 space-y-3 shadow-lg rounded-xl'>
+                        <h4 className='font-semibold'>NO RECORDS FOUND IN LAST 7 DAYS</h4>
+                        <button className='border border-[#2F80ED] rounded py-2 px-6 text-[#2F80ED] font-semibold'>SHOW ALL</button>
                     </div>
-                    <div className='p-2 border border-black rounded-full'>
-                        <Image src='/assets/icons/android.svg' alt='' width={31} height={31} className='' />
+                    <div className='bg-[#2F80ED] pt-0 p-2 w-16 h-16 flex justify-center items-center rounded-full cursor-pointer'>
+                        <p className='text-5xl text-white'>+</p>
                     </div>
-                    <div className='p-2 border border-black rounded-full'>
-                        <Image src='/assets/icons/windows.svg' alt='' width={31} height={31} className='' />
+                </>
+            }
+            {activeHistoryTab === 'TRADING HISTORY' && 
+                <>
+                    <div className='flex flex-col items-center justify-between w-full py-4 space-y-24 shadow-lg rounded-xl'>
+                        <ul className='flex flex-col items-center justify-between md:flex-row'>
+                            <li className='lg:text-lg font-semibold border-[#D9D9D9] border-b-4 px-3 lg:px-8 py-2'>OPEN POSITIONS</li>
+                            <li className='lg:text-lg font-semibold text-[#535353] border-b border-black px-3 lg:px-8 py-2'>ACTIVE ORDERS</li>
+                            <li className='lg:text-lg font-semibold text-[#535353] border-b border-black px-3 lg:px-8 py-2'>CANCELLED ORDERS</li>
+                            <li className='lg:text-lg font-semibold text-[#535353] border-b border-black px-3 lg:px-8 py-2'>CLOSED TRADES</li>
+                            <li className='lg:text-lg font-semibold text-[#535353] border-b border-black px-3 lg:px-8 py-2'>LEDGERS</li>
+                        </ul>
+                        <h4 className='font-semibold'>NO RECORDS FOUND IN LAST 7 DAYS</h4>
                     </div>
-                </div>
-                <div className='flex items-center justify-between space-x-2'>
-                    <Image src='/assets/icons/copyright.svg' alt='' width={16} height={16} className='' />
-                    <h5>MATCH-TRADE</h5>
-                </div>
-                <p className='text-sm'>Contact us at <a className='text-[#2F80ED]' href="mailto:support@match-trade.com">support@match-trade.com</a> if you encounter any problems  Version: v.0.36.2-1067-master</p>
-            </div>
+                    <div className='bg-[#2F80ED] pt-0 p-2 w-16 h-16 flex justify-center items-center rounded-full cursor-pointer'>
+                        <p className='text-5xl text-white'>+</p>
+                    </div>
+                </>
+            }
+            <DownloadTradingFooter />
         </div>
       </main>
     </>
