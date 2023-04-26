@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import React from "react";
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -88,7 +88,7 @@ import {
 const GraphChart = () => {
 
     return (
-        <Bar options={options} data={data} />
+        <Bar options={options} data={data} className='max-h-[calc(100vh-64px)]' />
     )
 };
 

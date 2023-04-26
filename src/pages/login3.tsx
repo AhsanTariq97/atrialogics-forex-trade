@@ -4,6 +4,7 @@ import validator from 'validator';
 import 'react-phone-number-input/style.css'
 import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input'
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 const LoginPage = () => {
 
@@ -36,7 +37,7 @@ const LoginPage = () => {
                     <p>EN</p>
                 </div>
                 <p className='text-sm font-semibold text-[#003960]'>Already a user?</p>
-                <button className='bg-[#5290F7] text-sm font-semibold rounded text-white py-2 px-6'>SIGN IN</button>
+                <Link href='/'><button className='bg-[#5290F7] text-sm font-semibold rounded text-white py-2 px-6'>SIGN IN</button></Link>
             </div>
         </nav>
         <section className='flex flex-col items-center justify-center py-32 mx-auto space-y-8 md:flex-row md:space-y-0'>
@@ -55,33 +56,40 @@ const LoginPage = () => {
             })}>
                 <h1 className='text-xl font-semibold'>Personal details</h1>
                 <div className='grid w-full grid-cols-2 gap-3'>
-                    <div className='flex flex-col items-start justify-between col-span-2 border border-[#BFDBFE] rounded p-2 bg-[#FBF6F64A] text-sm'>
-                        <label className='text-xs font-semibold'>Your email</label>
-                        <input type="text" className='text-[#53535394] font-semibold outline-none bg-transparent' {...register('email', {required: 'Required', validate: validateEmail })} placeholder='name@gmail.com' />
-                        <p className='text-xs text-red-600'>{errors.email?.message}</p>
+                    <div className='flex flex-col items-start justify-between col-span-2'>
+                        <div className={`${errors.email ? 'border border-red-600' : 'border border-[#BFDBFE]'} flex flex-col items-start w-full rounded p-2 bg-[#FBF6F64A] text-sm`}>
+                            <label className='text-xs font-semibold'>Your email</label>
+                            <input type="text" className='text-[#53535394] font-semibold outline-none bg-transparent py-1' {...register('email', {required: 'Enter your email', validate: validateEmail })} placeholder='name@gmail.com' />
+                        </div>
+                        <p className='pl-2 text-xs text-red-600'>{errors.email?.message}</p>
                     </div>
-                    <div className='flex flex-col items-start justify-between border border-[#BFDBFE] rounded p-2 bg-[#FBF6F64A] text-sm'>
-                        <label className='text-xs font-semibold'>Password</label>
-                        <input type="password" className='text-[#53535394] font-semibold outline-none bg-transparent' {...register('password', { required: 'Required', minLength: {value: 8, message: 'Please enter 8 digit password'} })} placeholder='Password' />
-                        <p className='text-xs text-red-600'>{errors.password?.message}</p>
+
+                    <div className='flex flex-col items-start justify-between'>
+                        <div className={`${errors.password ? 'border border-red-600' : 'border border-[#BFDBFE]'} flex flex-col items-start w-full rounded p-2 bg-[#FBF6F64A] text-sm`}>
+                            <label className='text-xs font-semibold'>Password</label>
+                            <input type="password" className='text-[#53535394] font-semibold outline-none bg-transparent py-1' {...register('password', { required: 'Enter your password', minLength: {value: 8, message: 'Please enter 8 digit password'} })} placeholder='Password' />
+                        </div>
+                        <p className='pl-2 text-xs text-red-600'>{errors.password?.message}</p>
                     </div>
                     <div className='flex flex-col items-start justify-between w-full col-start-1 space-y-1 '>
-                        <input type="text" className={`${errors.firstName ? 'border border-red-600' : 'border border-[#BFDBFE]' } font-semibold outline-none rounded p-2 bg-[#FBF6F64A] text-sm`} {...register('firstName', { required: 'Required', minLength: {value: 2, message: 'Please enter your first name'} })} placeholder='First name' />
+                        <input type="text" className={`${errors.firstName ? 'border border-red-600' : 'border border-[#BFDBFE]' } font-semibold outline-none rounded p-2 bg-[#FBF6F64A] text-sm`} {...register('firstName', { required: 'Enter your first name', minLength: {value: 2, message: 'Please enter your first name'} })} placeholder='First name' />
                         <p className='pl-2 text-xs text-red-600'>{errors.firstName?.message}</p>
                     </div>
                     <div className='flex flex-col items-start justify-between w-full space-y-1 '>
-                        <input type="text" className={`${errors.lastName ? 'border border-red-600' : 'border border-[#BFDBFE]' } font-semibold rounded p-2 bg-[#FBF6F64A] text-sm outline-none`} {...register('lastName', { required: 'Required', minLength: {value: 2, message: 'Please enter your last name'} })} placeholder='Last name' />
+                        <input type="text" className={`${errors.lastName ? 'border border-red-600' : 'border border-[#BFDBFE]' } font-semibold rounded p-2 bg-[#FBF6F64A] text-sm outline-none`} {...register('lastName', { required: 'Enter your last name', minLength: {value: 2, message: 'Please enter your last name'} })} placeholder='Last name' />
                         <p className='pl-2 text-xs text-red-600'>{errors.lastName?.message}</p>
                     </div>
                     <div className='flex flex-col items-start justify-between w-full space-y-1'>
-                        <Controller name="phone" control={control} rules={{ validate: (value) => isValidPhoneNumber(value) || 'Invalid number' , required: 'Required', }} render={({ field: { onChange, value } }) => (
-                            <PhoneInput value={value} onChange={onChange} defaultCountry="US" className='phone-input' placeholder='Phone number' />
-                            )}/>
+                        <div className={`${errors.phone ? 'border border-red-600' : 'border border-[#BFDBFE]'} rounded`}>
+                            <Controller name="phone" control={control} rules={{ validate: (value) => isValidPhoneNumber(value) || 'Invalid number' , required: 'Enter your number', }} render={({ field: { onChange, value } }) => (
+                                <PhoneInput value={value} onChange={onChange} defaultCountry="US" className='phone-input' placeholder='Phone number' />
+                                )}/>
+                        </div>
                         <p className='pl-2 text-xs text-red-600'>{errors.phone?.message}</p>
                     </div>
                 </div>
                 <div className='flex items-center justify-between w-full'>
-                    <button className='border border-[#5290F7] rounded text-xs text-[#535353] font-bold py-3 px-4 self-end'>PREVIOUS STEP</button>
+                    <Link href='/login2'><button className='border border-[#5290F7] rounded text-xs text-[#535353] font-bold py-3 px-4 self-end'>PREVIOUS STEP</button></Link>
                     <button className='bg-[#BFDBFE] rounded text-xs text-[#5290F7] font-bold py-3 px-4 self-end'>NEXT STEP</button>
                 </div>
             </form>

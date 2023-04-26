@@ -25,7 +25,7 @@ const LoginPage = () => {
                     <p>EN</p>
                 </div>
                 <p className='text-sm font-semibold text-[#003960]'>Already a user?</p>
-                <button className='bg-[#5290F7] text-sm font-semibold rounded text-white py-2 px-6'>SIGN IN</button>
+                <Link href='/'><button className='bg-[#5290F7] text-sm font-semibold rounded text-white py-2 px-6'>SIGN IN</button></Link>
             </div>
         </nav>
         <section className='flex flex-col items-center justify-center py-32 mx-auto space-y-8 md:flex-row md:space-y-0'>
@@ -41,7 +41,7 @@ const LoginPage = () => {
                     <ReCAPTCHA size="normal" sitekey='6LelI5QlAAAAAABvwav5tsdTLPof5PJJJdYeoLFk' />
                 </div>
                 <div className='flex items-center justify-between w-full'>
-                    <button className='border border-[#5290F7] rounded text-xs text-[#535353] font-bold py-3 px-4 self-end'>PREVIOUS STEP</button>
+                    <Link href='/login3'><button className='border border-[#5290F7] rounded text-xs text-[#535353] font-bold py-3 px-4 self-end'>PREVIOUS STEP</button></Link>
                     <Link href='/frame7'><button className='bg-[#5290F7] rounded text-xs text-white font-bold py-3 px-4 self-end'>NEXT STEP</button></Link>
                 </div>
             </div>
