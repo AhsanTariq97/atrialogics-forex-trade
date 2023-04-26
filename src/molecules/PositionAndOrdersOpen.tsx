@@ -5,8 +5,8 @@ import { IoMdClose } from 'react-icons/io'
 
 const PositionAndOrdersPending = () => {
   return (
-    <div className='flex flex-col items-center justify-between pb-8 bg-[#F4F8FD] '>
-      <table className='w-full h-full '>
+    <div className='pb-8 bg-[#F4F8FD] overflow-x-auto'>
+      <table className='w-full h-full'>
         <thead className='text-[10px] font-medium'>
           <tr className='border border-[#D9D9D9]'>
             <th className='py-1.5 rounded-l-2xl'><div className='flex items-center justify-center space-x-1'><p>ID</p><TbArrowsSort/></div></th>
@@ -130,7 +130,6 @@ const PositionAndOrdersPending = () => {
             <td className='text-center text-[#EF4444]'>2.95</td>
             <td className=''><IoMdClose className='mx-auto border border-[#D9D9D9] rounded' width={12} height={12}/></td>
           </tr>
-          
         </tbody>
       </table>
     </div>

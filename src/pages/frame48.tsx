@@ -4,16 +4,19 @@ import Image from 'next/image'
 import Frame54Navbar from '../compounds/Frame54Navbar'
 import DownloadTradingFooter from '../molecules/DownloadTradingFooter'
 import Link from 'next/link'
+import PaypalWithdraw from '../atoms/PaypalWithdraw'
 
 const Frame48Page = () => {
 
     const [activeFrame54Tab, setActiveFrame54Tab ] = useState('TRADING COPY')
-    
-    const [activeHistoryTab, setActiveHistoryTab ] = useState('PAYMENT HISTORY')
 
-    const onHistoryTabClick = (e: any) => {
-        setActiveHistoryTab(e.target.textContent)
+    const [paymentMethod, setPaymentMethod ] = useState('')
+
+    const onPaymentMethodClick = (e: any) => {
+        setPaymentMethod(e.target.textContent)
     }
+
+    console.log(paymentMethod)
 
   return (
     <>
@@ -42,47 +45,53 @@ const Frame48Page = () => {
                 <div className='flex flex-col items-start justify-between space-y-2 md:items-center'>
                     <h3 className='text-xl font-bold'>EQUITY:  100000.00 USD  |   MARGIN:  0.00USD</h3>
                 </div>
-                <div className='flex flex-wrap items-center justify-center space-x-4'>
-                    <div className='border border-[#D9D9D9] rounded-xl w-40 h-40 flex flex-col justify-center items-center space-y-3'>
-                        <Image src='/assets/bitcoin.svg' alt='' width={50} height={50} />
-                        <p className='font-bold'>BTC</p>
-                    </div>
-                    <div className='border border-[#D9D9D9] rounded-xl w-40 h-40 flex flex-col justify-center items-center space-y-3'>
-                        <Image src='/assets/credit_card.svg' alt='' width={50} height={50} />
-                        <p className='font-bold'>Bank Transfer USD</p>
-                    </div>
-                    <div className='border border-[#D9D9D9] rounded-xl w-40 h-40 flex flex-col justify-center items-center space-y-3'>
-                        <Image src='/assets/usdt.svg' alt='' width={50} height={50} />
-                        <p className='font-bold'>USDT ERC20 (CA) </p>
-                    </div>
-                    <div className='border border-[#D9D9D9] rounded-xl w-40 h-40 flex flex-col justify-center items-center space-y-3'>
-                        <Image src='/assets/usdt.svg' alt='' width={50} height={50} />
-                        <p className='font-bold'>USDT ERC20 (online payment)</p>
-                    </div>
-                    <div className='border border-[#D9D9D9] rounded-xl w-40 h-40 flex flex-col justify-center items-center space-y-3'>
-                        <Image src='/assets/change-balance.svg' alt='' width={50} height={50} />
-                        <p className='font-bold'>Change Balance</p>
-                    </div>
-                    <div className='border border-[#D9D9D9] rounded-xl w-40 h-40 flex flex-col justify-center items-center space-y-3'>
-                        <p className='text-4xl font-semibold'>Skrill</p>
-                        <p className='font-bold'>Skrill</p>
-                    </div>
-                    <div className='border border-[#D9D9D9] rounded-xl w-40 h-40 flex flex-col justify-center items-center space-y-3'>
-                        <Image src='/assets/paypal.svg' alt='' width={50} height={50} />
-                        <p className='font-bold'>Paypal</p>
-                    </div>
-                    <div className='border border-[#D9D9D9] rounded-xl w-40 h-40 flex flex-col justify-center items-center space-y-3'>
-                        <Image src='/assets/internal-transfer.svg' alt='' width={50} height={50} />
-                        <p className='font-bold'>Internal Transfer</p>
-                    </div>
+                <div className='flex flex-wrap items-center justify-center md:w-4/5'>
+                    <button className={`${paymentMethod === 'BTC' ? 'bg-[#B3CDF0]' : '' } border border-[#D9D9D9] rounded-xl w-40 h-40 flex flex-col justify-start pt-8 mx-2 my-2 items-center space-y-3`} onClick={onPaymentMethodClick}>
+                        <Image src='/assets/bitcoin.svg' className='pointer-events-none' alt='' width={50} height={50} />
+                        <p className='px-2 font-bold text-center'>BTC</p>
+                    </button>
+                    <button className={`${paymentMethod === 'Bank Transfer USD' ? 'bg-[#B3CDF0]' : '' } border border-[#D9D9D9] rounded-xl w-40 h-40 flex flex-col justify-start pt-8 mx-2 my-2 items-center space-y-3`} onClick={onPaymentMethodClick}>
+                        <Image src='/assets/credit_card.svg' className='pointer-events-none' alt='' width={50} height={50} />
+                        <p className='px-2 font-bold text-center'>Bank Transfer USD</p>
+                    </button>
+                    <button className={`${paymentMethod === 'USDT ERC20 (CA)' ? 'bg-[#B3CDF0]' : '' } border border-[#D9D9D9] rounded-xl w-40 h-40 flex flex-col justify-start pt-8 mx-2 my-2 items-center space-y-3`} onClick={onPaymentMethodClick}>
+                        <Image src='/assets/usdt.svg' className='pointer-events-none' alt='' width={50} height={50} />
+                        <p className='px-2 font-bold text-center'>USDT ERC20 (CA)</p>
+                    </button>
+                    <button className={`${paymentMethod === 'USDT ERC20 (online payment)' ? 'bg-[#B3CDF0]' : '' } border border-[#D9D9D9] rounded-xl w-40 h-40 flex flex-col justify-start pt-8 mx-2 my-2 items-center space-y-3`} onClick={onPaymentMethodClick}>
+                        <Image src='/assets/usdt.svg' className='pointer-events-none' alt='' width={50} height={50} />
+                        <p className='px-2 font-bold text-center'>USDT ERC20 (online payment)</p>
+                    </button>
+                    <button className={`${paymentMethod === 'Change Balance' ? 'bg-[#B3CDF0]' : '' } border border-[#D9D9D9] rounded-xl w-40 h-40 flex flex-col justify-start pt-8 mx-2 my-2 items-center space-y-3`} onClick={onPaymentMethodClick}>
+                        <Image src='/assets/change-balance.svg' className='pointer-events-none' alt='' width={50} height={50} />
+                        <p className='px-2 font-bold text-center'>Change Balance</p>
+                    </button>
+                    <button className={`${paymentMethod === 'SkrillSkrill' ? 'bg-[#B3CDF0]' : '' } border border-[#D9D9D9] rounded-xl w-40 h-40 flex flex-col justify-start pt-8 mx-2 my-2 items-center space-y-3`} onClick={onPaymentMethodClick}>
+                        <p className='text-4xl font-semibold pointer-events-none'>Skrill</p>
+                        <p className='px-2 font-bold text-center'>Skrill</p>
+                    </button>
+                    <button className={`${paymentMethod === 'Paypal' ? 'bg-[#B3CDF0]' : '' } border border-[#D9D9D9] rounded-xl w-40 h-40 flex flex-col justify-start pt-8 mx-2 my-2 items-center space-y-3`} onClick={onPaymentMethodClick}>
+                        <Image src='/assets/paypal.svg' className='pointer-events-none' alt='' width={50} height={50} />
+                        <p className='px-2 font-bold text-center'>Paypal</p>
+                    </button>
+                    <button className={`${paymentMethod === 'Internal Transfer' ? 'bg-[#B3CDF0]' : '' } border border-[#D9D9D9] rounded-xl w-40 h-40 flex flex-col justify-start pt-8 mx-2 my-2 items-center space-y-3`} onClick={onPaymentMethodClick}>
+                        <Image src='/assets/internal-transfer.svg' className='pointer-events-none' alt='' width={50} height={50} />
+                        <p className='px-2 font-bold text-center'>Internal Transfer</p>
+                    </button>
                 </div>
             </div>
             <div className='bg-[#2F80ED] p-2 w-16 h-16 flex justify-center items-center rounded-full fixed bottom-24 right-8 cursor-pointer'>
                 <Image src='/assets/icons/earphones.svg' alt='' width={28} height={28} className='' />
             </div>
         </div>
-        <div className='flex flex-col items-center justify-between px-4 pb-16 space-y-24'>
-            
+        <div className='flex flex-col items-center justify-between px-4 py-16 space-y-24'>
+            {paymentMethod === '' && <div className='flex flex-col items-center justify-between pt-16 space-y-4'>
+                <div className='p-1.5 border border-black rounded-full'>
+                    <Image src='/assets/icons/arrowup-7.svg' alt='' width={28} height={28} className='' />
+                </div>
+                <h3 className='text-lg font-bold'>Choose your payment method above</h3>
+            </div>}
+            {paymentMethod === 'Paypal' && <PaypalWithdraw />}
             <DownloadTradingFooter />
         </div>
       </main>

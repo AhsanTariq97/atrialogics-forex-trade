@@ -31,10 +31,10 @@ const Frame54Navbar = ({ setActiveFrame54Tab }: {setActiveFrame54Tab: React.Disp
         <nav className='flex items-center justify-between p-4 border-b'>
             <Link href='/frame7'><Image src='/assets/icons/backarrow.svg' alt='' width={20} height={20} /></Link>
             <div className='items-center justify-between hidden pl-40 space-x-12 lg:flex'>
-                <div className='flex items-center justify-between space-x-1'>
+                <Link href='/profile'><div className='flex items-center justify-between space-x-1'>
                     <Image src='/assets/icons/unverified.svg' alt='' width={24} height={24} />
                     <h4>UNVERIFIED</h4>
-                </div>
+                </div></Link>
                 <Link href='/frame51'><div className='flex items-center justify-between space-x-1'>
                     <div className='bg-white rounded-full w-max'>
                         <Image src='/assets/icons/users.svg' alt='' width={24} height={24} />
@@ -61,8 +61,8 @@ const Frame54Navbar = ({ setActiveFrame54Tab }: {setActiveFrame54Tab: React.Disp
             </div>
             <div ref={sidebarRef} className={`${navSidebar ? '' : 'hidden'} fixed z-20 right-0 px-4 py-4 top-[56.8px] bg-gradient-navSidebar`}>
                 <ul className='flex flex-col items-center justify-between'>
-                    <li className='cursor-pointer w-full text-center py-3 font-semibold px-6 border-b border-[#10B981]'>Profile</li>
-                    <Link href='/frame56'><li className='cursor-pointer w-full text-center py-3 font-semibold px-6 border-b border-[#10B981]'>Security</li></Link>
+                    <Link href='/profile'><li className='cursor-pointer w-full text-center py-3 font-semibold px-6 border-b border-[#10B981]'>Profile</li></Link>
+                    <Link href='/security'><li className='cursor-pointer w-full text-center py-3 font-semibold px-6 border-b border-[#10B981]'>Security</li></Link>
                     <Link href='/frame51'><li className='cursor-pointer w-full text-center py-3 font-semibold px-6 border-b border-[#10B981]'>Become an IB</li></Link>
                     <Link href='/frame54'><li className='cursor-pointer w-full text-center py-3 font-semibold px-6 border-b border-[#10B981]' onClick={() => setActiveFrame54Tab('COPY TRADING')}>Copy Trading</li></Link>
                     <Link href='/frame46'><li className='cursor-pointer w-full text-center py-3 font-semibold px-6 border-b border-[#10B981]'>Restart Application</li></Link>
