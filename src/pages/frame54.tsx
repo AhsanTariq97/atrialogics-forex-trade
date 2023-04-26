@@ -122,6 +122,7 @@ const Frame54Page = () => {
                 </div>
                 <p className='text-sm'>Contact us at <a className='text-[#2F80ED]' href="mailto:support@match-trade.com">support@match-trade.com</a> if you encounter any problems  Version: v.0.36.2-1067-master</p>
             </div>
+        </div>
         <div className='pb-16 text-white bg-gradient'>
             <Frame54Navbar setActiveFrame54Tab={setActiveFrame54Tab} />
             <div className='flex flex-col items-center justify-between py-8 space-y-4'>
