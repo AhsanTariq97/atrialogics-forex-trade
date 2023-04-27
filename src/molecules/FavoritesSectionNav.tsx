@@ -14,8 +14,6 @@ const FavoritesSectionNav = () => {
     setActiveFavNavTab(e.target.textContent)
   }
 
-  console.log(activeFavNavTab)
-
   return (
     <div className='flex flex-col justify-between py-1 items-between'>
       <div className='flex items-center justify-between px-4 py-2'>

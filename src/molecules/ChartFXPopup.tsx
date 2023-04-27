@@ -17,6 +17,19 @@ const ChartFXPopup = () => {
     setActiveFXButton(e.target.textContent)
   }
 
+  const [fxData, setfxData] = useState({})
+  // avgDirectional: {},
+  // avgTrueRange: {},
+  // awesomeOscillator: {},
+  // bollingerBands: {},
+  // commodityChannel: {},
+  // ichimokuCloud: {},
+  // knowsureThings: {},
+  // maco: {},
+  // momentum: {},
+
+  console.log(fxData, 'sda')
+
   return (
     <div className='absolute top-8 -translate-x-1/2 bg-[#F4F9FF] border border-[#D9D9D9] rounded w-[500px]'>
       <div className='flex flex-col items-start justify-start'>
@@ -34,8 +47,8 @@ const ChartFXPopup = () => {
                   <button className={`text-sm font-medium px-3 py-2 rounded ${activeFXButton === 'MOMENTUM' && 'text-[#5290F7] border border-[#5290F7] bg-[#F4F9FF]'}`} onClick={onFXButtonClick}>MOMENTUM</button>
               </div>
               <div className='col-span-3 bg-[#FBFAFA] w-full h-full'>
-                  {activeFXButton === 'AVERAGE DIRECTIONAL' && <ChartFXAvgDirectional />}
-                  {activeFXButton === 'AVERAGE TRUE RANGE' && <ChartFXAvgTrueRange />}
+                  {activeFXButton === 'AVERAGE DIRECTIONAL' && <ChartFXAvgDirectional fxData={fxData} setfxData={setfxData} />}
+                  {activeFXButton === 'AVERAGE TRUE RANGE' && <ChartFXAvgTrueRange fxData={fxData} setfxData={setfxData} />}
                   {activeFXButton === 'AWESOME OSCILLATOR' && <ChartFXAwesomeOscillator />}
                   {activeFXButton === 'BOLLINGER BANDS' && <ChartFXBollingerBands />}
                   {activeFXButton === 'COMMODITY CHANNEL' && <ChartFXCommodityChannel />}

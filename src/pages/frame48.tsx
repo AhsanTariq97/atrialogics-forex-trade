@@ -3,20 +3,14 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Frame54Navbar from '../compounds/Frame54Navbar'
 import DownloadTradingFooter from '../molecules/DownloadTradingFooter'
-import Link from 'next/link'
 import PaypalWithdraw from '../atoms/PaypalWithdraw'
+import PaymentMethodCard from '../atoms/PaymentMethodCard'
 
 const Frame48Page = () => {
 
     const [activeFrame54Tab, setActiveFrame54Tab ] = useState('TRADING COPY')
 
     const [paymentMethod, setPaymentMethod ] = useState('')
-
-    const onPaymentMethodClick = (e: any) => {
-        setPaymentMethod(e.target.textContent)
-    }
-
-    console.log(paymentMethod)
 
   return (
     <>
@@ -46,38 +40,14 @@ const Frame48Page = () => {
                     <h3 className='text-xl font-bold'>EQUITY:  100000.00 USD  |   MARGIN:  0.00USD</h3>
                 </div>
                 <div className='flex flex-wrap items-center justify-center md:w-4/5'>
-                    <button className={`${paymentMethod === 'BTC' ? 'bg-[#B3CDF0]' : '' } border border-[#D9D9D9] rounded-xl w-40 h-40 flex flex-col justify-start pt-8 mx-2 my-2 items-center space-y-3`} onClick={onPaymentMethodClick}>
-                        <Image src='/assets/bitcoin.svg' className='pointer-events-none' alt='' width={50} height={50} />
-                        <p className='px-2 font-bold text-center'>BTC</p>
-                    </button>
-                    <button className={`${paymentMethod === 'Bank Transfer USD' ? 'bg-[#B3CDF0]' : '' } border border-[#D9D9D9] rounded-xl w-40 h-40 flex flex-col justify-start pt-8 mx-2 my-2 items-center space-y-3`} onClick={onPaymentMethodClick}>
-                        <Image src='/assets/credit_card.svg' className='pointer-events-none' alt='' width={50} height={50} />
-                        <p className='px-2 font-bold text-center'>Bank Transfer USD</p>
-                    </button>
-                    <button className={`${paymentMethod === 'USDT ERC20 (CA)' ? 'bg-[#B3CDF0]' : '' } border border-[#D9D9D9] rounded-xl w-40 h-40 flex flex-col justify-start pt-8 mx-2 my-2 items-center space-y-3`} onClick={onPaymentMethodClick}>
-                        <Image src='/assets/usdt.svg' className='pointer-events-none' alt='' width={50} height={50} />
-                        <p className='px-2 font-bold text-center'>USDT ERC20 (CA)</p>
-                    </button>
-                    <button className={`${paymentMethod === 'USDT ERC20 (online payment)' ? 'bg-[#B3CDF0]' : '' } border border-[#D9D9D9] rounded-xl w-40 h-40 flex flex-col justify-start pt-8 mx-2 my-2 items-center space-y-3`} onClick={onPaymentMethodClick}>
-                        <Image src='/assets/usdt.svg' className='pointer-events-none' alt='' width={50} height={50} />
-                        <p className='px-2 font-bold text-center'>USDT ERC20 (online payment)</p>
-                    </button>
-                    <button className={`${paymentMethod === 'Change Balance' ? 'bg-[#B3CDF0]' : '' } border border-[#D9D9D9] rounded-xl w-40 h-40 flex flex-col justify-start pt-8 mx-2 my-2 items-center space-y-3`} onClick={onPaymentMethodClick}>
-                        <Image src='/assets/change-balance.svg' className='pointer-events-none' alt='' width={50} height={50} />
-                        <p className='px-2 font-bold text-center'>Change Balance</p>
-                    </button>
-                    <button className={`${paymentMethod === 'SkrillSkrill' ? 'bg-[#B3CDF0]' : '' } border border-[#D9D9D9] rounded-xl w-40 h-40 flex flex-col justify-start pt-8 mx-2 my-2 items-center space-y-3`} onClick={onPaymentMethodClick}>
-                        <p className='text-4xl font-semibold pointer-events-none'>Skrill</p>
-                        <p className='px-2 font-bold text-center'>Skrill</p>
-                    </button>
-                    <button className={`${paymentMethod === 'Paypal' ? 'bg-[#B3CDF0]' : '' } border border-[#D9D9D9] rounded-xl w-40 h-40 flex flex-col justify-start pt-8 mx-2 my-2 items-center space-y-3`} onClick={onPaymentMethodClick}>
-                        <Image src='/assets/paypal.svg' className='pointer-events-none' alt='' width={50} height={50} />
-                        <p className='px-2 font-bold text-center'>Paypal</p>
-                    </button>
-                    <button className={`${paymentMethod === 'Internal Transfer' ? 'bg-[#B3CDF0]' : '' } border border-[#D9D9D9] rounded-xl w-40 h-40 flex flex-col justify-start pt-8 mx-2 my-2 items-center space-y-3`} onClick={onPaymentMethodClick}>
-                        <Image src='/assets/internal-transfer.svg' className='pointer-events-none' alt='' width={50} height={50} />
-                        <p className='px-2 font-bold text-center'>Internal Transfer</p>
-                    </button>
+                    <PaymentMethodCard paymentMethod={paymentMethod} setPaymentMethod={setPaymentMethod} img='/assets/bitcoin.svg' text='BTC' />
+                    <PaymentMethodCard paymentMethod={paymentMethod} setPaymentMethod={setPaymentMethod} img='/assets/credit_card.svg' text='Bank Transfer USD' />
+                    <PaymentMethodCard paymentMethod={paymentMethod} setPaymentMethod={setPaymentMethod} img='/assets/usdt.svg' text='USDT ERC20 (CA)' />
+                    <PaymentMethodCard paymentMethod={paymentMethod} setPaymentMethod={setPaymentMethod} img='/assets/usdt.svg' text='USDT ERC20 (online payment)' />
+                    <PaymentMethodCard paymentMethod={paymentMethod} setPaymentMethod={setPaymentMethod} img='/assets/change-balance.svg' text='Change Balance' />
+                    <PaymentMethodCard paymentMethod={paymentMethod} setPaymentMethod={setPaymentMethod} img='/assets/skrill.svg' text='Skrill' />
+                    <PaymentMethodCard paymentMethod={paymentMethod} setPaymentMethod={setPaymentMethod} img='/assets/paypal.svg' text='Paypal' />
+                    <PaymentMethodCard paymentMethod={paymentMethod} setPaymentMethod={setPaymentMethod} img='/assets/internal-transfer.svg' text='Internal Transfer' />
                 </div>
             </div>
             <div className='bg-[#2F80ED] p-2 w-16 h-16 flex justify-center items-center rounded-full fixed bottom-24 right-8 cursor-pointer'>

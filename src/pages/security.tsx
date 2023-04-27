@@ -2,23 +2,11 @@ import React, {useState} from 'react'
 import Head from 'next/head'
 import Frame54Navbar from '../compounds/Frame54Navbar'
 import DownloadTradingFooter from '../molecules/DownloadTradingFooter'
+import ChangePasswordForm from '../molecules/ChangePasswordForm';
 
-import { useForm } from 'react-hook-form';
-
-const Frame48Page = () => {
+const SecurityPage = () => {
 
     const [activeFrame54Tab, setActiveFrame54Tab ] = useState('TRADING COPY')
-
-    const { register, handleSubmit, watch } = useForm();
-
-    const validateRepeatPassword = (value: string) => {
-      const newPassword = watch("newPassword", ""); // get the value of the "newPassword" field
-      return newPassword === value || console.log("Passwords do not match");
-    }
-
-    const onSubmit = (data: any) => {
-        console.log(data);
-    }
 
   return (
     <>
@@ -41,23 +29,7 @@ const Frame48Page = () => {
             </div>
         </div>
         <div className='flex flex-col items-center justify-between px-4 py-16 space-y-24'>
-            <form onClick={handleSubmit(onSubmit)} className='flex flex-col items-start justify-between space-y-6 w-full text-[#535353] max-w-[450px] px-8 py-12 shadow-lg rounded-xl'>
-                <div className='flex flex-col items-start justify-between w-full space-y-3'>
-                    <label className='font-semibold'>Current Password</label>
-                    <input type="password" className='font-medium border-b border-[#2F80ED] w-full outline-none' {...register('Old Password', { required: true })}/>
-                </div>
-                <div className='flex flex-col items-start justify-between w-full space-y-3'>
-                    <label className='font-semibold'>New Password</label>
-                    <input type="password" className='font-medium border-b border-[#2F80ED] w-full outline-none' {...register('New Password', { required: true, minLength: 8 })}/>
-                </div>
-                <div className='flex flex-col items-start justify-between w-full space-y-3'>
-                    <label className='font-semibold'>Repeat Password</label>
-                    {/* <input type="password" className='font-medium border-b border-[#2F80ED] w-full outline-none' {...register('Repeat New Password', { required: true, validate: validateRepeatPassword })}/> */}
-                </div>
-                <div className='w-full'>
-                    <button type='submit' className='w-full bg-[#2F80ED] font-semibold rounded-lg text-white py-4 mt-4'>CHANGE PASSWORD</button>
-                </div>
-            </form>
+            <ChangePasswordForm />
             <DownloadTradingFooter />
         </div>
       </main>
@@ -65,4 +37,4 @@ const Frame48Page = () => {
   )
 }
 
-export default Frame48Page
+export default SecurityPage

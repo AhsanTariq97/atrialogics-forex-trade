@@ -83,7 +83,7 @@ const LoginPage = () => {
                         <div className={`${errors.phone ? 'border border-red-600' : 'border border-[#BFDBFE]'} rounded`}>
                             <Controller name="phone" control={control} rules={{ validate: (value) => isValidPhoneNumber(value) || 'Invalid number' , required: 'Enter your number', }} render={({ field: { onChange, value } }) => (
                                 <PhoneInput value={value} onChange={onChange} defaultCountry="US" className='phone-input' placeholder='Phone number' />
-                                )}/>
+                            )}/>
                         </div>
                         <p className='pl-2 text-xs text-red-600'>{errors.phone?.message}</p>
                     </div>
