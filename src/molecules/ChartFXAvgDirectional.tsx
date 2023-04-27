@@ -3,15 +3,16 @@ import {GrFormAdd, GrFormSubtract} from 'react-icons/gr'
 
 interface Props {
     fxData: {[key: string]: any};
-    setfxData: React.Dispatch<React.SetStateAction<{[key: string]: any}>>;
+    setfxData: any;
+    // setfxData: React.Dispatch<React.SetStateAction<{[key: string]: any}>>;
 }
 
 const ChartFXAvgDirectional: React.FC<Props> = ({ fxData, setfxData }) => {
 
-    const [ NPCI, setNPCI ] = useState(14)
-    const [ PDI, setPDI ] = useState('1')
-    const [ ADI, setADI ] = useState('1')
-    const [ NDI, setNDI ] = useState('1')
+    const [ NPCI, setNPCI ] = useState<number>(fxData.avgDirectionalData.NPCI)
+    const [ PDI, setPDI ] = useState<string>(fxData.avgDirectionalData.PDI)
+    const [ ADI, setADI ] = useState<string>(fxData.avgDirectionalData.ADI)
+    const [ NDI, setNDI ] = useState<string>(fxData.avgDirectionalData.NDI)
 
     const [avgDirectionalData, setAvgDirectionalData] = useState({})
 
@@ -29,9 +30,9 @@ const ChartFXAvgDirectional: React.FC<Props> = ({ fxData, setfxData }) => {
         <div className='flex flex-col items-start justify-between w-full text-center'>
             <p className='text-xs font-medium'>Number of periods for calculation of the indicator</p>
             <div className='grid items-center w-full grid-cols-7 border border-[#CDCDCD] rounded bg-[#F4F9FF]'>
-                <GrFormAdd className='mx-auto cursor-pointer' onClick={() => setNPCI(NPCI + 1)}/>
+                <GrFormAdd className='mx-auto cursor-pointer' onClick={() => setNPCI(NPCI! + 1)}/>
                 <p className='col-span-5 py-1 border-l border-r'>{NPCI}</p>
-                <GrFormSubtract className='mx-auto cursor-pointer' onClick={() => setNPCI(NPCI - 1)} />
+                <GrFormSubtract className='mx-auto cursor-pointer' onClick={() => setNPCI(NPCI! - 1)} />
             </div>
             <p className='pt-2 text-xs font-medium'>Positive directional indicator</p>
             <div className='grid w-full grid-cols-7 items-center justify-center border border-[#CDCDCD] rounded'>

@@ -3,7 +3,8 @@ import {GrFormAdd, GrFormSubtract} from 'react-icons/gr'
 
 interface Props {
   fxData: {[key: string]: any};
-  setfxData: React.Dispatch<React.SetStateAction<{[key: string]: any}>>;
+  setfxData: any;
+  // setfxData: React.Dispatch<React.SetStateAction<{[key: string]: any}>>;
 }
 
 const ChartFXAvgTrueRange: React.FC<Props> = ({ fxData, setfxData }) => {

@@ -17,16 +17,30 @@ const ChartFXPopup = () => {
     setActiveFXButton(e.target.textContent)
   }
 
-  const [fxData, setfxData] = useState({})
-  // avgDirectional: {},
-  // avgTrueRange: {},
-  // awesomeOscillator: {},
-  // bollingerBands: {},
-  // commodityChannel: {},
-  // ichimokuCloud: {},
-  // knowsureThings: {},
-  // maco: {},
-  // momentum: {},
+  const [fxData, setfxData] = useState({
+    avgDirectionalData: {
+      ADI: "1",
+      NDI: "1",
+      NPCI: 14,
+      PDI: "1"
+    },
+    avgTrueRangeData: {
+      NPCI: 14,
+      color: "1 px"
+    },
+    awesomeOscillatorData: {
+      NPCLTMA: 14,
+      NPCSTMA: 14,
+      color1: "1 px",
+      color2: "1 px"
+    },
+    bollingerBands: {},
+    commodityChannel: {},
+    ichimokuCloud: {},
+    knowsureThings: {},
+    maco: {},
+    momentum: {},
+  })
 
   console.log(fxData, 'sda')
 
@@ -49,7 +63,7 @@ const ChartFXPopup = () => {
               <div className='col-span-3 bg-[#FBFAFA] w-full h-full'>
                   {activeFXButton === 'AVERAGE DIRECTIONAL' && <ChartFXAvgDirectional fxData={fxData} setfxData={setfxData} />}
                   {activeFXButton === 'AVERAGE TRUE RANGE' && <ChartFXAvgTrueRange fxData={fxData} setfxData={setfxData} />}
-                  {activeFXButton === 'AWESOME OSCILLATOR' && <ChartFXAwesomeOscillator />}
+                  {activeFXButton === 'AWESOME OSCILLATOR' && <ChartFXAwesomeOscillator fxData={fxData} setfxData={setfxData} />}
                   {activeFXButton === 'BOLLINGER BANDS' && <ChartFXBollingerBands />}
                   {activeFXButton === 'COMMODITY CHANNEL' && <ChartFXCommodityChannel />}
                   {activeFXButton === 'ICHIMOKU CLOUD' && <ChartFXIchimokuCloud />}
