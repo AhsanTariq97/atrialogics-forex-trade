@@ -9,20 +9,20 @@ interface Props {
 
 const ChartFXAwesomeOscillator: React.FC<Props> = ({ fxData, setfxData }) => {
 
-    const [ NPCSTMA, setNPCSTMA ] = useState(14)
-    const [ NPCLTMA, setNPCLTMA ] = useState(14)
-    const [ color1, setColor1 ] = useState('1')
-    const [ color2, setColor2 ] = useState('1')
+    const [ NPCSTMA, setNPCSTMA ] = useState<number>(fxData.awesomeOscillator.NPCSTMA)
+    const [ NPCLTMA, setNPCLTMA ] = useState<number>(fxData.awesomeOscillator.NPCLTMA)
+    const [ color1, setColor1 ] = useState<number>(fxData.awesomeOscillator.color1)
+    const [ color2, setColor2 ] = useState<number>(fxData.awesomeOscillator.color2)
 
-    const [awesomeOscillatorData, setAwesomeOscillatorData] = useState({})
+    const [awesomeOscillator, setAwesomeOscillator] = useState({NPCSTMA: NPCSTMA, NPCLTMA: NPCLTMA, color1: color1, color2: color2})
 
-    const setAwesomeOscillator = () => {
-        setAwesomeOscillatorData({...awesomeOscillatorData, NPCSTMA: NPCSTMA, NPCLTMA: NPCLTMA, color1: `${color1} px`, color2: `${color2} px`})
+    const setAwesomeOscillatorFn = () => {
+        setAwesomeOscillator({...awesomeOscillator, NPCSTMA: NPCSTMA, NPCLTMA: NPCLTMA, color1: color1, color2: color2})
     }
     
     useEffect(() => {
-        setfxData({...fxData, awesomeOscillatorData})
-    }, [awesomeOscillatorData])
+        setfxData({...fxData, awesomeOscillator})
+    }, [awesomeOscillator])
     
   return (
     <div className='flex flex-col items-start justify-between w-full h-full px-2 py-4 space-y-8'>
@@ -42,19 +42,19 @@ const ChartFXAwesomeOscillator: React.FC<Props> = ({ fxData, setfxData }) => {
             <p className='pt-2 text-xs font-medium'>Color</p>
             <div className='grid items-center justify-center w-full grid-cols-7'>
                 <div className='bg-[#EB5757] w-[24px] h-[22px] mx-auto'></div>
-                <input type="number" className='text-right bg-transparent outline-none border border-[#CDCDCD] rounded' min={1} max={99} step={1} defaultValue={1} onChange={(e) => setColor1(e.target.value)} />
+                <input type="number" className='text-right bg-transparent outline-none border border-[#CDCDCD] rounded' min={1} max={99} step={1} defaultValue={fxData.awesomeOscillator.color1 || 1} onChange={(e) => setColor1(parseInt(e.target.value))} />
                 <span>px</span>
                 {/* <p className='col-span-6 py-1 pl-4 text-left border border-[#CDCDCD] rounded'>1 px</p> */}
             </div>
             <p className='pt-2 text-xs font-medium'>Color</p>
             <div className='grid items-center justify-center w-full grid-cols-7'>
                 <div className='bg-[#56B786] w-[24px] h-[22px] mx-auto'></div>
-                <input type="number" className='text-right bg-transparent outline-none border border-[#CDCDCD] rounded' min={1} max={99} step={1} defaultValue={1} onChange={(e) => setColor2(e.target.value)} />
+                <input type="number" className='text-right bg-transparent outline-none border border-[#CDCDCD] rounded' min={1} max={99} step={1} defaultValue={fxData.awesomeOscillator.color2 || 1} onChange={(e) => setColor2(parseInt(e.target.value))} />
                 <span>px</span>
                 {/* <p className='col-span-6 py-1 pl-4 text-left border border-[#CDCDCD] rounded'>1 px</p> */}
             </div>
         </div>
-        <button className='w-[208px] bg-[#5290F7] text-sm font-semibold rounded text-white py-4 self-end' onClick={setAwesomeOscillator}>ADD AWESOME OSCILLATOR</button>
+        <button className='w-[208px] bg-[#5290F7] text-sm font-semibold rounded text-white py-4 self-end' onClick={setAwesomeOscillatorFn}>ADD AWESOME OSCILLATOR</button>
     </div>
   )
 }

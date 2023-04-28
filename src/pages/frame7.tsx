@@ -24,7 +24,7 @@ const Frame7Page = () => {
           <FavoritesSection />
         </div>
         <PositionsAndOrders activeTab={activeTab} setActiveTab={setActiveTab} />
-        {/* <div className='fixed flex bottom-4 left-4'>
+        <div className='fixed flex bottom-4 left-4'>
           <button className='w-6 h-6 text-white rounded-full bg-cyan-600' onClick={() => setShow1(prev => !prev)}>1</button>
           {show1 && <NewTradingAccountPopup />}
           <button className='w-6 h-6 text-white rounded-full bg-cyan-600' onClick={() => setShow2(prev => !prev)}>2</button>
@@ -33,7 +33,7 @@ const Frame7Page = () => {
           {show3 && <FundTradingAccountPopup />}
           <button className='w-6 h-6 text-white rounded-full bg-cyan-600' onClick={() => setShow4(prev => !prev)}>4</button>
           {show4 && <AboutUsPopup />}
-        </div> */}
+        </div>
     </div>
   )
 }

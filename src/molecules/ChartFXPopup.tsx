@@ -18,28 +18,57 @@ const ChartFXPopup = () => {
   }
 
   const [fxData, setfxData] = useState({
-    avgDirectionalData: {
-      ADI: "1",
-      NDI: "1",
+    avgDirectional: {
+      ADI: 1,
+      NDI: 1,
       NPCI: 14,
-      PDI: "1"
+      PDI: 1
     },
-    avgTrueRangeData: {
+    avgTrueRange: {
       NPCI: 14,
-      color: "1 px"
+      color: 1
     },
-    awesomeOscillatorData: {
+    awesomeOscillator: {
       NPCLTMA: 14,
       NPCSTMA: 14,
-      color1: "1 px",
-      color2: "1 px"
+      color1: 1,
+      color2: 1
     },
-    bollingerBands: {},
-    commodityChannel: {},
-    ichimokuCloud: {},
-    knowsureThings: {},
-    maco: {},
-    momentum: {},
+    bollingerBands: {
+      NPCI: 14,
+      SDM: 14,
+      color1: 1,
+      color2: 1,
+      color3: 1
+    },
+    commodityChannel: {
+      NPCI: 14,
+      color1: 1,
+      color2: 1,
+    },
+    ichimokuCloud: {
+      CP: 14,
+      BP: 14,
+      SP: 14,
+      displacement: 14
+    },
+    knowsureThings: {
+      ROC1: 14,
+      ROC2: 14,
+      ROC3: 14,
+      ROC4: 14,
+      ROC5: 14
+    },
+    maco: {
+      NPCLTMA: 14,
+      NPCSTMA: 14,
+      NPCSL: 14,
+      histogramColor: 1
+    },
+    momentum: {
+      NPCI: 14,
+      color: 1
+    },
   })
 
   console.log(fxData, 'sda')
@@ -64,12 +93,12 @@ const ChartFXPopup = () => {
                   {activeFXButton === 'AVERAGE DIRECTIONAL' && <ChartFXAvgDirectional fxData={fxData} setfxData={setfxData} />}
                   {activeFXButton === 'AVERAGE TRUE RANGE' && <ChartFXAvgTrueRange fxData={fxData} setfxData={setfxData} />}
                   {activeFXButton === 'AWESOME OSCILLATOR' && <ChartFXAwesomeOscillator fxData={fxData} setfxData={setfxData} />}
-                  {activeFXButton === 'BOLLINGER BANDS' && <ChartFXBollingerBands />}
-                  {activeFXButton === 'COMMODITY CHANNEL' && <ChartFXCommodityChannel />}
-                  {activeFXButton === 'ICHIMOKU CLOUD' && <ChartFXIchimokuCloud />}
-                  {activeFXButton === 'KNOWSURE THINGS' && <ChartFXKnowsureThings />}
-                  {activeFXButton === 'MACO' && <ChartFXMaco />}
-                  {activeFXButton === 'MOMENTUM' && <ChartFXMomentum />}
+                  {activeFXButton === 'BOLLINGER BANDS' && <ChartFXBollingerBands fxData={fxData} setfxData={setfxData} />}
+                  {activeFXButton === 'COMMODITY CHANNEL' && <ChartFXCommodityChannel fxData={fxData} setfxData={setfxData} />}
+                  {activeFXButton === 'ICHIMOKU CLOUD' && <ChartFXIchimokuCloud fxData={fxData} setfxData={setfxData} />}
+                  {activeFXButton === 'KNOWSURE THINGS' && <ChartFXKnowsureThings fxData={fxData} setfxData={setfxData} />}
+                  {activeFXButton === 'MACO' && <ChartFXMaco fxData={fxData} setfxData={setfxData} />}
+                  {activeFXButton === 'MOMENTUM' && <ChartFXMomentum fxData={fxData} setfxData={setfxData} />}
               </div>
           </div>
           <div className='bg-[#F1F1F1] h-5'></div>
