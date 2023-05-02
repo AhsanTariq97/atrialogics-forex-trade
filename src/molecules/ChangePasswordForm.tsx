@@ -12,8 +12,6 @@ const ChangePasswordForm = () => {
 
     const { handleSubmit, control, getValues, formState: { errors } } = useForm<PasswordFormInputs>();
 
-    // const newPassword = watch("newPassword", ""); // get the value of the "newPassword" field
-
     const onSubmit = (data: PasswordFormInputs) => {
         console.log(data);
     }

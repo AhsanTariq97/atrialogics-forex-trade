@@ -48,18 +48,20 @@ const LoginPage = () => {
             <form className='2-3/5 flex flex-col items-start justify-between min-w-[430px] mx-auto px-6 py-4 rounded bg-[#EFF6FF] space-y-4 border border-[#BFDBFE]' onSubmit={handleSubmit((data) => {
                 console.log(data)
                 reset();
-                if (validateEmail(data.email)) {
-                    router.push('/login4');
-                  } else {
-                    console.log('Email is not valid');
-                }
+                router.push('/login4');
             })}>
                 <h1 className='text-xl font-semibold'>Personal details</h1>
                 <div className='grid w-full grid-cols-2 gap-3'>
                     <div className='flex flex-col items-start justify-between col-span-2'>
                         <div className={`${errors.email ? 'border border-red-600' : 'border border-[#BFDBFE]'} flex flex-col items-start w-full rounded p-2 bg-[#FBF6F64A] text-sm`}>
                             <label className='text-xs font-semibold'>Your email</label>
-                            <input type="text" className='text-[#53535394] font-semibold outline-none bg-transparent py-1' {...register('email', {required: 'Enter your email', validate: validateEmail })} placeholder='name@gmail.com' />
+                            <Controller
+                                name="email"
+                                control={control}
+                                defaultValue=""
+                                rules={{ required: {value: true, message: 'Enter your email'}, validate: validateEmail }}
+                                render={({ field }) => <input {...field} type="text" placeholder='name@gmail.com' className='text-[#53535394] font-semibold outline-none bg-transparent py-1 w-full' />}
+                            />
                         </div>
                         <p className='pl-2 text-xs text-red-600'>{errors.email?.message}</p>
                     </div>
@@ -67,16 +69,34 @@ const LoginPage = () => {
                     <div className='flex flex-col items-start justify-between'>
                         <div className={`${errors.password ? 'border border-red-600' : 'border border-[#BFDBFE]'} flex flex-col items-start w-full rounded p-2 bg-[#FBF6F64A] text-sm`}>
                             <label className='text-xs font-semibold'>Password</label>
-                            <input type="password" className='text-[#53535394] font-semibold outline-none bg-transparent py-1' {...register('password', { required: 'Enter your password', minLength: {value: 8, message: 'Please enter 8 digit password'} })} placeholder='Password' />
+                            <Controller
+                                name="password"
+                                control={control}
+                                defaultValue=""
+                                rules={{ required: {value: true, message: 'Enter your password'}, minLength: {value:8, message: 'Password must be atleast 8 characters' } }}
+                                render={({ field }) => <input {...field} type="password" placeholder='Password' className='text-[#53535394] font-semibold outline-none bg-transparent py-1' />}
+                            />
                         </div>
                         <p className='pl-2 text-xs text-red-600'>{errors.password?.message}</p>
                     </div>
                     <div className='flex flex-col items-start justify-between w-full col-start-1 space-y-1 '>
-                        <input type="text" className={`${errors.firstName ? 'border border-red-600' : 'border border-[#BFDBFE]' } font-semibold outline-none rounded p-2 bg-[#FBF6F64A] text-sm`} {...register('firstName', { required: 'Enter your first name', minLength: {value: 2, message: 'Please enter your first name'} })} placeholder='First name' />
+                        <Controller
+                            name="firstName"
+                            control={control}
+                            defaultValue=""
+                            rules={{ required: {value: true, message: 'Enter your first name'} }}
+                            render={({ field }) => <input {...field} type='text' placeholder='First Name' className={`${errors.firstName ? 'border border-red-600' : 'border border-[#BFDBFE]' } font-semibold outline-none rounded p-2 bg-[#FBF6F64A] text-sm`} />}
+                        />
                         <p className='pl-2 text-xs text-red-600'>{errors.firstName?.message}</p>
                     </div>
                     <div className='flex flex-col items-start justify-between w-full space-y-1 '>
-                        <input type="text" className={`${errors.lastName ? 'border border-red-600' : 'border border-[#BFDBFE]' } font-semibold rounded p-2 bg-[#FBF6F64A] text-sm outline-none`} {...register('lastName', { required: 'Enter your last name', minLength: {value: 2, message: 'Please enter your last name'} })} placeholder='Last name' />
+                    <Controller
+                        name="lastName"
+                        control={control}
+                        defaultValue=""
+                        rules={{ required: {value: true, message: 'Enter your last name'} }}
+                        render={({ field }) => <input {...field} type='text' placeholder='Last Name' className={`${errors.lastName ? 'border border-red-600' : 'border border-[#BFDBFE]' } font-semibold rounded p-2 bg-[#FBF6F64A] text-sm outline-none`} />}
+                    />
                         <p className='pl-2 text-xs text-red-600'>{errors.lastName?.message}</p>
                     </div>
                     <div className='flex flex-col items-start justify-between w-full space-y-1'>
