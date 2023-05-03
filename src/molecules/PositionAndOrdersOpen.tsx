@@ -38,7 +38,7 @@ const PositionAndOrdersPending = ({apiData, formattedDateTimeFn}: MyProps) => {
             return (
               <tr key={index} className='border border-[#D9D9D9]'>
                 <td className='py-1.5 text-center rounded-l-2xl'>W1680201139157</td>
-                <td className='text-center'>{apiData.ticker}</td>
+                <td className='text-center'>{apiData?.ticker.slice(2)}</td>
                 <td className='text-center'>{formattedDateTimeFn(entry.t)}</td>
                 <td className='text-center'>{entry.vw}</td>
                 <td className='text-center'><p className='border border-[#EF4444] text-[#EF4444] bg-[#FFDFDF] rounded-sm w-max mx-auto px-1 font-medium'>Sell</p></td>

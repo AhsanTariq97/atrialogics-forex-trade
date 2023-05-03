@@ -28,7 +28,7 @@ const GraphSectionHead = ({apiData, chartFullScreen, setChartFullScreen, setNewO
         <div className='flex flex-col items-start justify-between col-span-2 md:col-span-1'>
             <div className='flex items-center justify-between space-x-4'>
                 <div className='flex items-center justify-start space-x-2 text-[#2F80ED] py-1'>
-                    <h3 className='text-xl font-semibold text-black'>{apiData?.ticker}</h3>
+                    <h3 className='text-xl font-semibold text-black'>{apiData?.ticker.slice(2)}</h3>
                     <FaStar />
                 </div>
                 {chartFullScreen && 
