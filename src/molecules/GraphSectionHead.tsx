@@ -4,19 +4,31 @@ import { FaStar } from "react-icons/fa";
 import GraphControlBtns from './ChartControlBtns';
 
 
-const GraphSectionHead = ({chartFullScreen, setChartFullScreen, setNewOrder, setSellPopup, setBuyPopup}: {
+const GraphSectionHead = ({apiData, chartFullScreen, setChartFullScreen, setNewOrder, setSellPopup, setBuyPopup}: {
+    apiData: any,
     chartFullScreen: boolean,
     setChartFullScreen: React.Dispatch<React.SetStateAction<boolean>>,
     setNewOrder: React.Dispatch<React.SetStateAction<boolean>>,
     setSellPopup: React.Dispatch<React.SetStateAction<boolean>>,
     setBuyPopup: React.Dispatch<React.SetStateAction<boolean>>,
 }) => {
+
+    const date = new Date(apiData?.results[apiData?.results.length - 1].t);
+    const year = date.getUTCFullYear();
+    const month = date.toLocaleString('default', { month: 'short' });
+    const day = date.getUTCDate();
+    const hours = date.getUTCHours();
+    const minutes = date.getUTCMinutes();
+    const seconds = date.getUTCSeconds();
+
+    const formattedDateTime = `${day} ${month} ${year} ${hours}-${minutes}:${seconds} UTC +0`;
+
     return (
     <div className='grid items-center w-full grid-cols-3 pl-4 pr-4'>
         <div className='flex flex-col items-start justify-between col-span-2 md:col-span-1'>
             <div className='flex items-center justify-between space-x-4'>
                 <div className='flex items-center justify-start space-x-2 text-[#2F80ED] py-1'>
-                    <h3 className='text-xl font-semibold text-black'>EURUSD</h3>
+                    <h3 className='text-xl font-semibold text-black'>{apiData?.ticker}</h3>
                     <FaStar />
                 </div>
                 {chartFullScreen && 
@@ -36,8 +48,8 @@ const GraphSectionHead = ({chartFullScreen, setChartFullScreen, setNewOrder, set
                 
             </div>
             <div className='flex items-center justify-start space-x-2'>
-                <p className='text-[#535353] text-[10px] font-medium'>L: <span className='text-[#EF4444]'>1.08235</span></p>
-                <p className='text-[#535353] text-[10px] font-medium'>H: <span className='text-[#10B981]'>1.09261</span></p>
+                <p className='text-[#535353] text-[10px] font-medium'>L: <span className='text-[#EF4444]'>{apiData?.results[apiData?.results.length - 1].l}</span></p>
+                <p className='text-[#535353] text-[10px] font-medium'>H: <span className='text-[#10B981]'>{apiData?.results[apiData?.results.length - 1].h}</span></p>
             </div>
         </div>
         <div className='flex items-center justify-end col-span-1 space-x-4 md:col-span-2'>
@@ -45,7 +57,7 @@ const GraphSectionHead = ({chartFullScreen, setChartFullScreen, setNewOrder, set
             <div className='flex items-center justify-end col-span-2 col-start-3 space-x-2 sm:col-start-4 sm:col-span-1'>
                 <div className='flex flex-col items-end justify-between'>
                     <p className='text-right text-[10px] font-medium'>PLATFORM TIME</p>
-                    <p className='text-xs font-medium text-right'>29 Mar 2023 18-26:45 UTC +0</p>
+                    <p className='text-xs font-medium text-right'>{formattedDateTime}</p>
                 </div>
                 <button className='border border-[#D9D9D9] p-1 rounded min-w-max' onClick={() => setChartFullScreen(prev => !prev)}>
                     <Image src={`${chartFullScreen ? '/assets/icons/expand-opp.svg' : '/assets/icons/expand.svg'}`} alt='' width={24} height={24} />
