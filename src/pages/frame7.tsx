@@ -20,7 +20,20 @@ const Frame7Page = () => {
 
   const [apiData, setApiData] = useState();
 
-  const url = `https://api.polygon.io/v2/aggs/ticker/C:EURUSD/range/1/day/2023-04-01/2023-04-30?adjusted=true&sort=asc&limit=120&apiKey=${apiKey}`
+  const today = new Date()
+  const tenDaysAgo = new Date(today.getTime() - 10 * 24 * 60 * 60 * 1000);
+
+  const formatDate = (date: Date) => {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
+
+  const currentDate = formatDate(today); 
+  const tenDaysAgoDate = formatDate(tenDaysAgo); 
+
+  const url = `https://api.polygon.io/v2/aggs/ticker/C:EURUSD/range/1/day/${tenDaysAgoDate}/${currentDate}?adjusted=true&sort=asc&limit=120&apiKey=${apiKey}`
 
   useEffect(() => {
     const fetchData = async () => {

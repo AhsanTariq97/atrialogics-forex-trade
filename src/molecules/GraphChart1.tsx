@@ -49,17 +49,17 @@ const GraphChart = ({ apiData }: {apiData: any}) => {
       legend: {
         display: false
       },
-      // zoom: {
-      //   zoom: {
-      //     wheel: {
-      //       enabled: true,
-      //     },
-      //     pinch: {
-      //       enabled: true
-      //     },
-      //     mode: 'xy',
-      //   }
-      // }
+      zoom: {
+        zoom: {
+          wheel: {
+            enabled: true,
+          },
+          pinch: {
+            enabled: true
+          },
+          // mode: 'xy',
+        }
+      }
     },
     scales: {
         y: {

@@ -9,7 +9,12 @@ import ChartFXPopup from './ChartFXPopup';
 import ChartSettingPopup from './ChartSettingPopup';
 import ChartLineStylePopup from './ChartLineStylePopup';
 
-const ChartControlBtns = ({ onFullScreen }: {onFullScreen?: boolean}) => {
+const ChartControlBtns = ({ onFullScreen, handleResetZoom, handleZoomIn, handleZoomOut }: {
+    onFullScreen?: boolean, 
+    handleResetZoom: () => void, 
+    handleZoomIn: () => void, 
+    handleZoomOut: () => void
+}) => {
       
     const [selectFilter, setSelectFilter] = useState<boolean>()
     const [selectFilter2, setSelectFilter2] = useState<boolean>()
@@ -39,9 +44,9 @@ const ChartControlBtns = ({ onFullScreen }: {onFullScreen?: boolean}) => {
                 <AiOutlineRise />
             </div>}
         </div>
-        <button className='border border-[#BFDBFE] rounded bg-[#F4F8FD] w-7 h-7 flex items-center justify-center'><HiMagnifyingGlassPlus /></button>
-        <button className='border border-[#BFDBFE] rounded bg-[#F4F8FD] w-7 h-7 flex items-center justify-center'><HiMagnifyingGlassMinus /></button>
-        <button className='border border-[#BFDBFE] rounded bg-[#F4F8FD] w-7 h-7 flex items-center justify-center'><MdOutlineCenterFocusWeak /></button>
+        <button className='border border-[#BFDBFE] rounded bg-[#F4F8FD] w-7 h-7 flex items-center justify-center' onClick={handleZoomIn}><HiMagnifyingGlassPlus /></button>
+        <button className='border border-[#BFDBFE] rounded bg-[#F4F8FD] w-7 h-7 flex items-center justify-center' onClick={handleZoomOut}><HiMagnifyingGlassMinus /></button>
+        <button className='border border-[#BFDBFE] rounded bg-[#F4F8FD] w-7 h-7 flex items-center justify-center' onClick={handleResetZoom}><MdOutlineCenterFocusWeak /></button>
         <div className='relative'>
             <button className={`${selectLineStyle ? 'bg-[#2F80ED] text-white' : 'bg-[#F4F8FD]'} border border-[#BFDBFE] rounded w-7 h-7 flex items-center justify-center`} onClick={() => setSelectLineStyle(prev => !prev)}><SlPencil /></button>
             {selectLineStyle && <ChartLineStylePopup />}

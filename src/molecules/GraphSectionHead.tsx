@@ -1,27 +1,30 @@
 import Image from 'next/image';
 import React from 'react'
 import { FaStar } from "react-icons/fa";
-import GraphControlBtns from './ChartControlBtns';
+import ChartControlBtns from './ChartControlBtns';
 
 
-const GraphSectionHead = ({apiData, chartFullScreen, setChartFullScreen, setNewOrder, setSellPopup, setBuyPopup}: {
+const GraphSectionHead = ({apiData, chartFullScreen, setChartFullScreen, setNewOrder, setSellPopup, setBuyPopup, handleResetZoom, handleZoomIn, handleZoomOut}: {
     apiData: any,
     chartFullScreen: boolean,
     setChartFullScreen: React.Dispatch<React.SetStateAction<boolean>>,
     setNewOrder: React.Dispatch<React.SetStateAction<boolean>>,
     setSellPopup: React.Dispatch<React.SetStateAction<boolean>>,
     setBuyPopup: React.Dispatch<React.SetStateAction<boolean>>,
+    handleResetZoom: () => void,
+    handleZoomIn: () => void,
+    handleZoomOut: () => void,
 }) => {
 
     const date = new Date(apiData?.results[apiData?.results.length - 1].t);
     const year = date.getUTCFullYear();
     const month = date.toLocaleString('default', { month: 'short' });
     const day = date.getUTCDate();
-    const hours = date.getUTCHours();
-    const minutes = date.getUTCMinutes();
-    const seconds = date.getUTCSeconds();
+    const hours = String(date.getUTCHours()).padStart(2, '0');
+    const minutes = String(date.getUTCMinutes()).padStart(2, '0');
+    const seconds = String(date.getUTCSeconds()).padStart(2, '0');
 
-    const formattedDateTime = `${day} ${month} ${year} ${hours}-${minutes}:${seconds} UTC +0`;
+    const formattedDateTime = `${day} ${month} ${year} ${hours}:${minutes}:${seconds} UTC +0`;
 
     return (
     <div className='grid items-center w-full grid-cols-3 pl-4 pr-4'>
@@ -53,7 +56,7 @@ const GraphSectionHead = ({apiData, chartFullScreen, setChartFullScreen, setNewO
             </div>
         </div>
         <div className='flex items-center justify-end col-span-1 space-x-4 md:col-span-2'>
-            <GraphControlBtns />
+            <ChartControlBtns handleResetZoom={handleResetZoom} handleZoomIn={handleZoomIn} handleZoomOut={handleZoomOut} />
             <div className='flex items-center justify-end col-span-2 col-start-3 space-x-2 sm:col-start-4 sm:col-span-1'>
                 <div className='flex flex-col items-end justify-between'>
                     <p className='text-right text-[10px] font-medium'>PLATFORM TIME</p>
