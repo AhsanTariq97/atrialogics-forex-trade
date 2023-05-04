@@ -38,7 +38,7 @@ const AddressDetailForm = ({ errors, control }: { errors: any, control: any }) =
                 render={({ field }) => {
                     return (
                         <select {...field} className='font-medium border-b bg-transparent border-[#52c2e4] w-full outline-none py-1'>
-                            <option value="" selected>Select a country</option>
+                            <option value="" defaultValue=''>Select a country</option>
                             {/* <option value="--">Not Specified</option> */}
                             <option value="AF">Afghanistan</option>
                             <option value="AL">Albania</option>

@@ -4,10 +4,12 @@ import { FaStar } from "react-icons/fa";
 import ChartControlBtns from './ChartControlBtns';
 
 
-const GraphSectionHead = ({apiData, chartFullScreen, setChartFullScreen, setNewOrder, setSellPopup, setBuyPopup, handleResetZoom, handleZoomIn, handleZoomOut}: {
+const GraphSectionHead = ({apiData, chartFullScreen, setChartFullScreen, lineChart, setLineChart, setNewOrder, setSellPopup, setBuyPopup, handleResetZoom, handleZoomIn, handleZoomOut}: {
     apiData: any,
     chartFullScreen: boolean,
     setChartFullScreen: React.Dispatch<React.SetStateAction<boolean>>,
+    lineChart: boolean,
+    setLineChart: React.Dispatch<React.SetStateAction<boolean>>,
     setNewOrder: React.Dispatch<React.SetStateAction<boolean>>,
     setSellPopup: React.Dispatch<React.SetStateAction<boolean>>,
     setBuyPopup: React.Dispatch<React.SetStateAction<boolean>>,
@@ -56,7 +58,7 @@ const GraphSectionHead = ({apiData, chartFullScreen, setChartFullScreen, setNewO
             </div>
         </div>
         <div className='flex items-center justify-end col-span-1 space-x-4 md:col-span-2'>
-            <ChartControlBtns handleResetZoom={handleResetZoom} handleZoomIn={handleZoomIn} handleZoomOut={handleZoomOut} />
+            <ChartControlBtns lineChart={lineChart} setLineChart={setLineChart} handleResetZoom={handleResetZoom} handleZoomIn={handleZoomIn} handleZoomOut={handleZoomOut} />
             <div className='flex items-center justify-end col-span-2 col-start-3 space-x-2 sm:col-start-4 sm:col-span-1'>
                 <div className='flex flex-col items-end justify-between'>
                     <p className='text-right text-[10px] font-medium'>PLATFORM TIME</p>

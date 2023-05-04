@@ -21,7 +21,7 @@ const ProfileDetailsForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate className='flex flex-col items-start justify-between space-y-8 w-full text-[#535353] px-8 py-12 shadow-lg rounded-xl'>
-        <VerificationDocsForm errors={errors} control={control} register={register} isFormSubmitted={isFormSubmitted} setIsFormSubmitted={setIsFormSubmitted} />
+        <VerificationDocsForm errors={errors} control={control} setValue={setValue} register={register} isFormSubmitted={isFormSubmitted} setIsFormSubmitted={setIsFormSubmitted} />
         {/* <PersonalDetailsForm errors={errors} control={control} /> */}
         <AddressDetailForm errors={errors} control={control} />
         {/* <BankInfoForm errors={errors} control={control} /> */}

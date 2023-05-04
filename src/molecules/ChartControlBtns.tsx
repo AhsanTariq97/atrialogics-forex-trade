@@ -9,8 +9,10 @@ import ChartFXPopup from './ChartFXPopup';
 import ChartSettingPopup from './ChartSettingPopup';
 import ChartLineStylePopup from './ChartLineStylePopup';
 
-const ChartControlBtns = ({ onFullScreen, handleResetZoom, handleZoomIn, handleZoomOut }: {
+const ChartControlBtns = ({ onFullScreen, lineChart, setLineChart, handleResetZoom, handleZoomIn, handleZoomOut }: {
     onFullScreen?: boolean, 
+    lineChart: boolean, 
+    setLineChart: React.Dispatch<React.SetStateAction<boolean>>,
     handleResetZoom: () => void, 
     handleZoomIn: () => void, 
     handleZoomOut: () => void
@@ -38,10 +40,12 @@ const ChartControlBtns = ({ onFullScreen, handleResetZoom, handleZoomIn, handleZ
             </div>}
         </div>
         <div className='relative'>
-            <button className={`${selectFilter2 ? 'bg-[#2F80ED]' : 'bg-[#F4F8FD]'} border border-[#BFDBFE] rounded w-7 h-7 flex items-center justify-center`} onClick={() => setSelectFilter2(prev => !prev)}><Image src='/assets/icons/adjustvertical.svg' className={`${selectFilter2 ? 'brightness-[100]' : ''}`} alt='' width={15} height={18} /></button>
+            <button className={`${selectFilter2 ? 'bg-[#2F80ED]' : 'bg-[#F4F8FD]'} border border-[#BFDBFE] rounded w-7 h-7 flex items-center justify-center`} onClick={() => setSelectFilter2(prev => !prev)}>
+                {lineChart ? (<AiOutlineRise className={`${selectFilter2 ? 'text-white' : ''}`} />) : (<Image src='/assets/icons/adjustvertical.svg' className={`${selectFilter2 ? 'brightness-[100]' : ''}`} alt='' width={15} height={18} />)}
+            </button>
             {selectFilter2 && <div className='absolute top-8 bg-[#F4F9FF] border border-[#D9D9D9] rounded p-1 space-y-1'>
-                <Image src='/assets/icons/adjustvertical.svg' alt='' width={15} height={18} />
-                <AiOutlineRise />
+                <Image src='/assets/icons/adjustvertical.svg' className={`cursor-pointer ${lineChart ? '' : 'svg-2F80ED'}`} alt='' width={15} height={18} onClick={() => setLineChart(false)} />
+                <AiOutlineRise className={`cursor-pointer ${lineChart ? 'text-[#2F80ED]' : ''}`} onClick={() => setLineChart(true)} />
             </div>}
         </div>
         <button className='border border-[#BFDBFE] rounded bg-[#F4F8FD] w-7 h-7 flex items-center justify-center' onClick={handleZoomIn}><HiMagnifyingGlassPlus /></button>

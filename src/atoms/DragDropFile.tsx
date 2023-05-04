@@ -1,12 +1,14 @@
 import React, {useRef, useState, useEffect} from 'react'
 import { Controller } from "react-hook-form";
 
-const DragDropFile = ({ name, errors, control, register, isFormSubmitted, setIsFormSubmitted }: { name: string, errors: any, control: any, register: any, isFormSubmitted: boolean, setIsFormSubmitted: any }) => {
+const DragDropFile = ({ name, errors, control, setValue, register, isFormSubmitted, setIsFormSubmitted }: { name: string, errors: any, control: any, setValue: any, register: any, isFormSubmitted: boolean, setIsFormSubmitted: any }) => {
 
   const [dragActive, setDragActive] = useState(false);
   const [fileName, setFileName] = useState('');
   // ref
   const inputRef = useRef<HTMLInputElement>(null);
+
+  // console.log(inputRef)
   
   // handle drag events
   const handleDrag = function(e: any) {
@@ -28,6 +30,7 @@ const DragDropFile = ({ name, errors, control, register, isFormSubmitted, setIsF
       const file = e.dataTransfer.files[0];
       setFileName(shortenFileNameFn(file.name) || '');
       console.log(e.dataTransfer.files)
+      // setValue(`${name}`, file, { shouldValidate: true });
     }
   };
   
@@ -38,6 +41,7 @@ const DragDropFile = ({ name, errors, control, register, isFormSubmitted, setIsF
       const file = e.target.files[0];
       setFileName(shortenFileNameFn(file.name) || '');
       console.log(e.target.files)
+      // setValue(`${name}`, file, { shouldValidate: true });
     }
   };
   
@@ -67,14 +71,8 @@ const DragDropFile = ({ name, errors, control, register, isFormSubmitted, setIsF
 
   return (
     <div className='h-40 w-[28rem] max-w-full text-center relative' onDragEnter={handleDrag} >
-        {/* <Controller
-            name={name}
-            control={control}
-            defaultValue=""
-            rules={{ required: {value: false, message: 'Enter docs here'} }}
-            render={({ field }) => <input {...field} id={name} type='file' accept='image/*, .pdf' className='absolute w-0 h-0 opacity-0' onChange={handleChange} />}
-        /> */}
-        <input {...register(`${name}`, {
+        <input 
+                {...register(`${name}`, {
                   required: 'Upload file here', 
                   validate: {
                     acceptedFormats: (files: { type: string; }[]) => ['image/jpeg', 'image/png', 'image/gif', 'application/pdf'].includes(files[0]?.type) || 'Only PNG, JPEG e GIF'}
@@ -83,6 +81,13 @@ const DragDropFile = ({ name, errors, control, register, isFormSubmitted, setIsF
               onChange={handleChange} 
               className='absolute w-0 h-0 opacity-0'
         />
+        {/* <Controller
+                name={name}
+                control={control}
+                defaultValue=""
+                rules={{ required: {value: true, message: 'Upload file here'} }}
+                render={({ field }) => <input className='absolute w-0 h-0 opacity-0' {...field} id={name} type="file" accept='image/*, .pdf' onChange={handleChange} />}
+            /> */}
         <label htmlFor={name} className={`h-full flex items-center justify-center border-2 rounded-2xl border-dashed border-[#CBD5E1] bg-[#F8FAFC]`}>
             {fileName ? <p className='w-full break-words'>{fileName}</p> : <div onClick={onButtonClick}>
                 <p>Drag and drop your file here or</p>

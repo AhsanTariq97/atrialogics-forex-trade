@@ -30,3 +30,7 @@
     background-color: transparent;
     outline: none;
 }
+
+.svg-2F80ED {
+    filter: invert(51%) sepia(57%) saturate(5001%) hue-rotate(198deg) brightness(97%) contrast(92%);
+}

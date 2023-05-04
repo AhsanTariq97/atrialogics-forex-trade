@@ -1,17 +1,19 @@
-import React, {useRef} from "react";
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
-import { Bar } from 'react-chartjs-2';
-// import { Data } from '../utils/Data'
+import React, {useState} from "react";
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, LineElement, PointElement, Title, Tooltip, Legend } from 'chart.js';
+import { Bar, Line } from 'react-chartjs-2';
 
-ChartJS.register( CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend );
+ChartJS.register( CategoryScale, LinearScale, BarElement, LineElement, PointElement, Title, Tooltip, Legend );
 
 import { Chart } from 'chart.js';
 import zoomPlugin from 'chartjs-plugin-zoom';
+import annotationPlugin from 'chartjs-plugin-annotation';
 
-Chart.register(zoomPlugin);
-
+Chart.register(zoomPlugin, annotationPlugin);
+Chart.register(PointElement, LineElement);
   
-const GraphChart = ({ apiData, chartRef }) => {
+const GraphChart = ({ apiData, chartRef, lineChart }) => {
+
+  const [showTrend, setShowTrend] = useState(false)
 
   const formattedDateFn = (dateInMS) => {
     const date = new Date(dateInMS);
@@ -24,19 +26,75 @@ const GraphChart = ({ apiData, chartRef }) => {
     return formattedDate
   }
 
+  const labels = []
+  apiData?.results.map((entry) => labels.push(formattedDateFn(entry.t)))
+
+  const highValues = {
+    type: 'line',
+    backgroundColor: '#EB5757',
+    borderColor: '#EB5757',
+    borderWidth: 2,
+    yScaleID: 'y',
+    arrowHeads: {
+      end: {
+        display: true,
+        fill: true,
+      }
+    },
+    xMin: labels.length - 2,
+    xMax: labels.length - 1,
+    yMin: apiData?.results[apiData?.results.length - 2].h,
+    yMax: apiData?.results[apiData?.results.length - 1].h,
+  };
+
+  const lowValues = {
+    type: 'line',
+    backgroundColor: '#2F80ED',
+    borderColor: '#2F80ED',
+    borderWidth: 2,
+    yScaleID: 'y',
+    arrowHeads: {
+      end: {
+        display: true,
+        fill: true,
+      }
+    },
+    xMin: labels.length - 2,
+    xMax: labels.length - 1,
+    yMin: apiData?.results[apiData?.results.length - 2].l,
+    yMax: apiData?.results[apiData?.results.length - 1].l,
+  };
+
+  const askUserStart = 2
+  const askUserEnd = 9
+  const useHighValue  = false;
+
+  const trendLine = {
+    type: 'line',
+    backgroundColor: '#10B981',
+    borderColor: '#10B981',
+    borderWidth: 1,
+    yScaleID: 'y',
+    xMin: askUserStart,
+    xMax: askUserEnd,
+    yMin: useHighValue ? apiData?.results[askUserStart].h : apiData?.results[askUserStart].l,
+    yMax: useHighValue ? apiData?.results[askUserEnd].h : apiData?.results[askUserEnd].l,
+  };
+
   const options = {
     indexAxis: 'x',
     elements: {
       bar: {
         borderWidth: 0,
       },
+      line: {
+        borderWidth: 2,
+        fill: false,
+      },
     },
     responsive: true,
     plugins: {
       zoom: {
-        limits: {
-          // y: {min: 0.9, max: 1.2}
-        },
         pan: {
           enabled: true,
           mode: 'x',
@@ -51,9 +109,8 @@ const GraphChart = ({ apiData, chartRef }) => {
           mode: 'x',
         }
       },
-      title: {
-        display: false,
-        text: 'Chart.js Bar Chart',
+      annotation: {
+        annotations: lineChart ? (showTrend ? { highValues, lowValues, trendLine } : { highValues, lowValues } ) : {}, 
       },
       legend: {
         display: false
@@ -71,12 +128,9 @@ const GraphChart = ({ apiData, chartRef }) => {
     maxBarThickness: 7,
   };
 
-  const labels = []
-  apiData?.results.map((entry) => labels.push(formattedDateFn(entry.t)))
-
   const colors = ["#EB5757", "#2F80ED", /*"#4CAF50", "#FFC107", "#9C27B0"*/];
 
-  const data = {
+  const barData = {
     labels,
     datasets: [
         {
@@ -87,8 +141,27 @@ const GraphChart = ({ apiData, chartRef }) => {
     ],
   };
 
+  const lineData = {
+    labels,
+    datasets: [
+      {
+        label: "High",
+        data: apiData?.results.map((entry) => entry.h),
+        borderColor: "#EB5757",
+      },
+      {
+        label: "Low",
+        data: apiData?.results.map((entry) => entry.l),
+        borderColor: "#2F80ED",
+      },
+    ],
+  };
+
   return (
-    <Bar ref={chartRef} options={options} data={data} className='max-h-[calc(100vh-64px)]' />
+    <>
+      {lineChart ? (<Line ref={chartRef} options={options} data={lineData} className='max-h-[calc(100vh-64px)]' />)
+      : (<Bar ref={chartRef} options={options} data={barData} className='max-h-[calc(100vh-64px)]' />)}
+    </>
   )
 };
 
