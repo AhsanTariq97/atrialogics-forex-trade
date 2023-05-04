@@ -1,11 +1,14 @@
 import React, { useState, useRef } from 'react'
+import dynamic from 'next/dynamic'
 import GraphSectionHead from '../molecules/GraphSectionHead'
-import GraphChart from '../molecules/GraphChart'
+// import GraphChart from '../molecules/GraphChart'
 import ChartControlBtns from '../molecules/ChartControlBtns'
 // import ChartSidebarFrame43 from '../molecules/ChartSidebarFrame43'
 import NewOrderPopup from '../molecules/NewOrderPopup'
 import OrderAdded from '../atoms/OrderAdded'
 import { Chart } from 'chart.js'
+
+const GraphChart = dynamic(() => import('../molecules/GraphChart'), { ssr: false });
 
 const ChartSection = ({apiData}: {apiData: any}) => {
 
