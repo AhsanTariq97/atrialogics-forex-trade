@@ -1,4 +1,5 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
+import { ChartStoreContext } from '../utils/chartStore'
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, LineElement, PointElement, Title, Tooltip, Legend } from 'chart.js';
 import { Bar, Line } from 'react-chartjs-2';
 
@@ -11,7 +12,9 @@ import annotationPlugin from 'chartjs-plugin-annotation';
 Chart.register(zoomPlugin, annotationPlugin);
 Chart.register(PointElement, LineElement);
   
-const GraphChart = ({ apiData, chartRef, lineChart }) => {
+const GraphChart = ({ chartRef, lineChart }) => {
+
+  const { apiData } = useContext(ChartStoreContext)
 
   const [showTrend, setShowTrend] = useState(false)
 
@@ -65,8 +68,8 @@ const GraphChart = ({ apiData, chartRef, lineChart }) => {
     yMax: apiData?.results[apiData?.results.length - 1].l,
   };
 
-  const askUserStart = 2
-  const askUserEnd = 9
+  const askUserStart = 0
+  const askUserEnd = 3
   const useHighValue  = false;
 
   const trendLine = {

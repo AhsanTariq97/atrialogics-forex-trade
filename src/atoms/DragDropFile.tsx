@@ -1,103 +1,63 @@
-import React, {useRef, useState, useEffect} from 'react'
-import { Controller } from "react-hook-form";
+import React, { useCallback, useEffect, useState } from "react"
+import { useDropzone } from "react-dropzone"
+import { useFormContext } from "react-hook-form"
 
-const DragDropFile = ({ name, errors, control, setValue, register, isFormSubmitted, setIsFormSubmitted }: { name: string, errors: any, control: any, setValue: any, register: any, isFormSubmitted: boolean, setIsFormSubmitted: any }) => {
+const FileInput = ({name, accept, isFormSubmitted, setIsFormSubmitted}: {name: string, accept: string, isFormSubmitted: boolean, setIsFormSubmitted: React.Dispatch<React.SetStateAction<boolean>> }) => {
+    const { register, unregister, setValue, watch } = useFormContext()
+    const files = watch(name)
+    const onDrop = useCallback(
+        (droppedFiles: any) => {
+            setValue(name, droppedFiles, { shouldValidate: true })
+        },
+        [setValue, name]
+    )
+    const { getRootProps, getInputProps, isDragActive } = useDropzone({
+        onDrop,
+        accept,
+    })
+    useEffect(() => {
+        register(name)
+        return () => {
+            unregister(name)
+        }
+    }, [register, unregister, name])
 
-  const [dragActive, setDragActive] = useState(false);
-  const [fileName, setFileName] = useState('');
-  // ref
-  const inputRef = useRef<HTMLInputElement>(null);
+    // const [fileUploaded, setFileUploaded] = useState(false)
 
-  // console.log(inputRef)
-  
-  // handle drag events
-  const handleDrag = function(e: any) {
-    e.preventDefault();
-    e.stopPropagation();
-    if (e.type === "dragenter" || e.type === "dragover") {
-      setDragActive(true);
-    } else if (e.type === "dragleave") {
-      setDragActive(false);
-    }
-  };
-  
-  // triggers when file is dropped
-  const handleDrop = function(e: any) {
-    e.preventDefault();
-    e.stopPropagation();
-    setDragActive(false);
-    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      const file = e.dataTransfer.files[0];
-      setFileName(shortenFileNameFn(file.name) || '');
-      console.log(e.dataTransfer.files)
-      // setValue(`${name}`, file, { shouldValidate: true });
-    }
-  };
-  
-  // triggers when file is selected with click
-  const handleChange = function(e: any) {
-    e.preventDefault();
-    if (e.target.files && e.target.files[0]) {
-      const file = e.target.files[0];
-      setFileName(shortenFileNameFn(file.name) || '');
-      console.log(e.target.files)
-      // setValue(`${name}`, file, { shouldValidate: true });
-    }
-  };
-  
-  // triggers the input when the button is clicked
-  const onButtonClick = (e: any) => {
-    if(inputRef.current) {
-      inputRef.current.click();
-    }
-  };
+    // if (files?.length) {
+    //   setFileUploaded(true)
+    // }
 
-  useEffect(() => {
-    if (isFormSubmitted) {
-      setFileName('');
-      setIsFormSubmitted(false)
-    }
-  }, [isFormSubmitted, setFileName]);
+    return (
+        <div {...getRootProps()} type="file" role="button" aria-label="File Upload" id={name} className="h-40 w-[28rem] max-w-full text-center p-2" >
+                <input {...getInputProps()} required />
+                <div className={"h-full flex items-center justify-center" + (isDragActive ? " " : " ")}>
+                    {!files?.length && <div>
+                        <p>Drag and drop your file here or</p>
+                        <p className="p-1 cursor-pointer hover:underline">Upload a file</p>
+                    </div>}
+                    {files?.length && <p className='w-full break-words'>{files[0].name}</p>}
 
-  //shorten fileName if bigger
-  const shortenFileNameFn = (fileName: string) => {
-    if (fileName.split('').length > 25) {
-      const fileType = fileName.substring(fileName.lastIndexOf('.'))
-      const shortFileName = fileName.substring(0, fileName.lastIndexOf('.')).split('').slice(0, 25).join('').concat('...')
-      const newFileName = shortFileName.concat(fileType)
-      return newFileName
-    } return fileName
-  }
-
-  return (
-    <div className='h-40 w-[28rem] max-w-full text-center relative' onDragEnter={handleDrag} >
-        <input 
-                {...register(`${name}`, {
-                  required: 'Upload file here', 
-                  validate: {
-                    acceptedFormats: (files: { type: string; }[]) => ['image/jpeg', 'image/png', 'image/gif', 'application/pdf'].includes(files[0]?.type) || 'Only PNG, JPEG e GIF'}
-                  })} 
-              id={name} type="file" accept='image/*, .pdf' 
-              onChange={handleChange} 
-              className='absolute w-0 h-0 opacity-0'
-        />
-        {/* <Controller
-                name={name}
-                control={control}
-                defaultValue=""
-                rules={{ required: {value: true, message: 'Upload file here'} }}
-                render={({ field }) => <input className='absolute w-0 h-0 opacity-0' {...field} id={name} type="file" accept='image/*, .pdf' onChange={handleChange} />}
-            /> */}
-        <label htmlFor={name} className={`h-full flex items-center justify-center border-2 rounded-2xl border-dashed border-[#CBD5E1] bg-[#F8FAFC]`}>
-            {fileName ? <p className='w-full break-words'>{fileName}</p> : <div onClick={onButtonClick}>
-                <p>Drag and drop your file here or</p>
-                <p className="p-1 cursor-pointer hover:underline">Upload a file</p>
-            </div>}
-        </label>
-        {dragActive && <div className='absolute inset-0 w-full h-full rounded-sm' onDragEnter={handleDrag} onDragLeave={handleDrag} onDragOver={handleDrag} onDrop={handleDrop}></div> }
-        <p className={`pt-4 text-xs font-semibold ${errors[name] && 'text-red-600'}`}>{errors[name] ? errors[name]?.message : '*Document required'}</p>
-    </div>
-  )
+                    {/* {!!files?.length && (
+                        <div className="">
+                            {files.map(file => {
+                                return (
+                                    <div key={file.name}>
+                                        <img
+                                            src={URL.createObjectURL(file)}
+                                            alt={file.name}
+                                            style={{
+                                                height: "200px",
+                                            }}
+                                        />
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    )} */}
+                </div>
+          </div>
+    )
 }
 
-export default DragDropFile
+export default FileInput

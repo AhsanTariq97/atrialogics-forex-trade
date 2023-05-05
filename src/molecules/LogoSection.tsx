@@ -1,8 +1,13 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import Logo from '../atoms/Logo'
 import DemoMatch from '../atoms/DemoMatch'
 
-const LogoSection = ({ activeTab }: {activeTab: string}) => {
+import { ChartStoreContext } from '../utils/chartStore'
+
+const LogoSection = () => {
+
+  const { activeTab } = useContext(ChartStoreContext)
+
   return (
     <div className='relative flex items-center justify-between w-full col-span-1 px-2 md:col-span-2 lg:col-span-1 sm:px-8'>
         <Logo />

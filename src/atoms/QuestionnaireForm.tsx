@@ -1,7 +1,10 @@
-import React from 'react'
-import { Controller } from "react-hook-form";
+import React, { ReactNode } from 'react'
+import { Controller, useFormContext } from "react-hook-form";
 
-const QuestionnaireForm = ({ errors, control }: { errors: any, control: any }) => {
+const QuestionnaireForm = () => {
+
+    const { control, formState: {errors} } = useFormContext();
+
   return (
     <div className='flex flex-col items-start justify-between w-full space-y-3'>
         <h2 className='text-[#52c2e4] text-xl font-bold pb-2'>Questionnaire</h2>
@@ -47,7 +50,7 @@ const QuestionnaireForm = ({ errors, control }: { errors: any, control: any }) =
                     />
                 <label htmlFor='never1'>Never</label>
             </div>
-            {errors.futureTradeFrequency && <p className='text-xs text-red-600'>{errors.futureTradeFrequency?.message}</p>}
+            {errors.futureTradeFrequency && <p className='text-xs text-red-600'>{errors.futureTradeFrequency?.message as ReactNode}</p>}
         </div>
         <div>
             <p className='font-semibold'>How often have you traded Spread Bets, CFDs or margined FX in the last 12 months?</p>
@@ -91,7 +94,7 @@ const QuestionnaireForm = ({ errors, control }: { errors: any, control: any }) =
                     />
                 <label htmlFor='never2'>Never</label>
             </div>
-            {errors.spreadBetsFrequency && <p className='text-xs text-red-600'>{errors.spreadBetsFrequency?.message}</p>}
+            {errors.spreadBetsFrequency && <p className='text-xs text-red-600'>{errors.spreadBetsFrequency?.message as ReactNode}</p>}
         </div>
         <div>
             <p className='font-semibold'>Do you have work experience that provides you with a good understanding of trading Spread Bets or CFDs?</p>
@@ -115,7 +118,7 @@ const QuestionnaireForm = ({ errors, control }: { errors: any, control: any }) =
                     />
                 <label htmlFor='no1'>No</label>
             </div>
-            {errors.workExperience && <p className='text-xs text-red-600'>{errors.workExperience?.message}</p>}
+            {errors.workExperience && <p className='text-xs text-red-600'>{errors.workExperience?.message as ReactNode}</p>}
         </div>
         <div>
             <p className='font-semibold'>Do you have qualifications that assist your understanding of CFDs?</p>
@@ -139,7 +142,7 @@ const QuestionnaireForm = ({ errors, control }: { errors: any, control: any }) =
                     />
                 <label htmlFor='no2'>No</label>
             </div>
-            {errors.qualifications && <p className='text-xs text-red-600'>{errors.qualifications?.message}</p>}
+            {errors.qualifications && <p className='text-xs text-red-600'>{errors.qualifications?.message as ReactNode}</p>}
         </div>
     </div>
   )

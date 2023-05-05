@@ -1,12 +1,11 @@
 import Image from 'next/image'
 import React, { useState } from 'react'
 
-interface MyProps {
-  activeTab: string;
-  setActiveTab: React.Dispatch<React.SetStateAction<string>>;
-}
+import { ChartStoreContext } from '../utils/chartStore'
 
-const PositionsAndOrdersTab = ({ activeTab, setActiveTab }: MyProps ) => {
+const PositionsAndOrdersTab = () => {
+
+    const { activeTab, setActiveTab } = React.useContext(ChartStoreContext)
 
     const [showSidebar, setShowSidebar] = useState(false)
 

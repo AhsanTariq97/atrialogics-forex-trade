@@ -1,22 +1,21 @@
 import Image from 'next/image';
-import React from 'react'
+import React, { useContext } from 'react'
 import { FaStar } from "react-icons/fa";
 import ChartControlBtns from './ChartControlBtns';
 
+import { ChartStoreContext } from '../utils/chartStore'
 
-const GraphSectionHead = ({apiData, chartFullScreen, setChartFullScreen, lineChart, setLineChart, setNewOrder, setSellPopup, setBuyPopup, handleResetZoom, handleZoomIn, handleZoomOut}: {
-    apiData: any,
-    chartFullScreen: boolean,
-    setChartFullScreen: React.Dispatch<React.SetStateAction<boolean>>,
+const GraphSectionHead = ({ lineChart, setLineChart, setSellPopup, setBuyPopup, handleResetZoom, handleZoomIn, handleZoomOut }: {
     lineChart: boolean,
     setLineChart: React.Dispatch<React.SetStateAction<boolean>>,
-    setNewOrder: React.Dispatch<React.SetStateAction<boolean>>,
     setSellPopup: React.Dispatch<React.SetStateAction<boolean>>,
     setBuyPopup: React.Dispatch<React.SetStateAction<boolean>>,
     handleResetZoom: () => void,
     handleZoomIn: () => void,
     handleZoomOut: () => void,
 }) => {
+
+    const { apiData, chartFullScreen, setChartFullScreen, setNewOrder } = useContext(ChartStoreContext)
 
     const date = new Date(apiData?.results[apiData?.results.length - 1].t);
     const year = date.getUTCFullYear();
@@ -38,7 +37,7 @@ const GraphSectionHead = ({apiData, chartFullScreen, setChartFullScreen, lineCha
                 </div>
                 {chartFullScreen && 
                 <>
-                    <button className='text-[#2F80ED] text-xs font-semibold border border-[#2F80ED] rounded px-2 py-1' onClick={() => setNewOrder(true)}>+New Order</button>
+                    <button className='text-[#2F80ED] text-xs font-semibold border border-[#2F80ED] rounded px-2 py-1' onClick={() => setNewOrder(true)}>+ New Order</button>
                     <div className='absolute hidden grid-cols-3 space-x-2 lg:grid top-16 left-16'>
                         <button className='bg-[#EF4444] border border-[#EF4444] rounded text-white text-[10px] font-medium text-left px-3 py-1.5' onClick={() => setSellPopup(prev => !prev)}>SELL <br /><span className='text-xl'>1.08386</span></button>
                         <div className='grid grid-cols-2 grid-rows-3 border bg-[#FFFFF4] border-[#D9D9D9] rounded'>
@@ -64,7 +63,7 @@ const GraphSectionHead = ({apiData, chartFullScreen, setChartFullScreen, lineCha
                     <p className='text-right text-[10px] font-medium'>PLATFORM TIME</p>
                     <p className='text-xs font-medium text-right'>{formattedDateTime}</p>
                 </div>
-                <button className='border border-[#D9D9D9] p-1 rounded min-w-max' onClick={() => setChartFullScreen(prev => !prev)}>
+                <button className='border border-[#D9D9D9] p-1 rounded min-w-max' onClick={() => setChartFullScreen((prev: any) => !prev)}>
                     <Image src={`${chartFullScreen ? '/assets/icons/expand-opp.svg' : '/assets/icons/expand.svg'}`} alt='' width={24} height={24} />
                 </button>
             </div>

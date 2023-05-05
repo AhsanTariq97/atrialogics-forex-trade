@@ -1,13 +1,14 @@
-import React, {useState} from 'react'
+import React, {useContext, useState} from 'react'
 import Image from 'next/image';
-import { HiMagnifyingGlassPlus, HiMagnifyingGlassMinus } from "react-icons/hi2";
+import { HiMagnifyingGlassPlus, HiMagnifyingGlassMinus, HiOutlineBackward, HiOutlineForward } from "react-icons/hi2";
 import { MdOutlineCenterFocusWeak } from "react-icons/md";
 import { SlPencil } from "react-icons/sl";
 import { AiOutlineFunction, AiOutlineSetting, AiOutlineRise } from "react-icons/ai";
-import { BsFastForward } from "react-icons/bs";
 import ChartFXPopup from './ChartFXPopup';
 import ChartSettingPopup from './ChartSettingPopup';
 import ChartLineStylePopup from './ChartLineStylePopup';
+
+import { ChartStoreContext } from '../utils/chartStore'
 
 const ChartControlBtns = ({ onFullScreen, lineChart, setLineChart, handleResetZoom, handleZoomIn, handleZoomOut }: {
     onFullScreen?: boolean, 
@@ -15,8 +16,14 @@ const ChartControlBtns = ({ onFullScreen, lineChart, setLineChart, handleResetZo
     setLineChart: React.Dispatch<React.SetStateAction<boolean>>,
     handleResetZoom: () => void, 
     handleZoomIn: () => void, 
-    handleZoomOut: () => void
+    handleZoomOut: () => void,
 }) => {
+
+    const { 
+        showCurrentWeekData, showCurrentMonthData, showCurrentYearData,
+        setShowCurrentWeekData, setShowCurrentMonthData, setShowCurrentYearData,
+    } = useContext(ChartStoreContext)
+
       
     const [selectFilter, setSelectFilter] = useState<boolean>()
     const [selectFilter2, setSelectFilter2] = useState<boolean>()
@@ -26,6 +33,10 @@ const ChartControlBtns = ({ onFullScreen, lineChart, setLineChart, handleResetZo
     
   return (
     <div className={`${onFullScreen ? 'flex md:hidden mx-auto py-8' : 'md:flex hidden' } items-center justify-center space-x-2 text-right`}>
+        <button className='border border-[#BFDBFE] rounded bg-[#F4F8FD] w-7 h-7 flex items-center justify-center'><HiOutlineBackward /></button>
+        <button className={`${showCurrentYearData ? 'bg-[#2F80ED] text-white' : 'bg-[#F4F8FD]'} border border-[#BFDBFE] rounded w-7 h-7 flex items-center justify-center`} onClick={() => setShowCurrentYearData((prev: any) => !prev)}>Y</button>
+        <button className={`${showCurrentMonthData ? 'bg-[#2F80ED] text-white' : 'bg-[#F4F8FD]'} border border-[#BFDBFE] rounded w-7 h-7 flex items-center justify-center`} onClick={() => setShowCurrentMonthData((prev: any) => !prev)}>M</button>
+        <button className={`${showCurrentWeekData ? 'bg-[#2F80ED] text-white' : 'bg-[#F4F8FD]'} border border-[#BFDBFE] rounded w-7 h-7 flex items-center justify-center`} onClick={() => setShowCurrentWeekData((prev: any) => !prev)}>W</button>
         <div className='relative'>
             <button className={`${selectFilter ? 'bg-[#2F80ED] text-white' : 'bg-[#F4F8FD]'} border border-[#BFDBFE] rounded w-7 h-7 flex items-center justify-center`} onClick={() => setSelectFilter(prev => !prev)}>D1</button>
             {selectFilter && <div className='absolute top-8 bg-[#F4F9FF] border border-[#D9D9D9] rounded text-left p-1 space-y-1'>
@@ -63,7 +74,7 @@ const ChartControlBtns = ({ onFullScreen, lineChart, setLineChart, handleResetZo
             <button className={`${selectSetting ? 'bg-[#2F80ED] text-white' : 'bg-[#F4F8FD]'} border border-[#BFDBFE] rounded w-7 h-7 flex items-center justify-center`} onClick={() => setSelectSetting(prev => !prev)}><AiOutlineSetting /></button>
             {selectSetting && <ChartSettingPopup />}
         </div>
-        <button className='border border-[#BFDBFE] rounded bg-[#F4F8FD] w-7 h-7 flex items-center justify-center'><BsFastForward /></button>
+        <button className='border border-[#BFDBFE] rounded bg-[#F4F8FD] w-7 h-7 flex items-center justify-center'><HiOutlineForward /></button>
     </div>
   )
 }

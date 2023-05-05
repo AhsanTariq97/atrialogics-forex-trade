@@ -3,10 +3,10 @@ import LogoSection from '../molecules/LogoSection'
 import NavAccountData from '../molecules/NavAccountData'
 import AccountData from '../atoms/AccountData'
 
-const Navbar = ({ activeTab }: {activeTab: string}) => {
+const Navbar = () => {
   return (
     <nav className='grid grid-cols-3 items-center bg-[#FAFAFA] border-b border-[#D9D9D9]'>
-        <LogoSection activeTab={activeTab} />
+        <LogoSection />
         <NavAccountData />
         <div className='grid col-start-2 grid-rows-3 xs:grid-rows-1 xs:grid-cols-3 xs:col-span-full'>
           <AccountData heading1='BALANCE: ' amount1='10,000.00' heading2='EQUITY: ' amount2='10,000.00' smallScreen={true} />

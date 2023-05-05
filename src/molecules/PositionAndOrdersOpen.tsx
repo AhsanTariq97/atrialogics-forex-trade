@@ -1,21 +1,48 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import { TbArrowsSort } from 'react-icons/tb'
 import { FaSortDown } from 'react-icons/fa'
 import { IoMdClose } from 'react-icons/io'
 
-interface MyProps {
-  apiData: any;
-  formattedDateTimeFn: (dateInMS: number) => string
-}
+import { ChartStoreContext } from '../utils/chartStore'
 
+const PositionAndOrdersPending = () => {
 
-const PositionAndOrdersPending = ({apiData, formattedDateTimeFn}: MyProps) => {
+  const { apiData } = useContext(ChartStoreContext)
   
-  const reversedApiData = [...apiData.results].reverse()
+  const [isData, setIsData] = useState(true)
+  const [tableData, setTableData] = useState([...apiData.results].reverse())
+
+  const formattedDateTimeFn = (dateInMS: number) => {
+    const date = new Date(dateInMS);
+  
+    const year = date.getFullYear(); // Get the year (e.g. 2021)
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Get the month (0-11) and pad with a leading zero
+    const day = String(date.getDate()).padStart(2, '0'); // Get the day of the month (1-31) and pad with a leading zero
+    const hours = String(date.getHours()).padStart(2, '0'); // Get the hours (0-23) and pad with a leading zero
+    const minutes = String(date.getMinutes()).padStart(2, '0'); // Get the minutes (0-59) and pad with a leading zero
+    const seconds = String(date.getSeconds()).padStart(2, '0'); // Get the seconds (0-59) and pad with a leading zero
+  
+    const formattedDateTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+    return formattedDateTime
+  }
+
+  const handleDelete = (index: number) => {
+    const newData = [...tableData];
+    newData.splice(index, 1);
+    setTableData(newData);
+    if (!newData.length) {
+      setIsData(false)
+    }
+  };
+
+  const handleDeleteAll = () => {
+    setTableData([])
+    setIsData(false)
+  }
 
   return (
     <div className='bg-[#F4F8FD] max-h-80 overflow-auto'>
-      <table className='w-full h-full'>
+      {isData ? <table className='w-full h-full'>
         <thead className='text-[10px] font-medium'>
           <tr className='border border-[#D9D9D9]'>
             <th className='py-1.5 rounded-l-2xl'><div className='flex items-center justify-center space-x-1'><p>ID</p><TbArrowsSort/></div></th>
@@ -30,11 +57,11 @@ const PositionAndOrdersPending = ({apiData, formattedDateTimeFn}: MyProps) => {
             <th className='py-1.5'><div className='flex items-center justify-center space-x-1'><p>SWAP</p><TbArrowsSort/></div></th>
             <th className='py-1.5'><div className='flex items-center justify-center space-x-1'><p>COMISSION</p><TbArrowsSort/></div></th>
             <th className='py-1.5'><div className='flex items-center justify-center space-x-1'><p>NET PROFIT</p><TbArrowsSort/></div></th>
-            <th className='py-1.5 px-1'><div className='flex items-center justify-center space-x-1 border border-[#D9D9D9] rounded-sm'><p>SELECT ALL</p><FaSortDown/></div></th>
+            <th className='py-1.5 px-1'><div className='flex items-center justify-center space-x-1 border border-[#D9D9D9] rounded-sm' onClick={handleDeleteAll}><p>SELECT ALL</p><FaSortDown/></div></th>
           </tr>
         </thead>
         <tbody className='text-xs font-medium'>
-          {reversedApiData.map((entry: any, index: number) => {
+          {tableData.map((entry: any, index: number) => {
             return (
               <tr key={index} className='border border-[#D9D9D9]'>
                 <td className='py-1.5 text-center rounded-l-2xl'>W1680201139157</td>
@@ -49,12 +76,18 @@ const PositionAndOrdersPending = ({apiData, formattedDateTimeFn}: MyProps) => {
                 <td className='text-center text-[#10B981]'>0.04</td>
                 <td className='text-center'>0.04</td>
                 <td className='text-center text-[#10B981]'>2.95</td>
-                <td className=''><IoMdClose className='mx-auto border border-[#D9D9D9] rounded' width={12} height={12}/></td>
+                <td className='flex items-center justify-center'>
+                  <button className='p-1 mx-auto border border-[#D9D9D9] rounded cursor-pointer' onClick={() => handleDelete(index)}><IoMdClose width={12} height={12}/></button>
+                </td>
               </tr>
             )
           })}
         </tbody>
       </table>
+      : <div className='flex flex-col items-center justify-between py-12'>
+          <h1 className='text-3xl font-semibold'>NO RESULTS</h1>
+          <p className='text-sm font-medium'>YOU DO NOT HAVE AN OPEN POSITION</p>
+      </div>}
     </div>
   )
 }

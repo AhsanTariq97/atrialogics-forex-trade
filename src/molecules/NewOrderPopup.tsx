@@ -1,18 +1,22 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { IoClose, IoAddOutline } from 'react-icons/io5'
 
-const NewOrderPopup = ({ setNewOrder, sellPopup, setSellPopup, buyPopup, setBuyPopup }: {
-    setNewOrder: React.Dispatch<React.SetStateAction<boolean>>,
+import { ChartStoreContext } from '../utils/chartStore'
+
+const NewOrderPopup = ({ sellPopup, setSellPopup, buyPopup, setBuyPopup }: {
     sellPopup: boolean,
     setSellPopup: React.Dispatch<React.SetStateAction<boolean>>,
     buyPopup: boolean,
     setBuyPopup: React.Dispatch<React.SetStateAction<boolean>>,
 }) => {
 
-    const [activeTab, setActiveTab] = useState('PENDING ORDER')
+    const { setNewOrder, newOrderActiveTab, setNewOrderActiveTab } = useContext(ChartStoreContext)
+
+
+    // const [newOrderActiveTab, setNewOrderActiveTab] = useState('PENDING ORDER')
 
     const onClickTab = (e: any) => {
-        setActiveTab(e.target.textContent)
+        setNewOrderActiveTab(e.target.textContent)
     }
     
   return (
@@ -20,8 +24,8 @@ const NewOrderPopup = ({ setNewOrder, sellPopup, setSellPopup, buyPopup, setBuyP
         <button className='bg-[#E0EEFF] rounded p-2 absolute top-2 right-2' onClick={() => setNewOrder(false)}><IoClose /></button>
         <h2 className='text-2xl font-semibold'>EURUSD</h2>
         <div className='flex items-center justify-center w-full border border-[#E9E7E7] rounded bg-[#E6E4E42B]'>
-            <button className={`w-1/2 py-1.5 font-medium ${activeTab === 'MARKET' && 'border-b-2 border-[#5290F7]'}`} onClick={onClickTab}>MARKET</button>
-            <button className={`w-1/2 py-1.5 font-medium ${activeTab === 'PENDING ORDER' && 'border-b-2 border-[#5290F7]'}`} onClick={onClickTab}>PENDING ORDER</button>
+            <button className={`w-1/2 py-1.5 font-medium ${newOrderActiveTab === 'MARKET' && 'border-b-2 border-[#5290F7]'}`} onClick={onClickTab}>MARKET</button>
+            <button className={`w-1/2 py-1.5 font-medium ${newOrderActiveTab === 'PENDING ORDER' && 'border-b-2 border-[#5290F7]'}`} onClick={onClickTab}>PENDING ORDER</button>
         </div>
         <div className='flex items-center justify-center w-full px-2 space-x-2'>
             <div className='w-1/2 grid items-center grid-cols-5 text-center border border-[#E9E7E7] bg-[#E6E4E42B] rounded'>
@@ -29,7 +33,7 @@ const NewOrderPopup = ({ setNewOrder, sellPopup, setSellPopup, buyPopup, setBuyP
                 <p className='col-span-3 text-sm font-medium border-l border-r border-[#E1EEFF] leading-none'>VOLUME<br /><span className='text-base font-medium text-[#535353]'>0.01</span></p>
                 <p>+</p>
             </div>
-            {activeTab === 'PENDING ORDER' && <div className='w-1/2 grid items-center grid-cols-5 text-center border border-[#E9E7E7] bg-[#E6E4E42B] rounded'>
+            {newOrderActiveTab === 'PENDING ORDER' && <div className='w-1/2 grid items-center grid-cols-5 text-center border border-[#E9E7E7] bg-[#E6E4E42B] rounded'>
                 <p>-</p>
                 <p className='col-span-3 text-sm font-medium border-l border-r border-[#E1EEFF] leading-none'>PRICE<br /><span className='text-base font-medium text-[#535353]'>1.09030</span></p>
                 <p>+</p>
