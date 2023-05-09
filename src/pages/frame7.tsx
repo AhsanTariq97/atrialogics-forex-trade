@@ -13,11 +13,10 @@ import { ChartStoreContext } from '../utils/chartStore'
 const Frame7Page = () => {
 
   const { 
-    showCurrentWeekData, showCurrentMonthData, showCurrentYearData,
-    setApiData
+    showWeeklyData, showMonthlyData, showYearlyData, currentYear, currentMonth, currentDay, 
+    apiData, setApiData
   } = useContext(ChartStoreContext)
 
-  // const [activeTab, setActiveTab] = useState('PENDING ORDERS')
   const [show1, setShow1] = useState(false)
   const [show2, setShow2] = useState(false)
   const [show3, setShow3] = useState(false)
@@ -25,18 +24,12 @@ const Frame7Page = () => {
 
   const apiKey = process.env.NEXT_PUBLIC_POLYGON_API_KEY;
 
-  // const [apiData, setApiData] = useState();
-  
   const formatDate = (date: Date) => {
-    const year = date.getFullYear();
+    const year = String(date.getFullYear());
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const day = String(date.getDate()).padStart(2, '0');
     return `${year}-${month}-${day}`;
   };
-
-  // const [showCurrentWeekData, setShowCurrentWeekData] = useState(false);
-  // const [showCurrentMonthData, setShowCurrentMonthData] = useState(false);
-  // const [showCurrentYearData, setShowCurrentYearData] = useState(false);
 
   const today = new Date()
   const currentDate = formatDate(today);
@@ -46,30 +39,48 @@ const Frame7Page = () => {
   
   const tenDaysAgo = new Date(today.getTime() - 10 * 24 * 60 * 60 * 1000);
   const tenDaysAgoDate = formatDate(tenDaysAgo);
-  
-  const currentMonth = String(today.getMonth() + 1).padStart(2, '0')
-  const currentYear = String(today.getFullYear())
 
+  const currentYearStr = String(currentYear)
+  const currentMonthStr = String(currentMonth).padStart(2, '0')
+  const currentDayStr = String(currentDay).padStart(2, '0')
+  
   let url: string
   url = `https://api.polygon.io/v2/aggs/ticker/C:EURUSD/range/1/day/${tenDaysAgoDate}/${currentDate}?adjusted=true&sort=asc&limit=1000&apiKey=${apiKey}`
 
-  if (showCurrentYearData) {
-    url = `https://api.polygon.io/v2/aggs/ticker/C:EURUSD/range/1/day/${currentYear}-01-01/${currentDate}?adjusted=true&sort=asc&limit=1000&apiKey=${apiKey}`
-  } else if (showCurrentMonthData) {
-    url = `https://api.polygon.io/v2/aggs/ticker/C:EURUSD/range/1/day/${currentYear}-${currentMonth}-01/${currentDate}?adjusted=true&sort=asc&limit=1000&apiKey=${apiKey}`
-  } else if (showCurrentWeekData) {
+  if (showYearlyData) {
+    url = `https://api.polygon.io/v2/aggs/ticker/C:EURUSD/range/1/day/${currentYearStr}-01-01/${currentYearStr}-12-31?adjusted=true&sort=asc&limit=1000&apiKey=${apiKey}`
+  } else if (showMonthlyData) {
+    url = `https://api.polygon.io/v2/aggs/ticker/C:EURUSD/range/1/day/${currentYearStr}-${currentMonthStr}-01/${currentYearStr}-${currentMonthStr}-${currentDayStr}?adjusted=true&sort=asc&limit=1000&apiKey=${apiKey}`
+  } else if (showWeeklyData) {
     url = `https://api.polygon.io/v2/aggs/ticker/C:EURUSD/range/1/day/${weekAgoDate}/${currentDate}?adjusted=true&sort=asc&limit=1000&apiKey=${apiKey}`
   }
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(url);
-      const data = await response.json();
-      setApiData(data);
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+        setApiData(data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
     };
 
     fetchData();
   }, [url]);
+
+  if (apiData === undefined) {
+    return <div className='flex flex-col items-center justify-center w-screen h-screen'><p>Loading...</p></div>
+  }
+
+  if (apiData.results === undefined) {
+    return (
+      <div className='flex flex-col items-center justify-center w-screen h-screen'>
+        <p className=''>Error: API call limit reached</p> 
+        {/* <p className=''>Reload in a minute</p> */}
+      </div>
+    ) 
+  }
 
   // console.log(apiData)
 

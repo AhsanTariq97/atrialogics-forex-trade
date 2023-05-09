@@ -1,4 +1,4 @@
-import React, {useState, useContext} from "react";
+import React, {useContext} from "react";
 import { ChartStoreContext } from '../utils/chartStore'
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, LineElement, PointElement, Title, Tooltip, Legend } from 'chart.js';
 import { Bar, Line } from 'react-chartjs-2';
@@ -12,11 +12,9 @@ import annotationPlugin from 'chartjs-plugin-annotation';
 Chart.register(zoomPlugin, annotationPlugin);
 Chart.register(PointElement, LineElement);
   
-const GraphChart = ({ chartRef, lineChart }) => {
+const GraphChart = () => {
 
-  const { apiData } = useContext(ChartStoreContext)
-
-  const [showTrend, setShowTrend] = useState(false)
+  const { apiData, lineChart, chartRef, showTrend } = useContext(ChartStoreContext)
 
   const formattedDateFn = (dateInMS) => {
     const date = new Date(dateInMS);

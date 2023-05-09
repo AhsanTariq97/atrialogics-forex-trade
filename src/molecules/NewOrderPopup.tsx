@@ -3,14 +3,9 @@ import { IoClose, IoAddOutline } from 'react-icons/io5'
 
 import { ChartStoreContext } from '../utils/chartStore'
 
-const NewOrderPopup = ({ sellPopup, setSellPopup, buyPopup, setBuyPopup }: {
-    sellPopup: boolean,
-    setSellPopup: React.Dispatch<React.SetStateAction<boolean>>,
-    buyPopup: boolean,
-    setBuyPopup: React.Dispatch<React.SetStateAction<boolean>>,
-}) => {
+const NewOrderPopup = () => {
 
-    const { setNewOrder, newOrderActiveTab, setNewOrderActiveTab } = useContext(ChartStoreContext)
+    const { setNewOrder, newOrderActiveTab, setNewOrderActiveTab, setSellPopup, setBuyPopup } = useContext(ChartStoreContext)
 
 
     // const [newOrderActiveTab, setNewOrderActiveTab] = useState('PENDING ORDER')
@@ -60,8 +55,8 @@ const NewOrderPopup = ({ sellPopup, setSellPopup, buyPopup, setBuyPopup }: {
             </div>
         </div>
         <div className='grid items-center w-full grid-cols-2 gap-1'>
-            <button className='text-sm text-white font-medium bg-[#EB5757] border border-[#EF4444] rounded py-2' onClick={() => setSellPopup(prev => !prev)}>SELL LIMIT <br /><span className='text-xl font-medium text-center'>1.08386</span></button>
-            <button className='text-sm text-white font-medium bg-[#56B786] border border-[#56B786] rounded py-2' onClick={() => setBuyPopup(prev => !prev)}>BUY LIMIT <br /><span className='text-xl font-medium text-center'>1.08386</span></button>
+            <button className='text-sm text-white font-medium bg-[#EB5757] border border-[#EF4444] rounded py-2' onClick={() => setSellPopup((prev: any) => !prev)}>SELL LIMIT <br /><span className='text-xl font-medium text-center'>1.08386</span></button>
+            <button className='text-sm text-white font-medium bg-[#56B786] border border-[#56B786] rounded py-2' onClick={() => setBuyPopup((prev: any) => !prev)}>BUY LIMIT <br /><span className='text-xl font-medium text-center'>1.08386</span></button>
         </div>
     </div>
   )

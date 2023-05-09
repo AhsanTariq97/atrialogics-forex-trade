@@ -71,7 +71,7 @@ const ChartFXPopup = () => {
     },
   })
 
-  console.log(fxData, 'sda')
+  // console.log(fxData)
 
   return (
     <div className='absolute top-8 -translate-x-1/2 bg-[#F4F9FF] border border-[#D9D9D9] rounded w-[500px]'>

@@ -15,12 +15,12 @@ const PositionAndOrdersPending = () => {
   const formattedDateTimeFn = (dateInMS: number) => {
     const date = new Date(dateInMS);
   
-    const year = date.getFullYear(); // Get the year (e.g. 2021)
-    const month = String(date.getMonth() + 1).padStart(2, '0'); // Get the month (0-11) and pad with a leading zero
-    const day = String(date.getDate()).padStart(2, '0'); // Get the day of the month (1-31) and pad with a leading zero
-    const hours = String(date.getHours()).padStart(2, '0'); // Get the hours (0-23) and pad with a leading zero
-    const minutes = String(date.getMinutes()).padStart(2, '0'); // Get the minutes (0-59) and pad with a leading zero
-    const seconds = String(date.getSeconds()).padStart(2, '0'); // Get the seconds (0-59) and pad with a leading zero
+    const year = date.getFullYear(); 
+    const month = String(date.getMonth() + 1).padStart(2, '0'); 
+    const day = String(date.getDate()).padStart(2, '0'); 
+    const hours = String(date.getHours()).padStart(2, '0'); 
+    const minutes = String(date.getMinutes()).padStart(2, '0'); 
+    const seconds = String(date.getSeconds()).padStart(2, '0'); 
   
     const formattedDateTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
     return formattedDateTime

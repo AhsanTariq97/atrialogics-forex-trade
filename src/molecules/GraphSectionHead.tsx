@@ -5,17 +5,11 @@ import ChartControlBtns from './ChartControlBtns';
 
 import { ChartStoreContext } from '../utils/chartStore'
 
-const GraphSectionHead = ({ lineChart, setLineChart, setSellPopup, setBuyPopup, handleResetZoom, handleZoomIn, handleZoomOut }: {
-    lineChart: boolean,
-    setLineChart: React.Dispatch<React.SetStateAction<boolean>>,
-    setSellPopup: React.Dispatch<React.SetStateAction<boolean>>,
-    setBuyPopup: React.Dispatch<React.SetStateAction<boolean>>,
-    handleResetZoom: () => void,
-    handleZoomIn: () => void,
-    handleZoomOut: () => void,
-}) => {
+const GraphSectionHead = () => {
 
-    const { apiData, chartFullScreen, setChartFullScreen, setNewOrder } = useContext(ChartStoreContext)
+    const { apiData, chartFullScreen, setChartFullScreen, setNewOrder, 
+        setSellPopup, setBuyPopup, 
+    } = useContext(ChartStoreContext)
 
     const date = new Date(apiData?.results[apiData?.results.length - 1].t);
     const year = date.getUTCFullYear();
@@ -39,13 +33,13 @@ const GraphSectionHead = ({ lineChart, setLineChart, setSellPopup, setBuyPopup, 
                 <>
                     <button className='text-[#2F80ED] text-xs font-semibold border border-[#2F80ED] rounded px-2 py-1' onClick={() => setNewOrder(true)}>+ New Order</button>
                     <div className='absolute hidden grid-cols-3 space-x-2 lg:grid top-16 left-16'>
-                        <button className='bg-[#EF4444] border border-[#EF4444] rounded text-white text-[10px] font-medium text-left px-3 py-1.5' onClick={() => setSellPopup(prev => !prev)}>SELL <br /><span className='text-xl'>1.08386</span></button>
+                        <button className='bg-[#EF4444] border border-[#EF4444] rounded text-white text-[10px] font-medium text-left px-3 py-1.5' onClick={() => setSellPopup((prev: any) => !prev)}>SELL <br /><span className='text-xl'>1.08386</span></button>
                         <div className='grid grid-cols-2 grid-rows-3 border bg-[#FFFFF4] border-[#D9D9D9] rounded'>
                             <p className='text-[10px] font-medium col-span-2 row-span-2 border-b border-[#D9D9D9] text-center'>VOLUME <br /><span className='text-sm'>0.01</span></p>
                             <p className='text-center'>+</p>
                             <p className='border-l border-[#D9D9D9] text-center'>-</p>
                         </div>
-                        <button className='bg-[#10B981] border border-[#10B981] rounded text-white text-[10px] font-medium text-right px-3 py-1.5' onClick={() => setBuyPopup(prev => !prev)}>BUY <br /><span className='text-xl'>1.08387</span></button>
+                        <button className='bg-[#10B981] border border-[#10B981] rounded text-white text-[10px] font-medium text-right px-3 py-1.5' onClick={() => setBuyPopup((prev: any) => !prev)}>BUY <br /><span className='text-xl'>1.08387</span></button>
                     </div>
                 </>
                 }
@@ -57,7 +51,7 @@ const GraphSectionHead = ({ lineChart, setLineChart, setSellPopup, setBuyPopup, 
             </div>
         </div>
         <div className='flex items-center justify-end col-span-1 space-x-4 md:col-span-2'>
-            <ChartControlBtns lineChart={lineChart} setLineChart={setLineChart} handleResetZoom={handleResetZoom} handleZoomIn={handleZoomIn} handleZoomOut={handleZoomOut} />
+            <ChartControlBtns />
             <div className='flex items-center justify-end col-span-2 col-start-3 space-x-2 sm:col-start-4 sm:col-span-1'>
                 <div className='flex flex-col items-end justify-between'>
                     <p className='text-right text-[10px] font-medium'>PLATFORM TIME</p>

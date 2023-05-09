@@ -1,63 +1,61 @@
-import React, { useCallback, useEffect, useState } from "react"
-import { useDropzone } from "react-dropzone"
-import { useFormContext } from "react-hook-form"
+import Dropzone, { useDropzone } from 'react-dropzone';
+import { Controller, useFormContext } from "react-hook-form"
+import React, {useState, useEffect} from 'react'
 
-const FileInput = ({name, accept, isFormSubmitted, setIsFormSubmitted}: {name: string, accept: string, isFormSubmitted: boolean, setIsFormSubmitted: React.Dispatch<React.SetStateAction<boolean>> }) => {
-    const { register, unregister, setValue, watch } = useFormContext()
-    const files = watch(name)
-    const onDrop = useCallback(
-        (droppedFiles: any) => {
-            setValue(name, droppedFiles, { shouldValidate: true })
-        },
-        [setValue, name]
-    )
-    const { getRootProps, getInputProps, isDragActive } = useDropzone({
-        onDrop,
-        accept,
-    })
-    useEffect(() => {
-        register(name)
-        return () => {
-            unregister(name)
-        }
-    }, [register, unregister, name])
+const DragDropFile = ({name, isFormSubmitted, setIsFormSubmitted}: {
+  name: string, 
+  isFormSubmitted: boolean, 
+  setIsFormSubmitted: React.Dispatch<React.SetStateAction<boolean>>,
+}) => {
+  const { setValue, control } = useFormContext()
 
-    // const [fileUploaded, setFileUploaded] = useState(false)
-
-    // if (files?.length) {
-    //   setFileUploaded(true)
-    // }
-
-    return (
-        <div {...getRootProps()} type="file" role="button" aria-label="File Upload" id={name} className="h-40 w-[28rem] max-w-full text-center p-2" >
-                <input {...getInputProps()} required />
-                <div className={"h-full flex items-center justify-center" + (isDragActive ? " " : " ")}>
-                    {!files?.length && <div>
-                        <p>Drag and drop your file here or</p>
-                        <p className="p-1 cursor-pointer hover:underline">Upload a file</p>
-                    </div>}
-                    {files?.length && <p className='w-full break-words'>{files[0].name}</p>}
-
-                    {/* {!!files?.length && (
-                        <div className="">
-                            {files.map(file => {
-                                return (
-                                    <div key={file.name}>
-                                        <img
-                                            src={URL.createObjectURL(file)}
-                                            alt={file.name}
-                                            style={{
-                                                height: "200px",
-                                            }}
-                                        />
-                                    </div>
-                                )
-                            })}
-                        </div>
-                    )} */}
-                </div>
-          </div>
-    )
+  const [wrongTypeErr, setWrongTypeErr] = useState<string>('')
+  const [acceptedFiles, setAcceptedFiles] = useState<File[]>([])
+  
+  useEffect(() => {
+    if (isFormSubmitted) {
+      setAcceptedFiles([])
+      setIsFormSubmitted(false)
+    }
+  }, [isFormSubmitted]);
+  
+  return (
+    <div className='relative p-2 h-40 w-[28rem] max-w-full text-center'>
+        <Controller
+          control={control}
+          name={name}
+          rules={{
+            required: { value: true, message: 'Upload file here' },
+          }}
+          render={({ field: { onChange, onBlur }, fieldState }) => (
+            <Dropzone noClick 
+              onDrop={(acceptedFiles) => {
+                if (['image/jpeg', 'image/png', 'image/gif', 'application/pdf'].includes(acceptedFiles[0].type)) {
+                  setValue(`${name}`, acceptedFiles as unknown as FileList, {shouldValidate: true});
+                  setWrongTypeErr('')
+                  setAcceptedFiles(acceptedFiles)
+                } else if (!['image/jpeg', 'image/png', 'application/pdf'].includes(acceptedFiles[0].type)) {
+                  setWrongTypeErr('JPG, PNG or PDF only')
+                }
+              }} 
+            >
+              {({ getRootProps, getInputProps, open, isDragActive }) => (
+                  <div className={`border-dashed w-full h-full ${isDragActive ? 'bg-[#808080]' : 'bg-transprent' }`} {...getRootProps()} >
+                      <input {...getInputProps({ id: 'spreadsheet', onChange, onBlur, })} />
+                      <button type="button" onClick={open} className='flex items-center justify-center w-full h-full'>
+                          {!acceptedFiles.length ? <p><span className='cursor-pointer hover:underline'>Choose a file</span><br />or drag and drop</p>
+                          : <p className='w-full break-words'>{acceptedFiles[0].name}</p> }
+                      </button>
+                      <div>
+                          {wrongTypeErr !== '' && <p className='absolute text-xs font-semibold text-red-600 -bottom-6'>{wrongTypeErr}</p>}
+                          <p className={`absolute -bottom-6 text-xs font-semibold ${fieldState.error && 'text-red-600'}`}>{wrongTypeErr === '' ? (fieldState.error ? fieldState.error.message : '*Document required') : null }</p>
+                      </div>
+                  </div>)}
+            </Dropzone>
+          )}
+        />
+    </div>
+  );
 }
 
-export default FileInput
+export default DragDropFile
