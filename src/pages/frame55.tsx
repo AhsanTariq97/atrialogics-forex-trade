@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Frame54Navbar from '../compounds/Frame54Navbar'
 import DownloadTradingFooter from '../molecules/DownloadTradingFooter'
 import {IoCloseOutline, IoCheckmarkOutline} from 'react-icons/io5'
+import { MdAdd } from 'react-icons/md'
 
 const Frame55Page = () => {
 
@@ -71,8 +72,8 @@ const Frame55Page = () => {
                 <h4 className='font-semibold'>NO RECORDS FOUND IN LAST 7 DAYS</h4>
                 <button className='border border-[#2F80ED] rounded py-2 px-6 text-[#2F80ED] font-semibold'>SHOW ALL</button>
             </div>
-            <div className='bg-[#2F80ED] pt-0 p-2 w-16 h-16 flex justify-center items-center rounded-full cursor-pointer'>
-                <p className='text-5xl text-white'>+</p>
+            <div className='bg-[#2F80ED] w-12 h-12 flex justify-center items-center rounded-full cursor-pointer'>
+                <p className='text-white '><MdAdd size={35} /></p>
             </div>
             <DownloadTradingFooter />
         </div>

@@ -27,7 +27,7 @@ const Frame48Page = () => {
                 <Image src='/assets/icons/earphones.svg' alt='' width={28} height={28} className='' />
             </div>
         </div>
-        <div className='flex flex-col items-center justify-between px-8 py-16 space-y-24'>
+        <div className='flex flex-col items-center justify-between px-4 py-16 space-y-24 md:px-8'>
             <ProfileDetailsForm />
             <DownloadTradingFooter />
         </div>

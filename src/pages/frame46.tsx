@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Frame54Navbar from '../compounds/Frame54Navbar'
 import DownloadTradingFooter from '../molecules/DownloadTradingFooter'
 import Link from 'next/link'
+import { MdAdd } from 'react-icons/md'
 
 const Frame46Page = () => {
 
@@ -41,9 +42,9 @@ const Frame46Page = () => {
                 <div className="absolute right-0 z-0 hidden w-1/6 h-px bg-white lg:w-1/4 md:block top-1/2"></div>
             </div>
             <div className='flex flex-col items-center justify-between px-4 py-16 space-y-12 md:px-16'>
-                <div className='flex flex-col items-start justify-between space-y-2 md:items-center'>
+                <div className='flex flex-col items-center justify-between space-y-2 text-center'>
                     <h3 className='text-xl font-bold'>EQUITY:  100000.00 USD  |   MARGIN:  0.00USD</h3>
-                    <p className='text-xl'>ACCOUNT:  256900  |   MATCH-TRADER  |  FX LIVE   |    LEVERAGE:  1  :  100</p>
+                    <p className='text-xl'>ACCOUNT:  256900  |   MATCH-TRADER  |  FX LIVE   |    LEVERAGE: 1:100</p>
                 </div>
                 <div className='flex items-center justify-between w-full'>
                     <h3 className='text-xl font-bold'>Credit:  0.00 USD</h3>
@@ -71,8 +72,8 @@ const Frame46Page = () => {
                         <h4 className='font-semibold'>NO RECORDS FOUND IN LAST 7 DAYS</h4>
                         <button className='border border-[#2F80ED] rounded py-2 px-6 text-[#2F80ED] font-semibold'>SHOW ALL</button>
                     </div>
-                    <div className='bg-[#2F80ED] pt-0 p-2 w-16 h-16 flex justify-center items-center rounded-full cursor-pointer'>
-                        <p className='text-5xl text-white'>+</p>
+                    <div className='bg-[#2F80ED] w-12 h-12 flex justify-center items-center rounded-full cursor-pointer'>
+                        <p className='text-white '><MdAdd size={35} /></p>
                     </div>
                 </>
             }
@@ -88,8 +89,8 @@ const Frame46Page = () => {
                         </ul>
                         <h4 className='font-semibold'>NO RECORDS FOUND IN LAST 7 DAYS</h4>
                     </div>
-                    <div className='bg-[#2F80ED] pt-0 p-2 w-16 h-16 flex justify-center items-center rounded-full cursor-pointer'>
-                        <p className='text-5xl text-white'>+</p>
+                    <div className='bg-[#2F80ED] w-12 h-12 flex justify-center items-center rounded-full cursor-pointer'>
+                        <p className='text-white '><MdAdd size={35} /></p>
                     </div>
                 </>
             }

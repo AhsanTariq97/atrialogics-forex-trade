@@ -95,8 +95,8 @@ const ChartControlBtns = ({ onFullScreen }: { onFullScreen?: boolean }) => {
     const [selectSetting, setSelectSetting] = useState<boolean>()
     
   return (
-    <div className={`${onFullScreen ? 'flex md:hidden mx-auto py-8' : 'md:flex hidden' } items-center justify-center space-x-2 text-right`}>
-        <button className='border border-[#BFDBFE] rounded bg-[#F4F8FD] w-7 h-7 flex items-center justify-center' onClick={moveBackwards}><HiOutlineBackward /></button>
+    <div className={`${onFullScreen ? 'flex md:hidden mx-auto py-8 w-full flex-wrap' : 'md:flex hidden' } items-center justify-center space-x-2 text-right`}>
+        <button className='my-2 border border-[#BFDBFE] rounded bg-[#F4F8FD] w-7 h-7 flex items-center justify-center' onClick={moveBackwards}><HiOutlineBackward /></button>
         <button className={`${showYearlyData ? 'bg-[#2F80ED] text-white' : 'bg-[#F4F8FD]'} border border-[#BFDBFE] rounded w-7 h-7 flex items-center justify-center`} onClick={() => setShowYearlyData((prev: any) => !prev)}>Y</button>
         <button className={`${showMonthlyData ? 'bg-[#2F80ED] text-white' : 'bg-[#F4F8FD]'} border border-[#BFDBFE] rounded w-7 h-7 flex items-center justify-center`} onClick={() => setShowMonthlyData((prev: any) => !prev)}>M</button>
         <button className={`${showWeeklyData ? 'bg-[#2F80ED] text-white' : 'bg-[#F4F8FD]'} border border-[#BFDBFE] rounded w-7 h-7 flex items-center justify-center`} onClick={() => setShowWeeklyData((prev: any) => !prev)}>W</button>

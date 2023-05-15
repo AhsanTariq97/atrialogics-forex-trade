@@ -19,7 +19,7 @@ const ChangePasswordForm = () => {
   return (
     <form noValidate onSubmit={handleSubmit(onSubmit)} className='flex flex-col items-center w-full max-w-md px-8 py-12 space-y-8 shadow-lg jusitfy-between rounded-xl text-[#535353]'>
         <div className='flex flex-col items-start justify-between w-full space-y-2'>
-            <label htmlFor="oldPassword" className='text-xl font-semibold'>Current password</label>
+            <label htmlFor="oldPassword" className='text-lg font-semibold xs:text-xl'>Current password</label>
             <Controller
                 name="oldPassword"
                 control={control}
@@ -30,7 +30,7 @@ const ChangePasswordForm = () => {
             <p className='text-xs text-red-600'>{errors.oldPassword?.message}</p>
         </div>
         <div className='flex flex-col items-start justify-between w-full space-y-2'>
-            <label htmlFor="newPassword" className='text-xl font-semibold'>New password</label>
+            <label htmlFor="newPassword" className='text-lg font-semibold xs:text-xl'>New password</label>
             <Controller
                 name="newPassword"
                 control={control}
@@ -41,7 +41,7 @@ const ChangePasswordForm = () => {
             <p className='text-xs text-red-600'>{errors.newPassword?.message}</p>
         </div>
         <div className='flex flex-col items-start justify-between w-full space-y-2'>
-            <label htmlFor="repeatNewPassword" className='text-xl font-semibold'>Repeat password</label>
+            <label htmlFor="repeatNewPassword" className='text-lg font-semibold xs:text-xl'>Repeat password</label>
             <Controller
                 name="repeatNewPassword"
                 control={control}

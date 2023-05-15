@@ -36,7 +36,7 @@ const Frame48Page = () => {
                 <div className="absolute right-0 z-0 hidden w-1/6 h-px bg-white lg:w-1/4 md:block top-1/2"></div>
             </div>
             <div className='flex flex-col items-center justify-between px-4 pt-2 pb-16 space-y-12 md:px-16'>
-                <div className='flex flex-col items-start justify-between space-y-2 md:items-center'>
+                <div className='flex flex-col items-center justify-between space-y-2 text-center'>
                     <h3 className='text-xl font-bold'>EQUITY:  100000.00 USD  |   MARGIN:  0.00USD</h3>
                 </div>
                 <div className='flex flex-wrap items-center justify-center md:w-4/5'>

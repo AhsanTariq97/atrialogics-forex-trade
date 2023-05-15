@@ -22,8 +22,8 @@ const SecurityPage = () => {
             <div className='flex flex-col items-center justify-between py-16 space-y-8'>
                 <h1 className='text-3xl font-bold'>Security</h1>
                 <div className='flex items-center justify-center'>
-                    <h3 className='font-medium border-b-2 border-[#D9D9D9] px-12 pb-2'>TWO-FACTOR AUTHORIZATION</h3>
-                    <h3 className='font-medium border-b-4 border-[#F4F9FF] px-12 pb-2'>CHANGE PASSWORD</h3>
+                    <h3 className='font-medium border-b-2 border-[#D9D9D9] text-center px-12 pb-2'>TWO-FACTOR AUTHORIZATION</h3>
+                    <h3 className='font-medium border-b-4 border-[#F4F9FF] text-center px-12 pb-2'>CHANGE PASSWORD</h3>
                 </div>
                 <h1 className='text-3xl font-bold'>Change User Password</h1>
             </div>
