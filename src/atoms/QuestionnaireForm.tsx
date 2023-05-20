@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react'
 import { Controller, useFormContext } from "react-hook-form";
 
-const QuestionnaireForm = () => {
+const QuestionnaireForm = ({retrievedData}: {retrievedData: any}) => {
 
     const { control, formState: {errors} } = useFormContext();
 
@@ -14,9 +14,9 @@ const QuestionnaireForm = () => {
                 <Controller
                     name="futureTradeFrequency"
                     control={control}
-                    defaultValue=""
+                    defaultValue= {retrievedData ? retrievedData.futureTradeFrequency : ''}
                     rules={{ required: 'Please select an option' }}
-                    render={({ field }) => <input {...field} type='radio' id='frequently1' value='Frequently' className='font-medium border-b border-[#52c2e4] w-full' />}
+                    render={({ field }) => <input {...field} type='radio' id='frequently1' checked={retrievedData.futureTradeFrequency === 'Frequently'} value='Frequently' className='font-medium border-b border-[#52c2e4] w-full' />}
                     />
                 <label htmlFor='frequently1'>Frequently</label>
             </div>
@@ -24,9 +24,9 @@ const QuestionnaireForm = () => {
                 <Controller
                     name="futureTradeFrequency"
                     control={control}
-                    defaultValue=""
+                    defaultValue= {retrievedData ? retrievedData.futureTradeFrequency : ''}
                     rules={{ required: 'Please select an option' }}
-                    render={({ field }) => <input {...field} type='radio' id='regularly1' value='Regularly' className='font-medium border-b border-[#52c2e4] w-full' />}
+                    render={({ field }) => <input {...field} type='radio' id='regularly1' checked={retrievedData.futureTradeFrequency === 'Regularly'} value='Regularly' className='font-medium border-b border-[#52c2e4] w-full' />}
                     />
                 <label htmlFor='regularly1'>Regularly</label>
             </div>
@@ -34,9 +34,9 @@ const QuestionnaireForm = () => {
                 <Controller
                     name="futureTradeFrequency"
                     control={control}
-                    defaultValue=""
+                    defaultValue= {retrievedData ? retrievedData.futureTradeFrequency : ''}
                     rules={{ required: 'Please select an option' }}
-                    render={({ field }) => <input {...field} type='radio' id='occasionally1' value='Occasionally' className='font-medium border-b border-[#52c2e4] w-full' />}
+                    render={({ field }) => <input {...field} type='radio' id='occasionally1' checked={retrievedData.futureTradeFrequency === 'Occasionally'} value='Occasionally' className='font-medium border-b border-[#52c2e4] w-full' />}
                     />
                 <label htmlFor='occasionally1'>Occasionally</label>
             </div>
@@ -44,9 +44,9 @@ const QuestionnaireForm = () => {
                 <Controller
                     name="futureTradeFrequency"
                     control={control}
-                    defaultValue=""
+                    defaultValue= {retrievedData ? retrievedData.futureTradeFrequency : ''}
                     rules={{ required: 'Please select an option' }}
-                    render={({ field }) => <input {...field} type='radio' id='never1' value='Never' className='font-medium border-b border-[#52c2e4] w-full' />}
+                    render={({ field }) => <input {...field} type='radio' id='never1' checked={retrievedData.futureTradeFrequency === 'Never'} value='Never' className='font-medium border-b border-[#52c2e4] w-full' />}
                     />
                 <label htmlFor='never1'>Never</label>
             </div>
@@ -58,9 +58,9 @@ const QuestionnaireForm = () => {
                 <Controller
                     name="spreadBetsFrequency"
                     control={control}
-                    defaultValue=""
+                    defaultValue= {retrievedData ? retrievedData.spreadBetsFrequency : ''}
                     rules={{ required: 'Please select an option' }}
-                    render={({ field }) => <input {...field} type='radio' id='frequently2' value='Frequently' className='font-medium border-b border-[#52c2e4] w-full' />}
+                    render={({ field }) => <input {...field} type='radio' id='frequently2' checked={retrievedData.spreadBetsFrequency === 'Frequently'} value='Frequently' className='font-medium border-b border-[#52c2e4] w-full' />}
                     />
                 <label htmlFor='frequently2'>Frequently</label>
             </div>
@@ -68,9 +68,9 @@ const QuestionnaireForm = () => {
                 <Controller
                     name="spreadBetsFrequency"
                     control={control}
-                    defaultValue=""
+                    defaultValue= {retrievedData ? retrievedData.spreadBetsFrequency : ''}
                     rules={{ required: 'Please select an option' }}
-                    render={({ field }) => <input {...field} type='radio' id='regularly2' value='Regularly' className='font-medium border-b border-[#52c2e4] w-full' />}
+                    render={({ field }) => <input {...field} type='radio' id='regularly2' checked={retrievedData.spreadBetsFrequency === 'Regularly'} value='Regularly' className='font-medium border-b border-[#52c2e4] w-full' />}
                     />
                 <label htmlFor='regularly2'>Regularly</label>
             </div>
@@ -78,9 +78,9 @@ const QuestionnaireForm = () => {
                 <Controller
                     name="spreadBetsFrequency"
                     control={control}
-                    defaultValue=""
+                    defaultValue= {retrievedData ? retrievedData.spreadBetsFrequency : ''}
                     rules={{ required: 'Please select an option' }}
-                    render={({ field }) => <input {...field} type='radio' id='occasionally2' value='Occasionally' className='font-medium border-b border-[#52c2e4] w-full' />}
+                    render={({ field }) => <input {...field} type='radio' id='occasionally2' checked={retrievedData.spreadBetsFrequency === 'Occasionally'} value='Occasionally' className='font-medium border-b border-[#52c2e4] w-full' />}
                     />
                 <label htmlFor='occasionally2'>Occasionally</label>
             </div>
@@ -88,9 +88,9 @@ const QuestionnaireForm = () => {
                 <Controller
                     name="spreadBetsFrequency"
                     control={control}
-                    defaultValue=""
+                    defaultValue= {retrievedData ? retrievedData.spreadBetsFrequency : ''}
                     rules={{ required: 'Please select an option' }}
-                    render={({ field }) => <input {...field} type='radio' id='never2' value='Never' className='font-medium border-b border-[#52c2e4] w-full' />}
+                    render={({ field }) => <input {...field} type='radio' id='never2' checked={retrievedData.spreadBetsFrequency === 'Never'} value='Never' className='font-medium border-b border-[#52c2e4] w-full' />}
                     />
                 <label htmlFor='never2'>Never</label>
             </div>
@@ -102,9 +102,9 @@ const QuestionnaireForm = () => {
                 <Controller
                     name="workExperience"
                     control={control}
-                    defaultValue=""
+                    defaultValue= {retrievedData ? retrievedData.workExperience : ''}
                     rules={{ required: 'Please select an option' }}
-                    render={({ field }) => <input {...field} type='radio' id='yes1' value='Yes' className='font-medium border-b border-[#52c2e4] w-full' />}
+                    render={({ field }) => <input {...field} type='radio' id='yes1' checked={retrievedData.workExperience === 'Yes'} value='Yes' className='font-medium border-b border-[#52c2e4] w-full' />}
                     />
                 <label htmlFor='yes1'>Yes</label>
             </div>
@@ -112,9 +112,9 @@ const QuestionnaireForm = () => {
                 <Controller
                     name="workExperience"
                     control={control}
-                    defaultValue=""
+                    defaultValue= {retrievedData ? retrievedData.workExperience : ''}
                     rules={{ required: 'Please select an option' }}
-                    render={({ field }) => <input {...field} type='radio' id='no1' value='No' className='font-medium border-b border-[#52c2e4] w-full' />}
+                    render={({ field }) => <input {...field} type='radio' id='no1' checked={retrievedData.workExperience === 'No'} value='No' className='font-medium border-b border-[#52c2e4] w-full' />}
                     />
                 <label htmlFor='no1'>No</label>
             </div>
@@ -126,9 +126,9 @@ const QuestionnaireForm = () => {
                 <Controller
                     name="qualifications"
                     control={control}
-                    defaultValue=""
+                    defaultValue= {retrievedData ? retrievedData.qualifications : ''}
                     rules={{ required: 'Please select an option' }}
-                    render={({ field }) => <input {...field} type='radio' id='yes2' value='Yes' className='font-medium border-b border-[#52c2e4] w-full' />}
+                    render={({ field }) => <input {...field} type='radio' id='yes2' checked={retrievedData.qualifications === 'Yes'} value='Yes' className='font-medium border-b border-[#52c2e4] w-full' />}
                     />
                 <label htmlFor='yes2'>Yes</label>
             </div>
@@ -136,9 +136,9 @@ const QuestionnaireForm = () => {
                 <Controller
                     name="qualifications"
                     control={control}
-                    defaultValue=""
+                    defaultValue= {retrievedData ? retrievedData.qualifications : ''}
                     rules={{ required: 'Please select an option' }}
-                    render={({ field }) => <input {...field} type='radio' id='no2' value='No' className='font-medium border-b border-[#52c2e4] w-full' />}
+                    render={({ field }) => <input {...field} type='radio' id='no2' checked={retrievedData.qualifications === 'No'} value='No' className='font-medium border-b border-[#52c2e4] w-full' />}
                     />
                 <label htmlFor='no2'>No</label>
             </div>

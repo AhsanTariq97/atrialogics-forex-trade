@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react'
 import { Controller, useFormContext } from "react-hook-form";
 
-const BankInfoForm = () => {
+const BankInfoForm = ({retrievedData}: {retrievedData: any}) => {
 
     const { control, formState: {errors} } = useFormContext();
 
@@ -13,7 +13,7 @@ const BankInfoForm = () => {
             <Controller
                 name="accountName"
                 control={control}
-                defaultValue=""
+                defaultValue= {retrievedData ? retrievedData.accountName : ''}
                 rules={{ required: {value: true, message: 'Enter your account name'} }}
                 render={({ field }) => <input className='font-medium border-b border-[#52c2e4] w-full outline-none' {...field} type='text' placeholder='Account Name' />}
             />
@@ -24,7 +24,7 @@ const BankInfoForm = () => {
             <Controller
                 name="bankAccount"
                 control={control}
-                defaultValue=""
+                defaultValue= {retrievedData ? retrievedData.bankAccount : ''}
                 rules={{ required: {value: true, message: 'Enter your bank account'} }}
                 render={({ field }) => <input className='font-medium border-b border-[#52c2e4] w-full outline-none' {...field} type='text' placeholder='Bank Account' />}
             />
@@ -35,10 +35,10 @@ const BankInfoForm = () => {
             <Controller
                 name="bankAddress"
                 control={control}
-                defaultValue=""
+                defaultValue= {retrievedData ? retrievedData.bankAddress : ''}
                 rules={{ required: {value: true, message: 'Enter your bank address'} }}
                 render={({ field }) => <input className='font-medium border-b border-[#52c2e4] w-full outline-none' {...field} type='text' placeholder='Bank Address' />}
-            />
+                />
             {errors.bankAddress && <p className='text-xs text-red-600'>{errors.bankAddress?.message as ReactNode}</p>}
         </div>
         <div className='flex flex-col items-start justify-between w-full space-y-1'>
@@ -46,10 +46,10 @@ const BankInfoForm = () => {
             <Controller
                 name="swiftCode"
                 control={control}
-                defaultValue=""
+                defaultValue= {retrievedData ? retrievedData.swiftCode : ''}
                 rules={{ required: {value: true, message: 'Enter your swift code'} }}
                 render={({ field }) => <input className='font-medium border-b border-[#52c2e4] w-full outline-none' {...field} type='text' placeholder='Swift Code' />}
-            />
+                />
             {errors.swiftCode && <p className='text-xs text-red-600'>{errors.swiftCode?.message as ReactNode}</p>}
         </div>
         <div className='flex flex-col items-start justify-between w-full space-y-1'>
@@ -57,7 +57,7 @@ const BankInfoForm = () => {
             <Controller
                 name="bankName"
                 control={control}
-                defaultValue=""
+                defaultValue= {retrievedData ? retrievedData.bankName : ''}
                 rules={{ required: {value: true, message: 'Enter your bank name'} }}
                 render={({ field }) => <input className='font-medium border-b border-[#52c2e4] w-full outline-none' {...field} type='text' placeholder='Bank Name' />}
             />

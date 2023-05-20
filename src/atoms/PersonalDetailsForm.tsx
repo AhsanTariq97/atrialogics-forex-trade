@@ -3,8 +3,10 @@ import { Controller, useFormContext } from "react-hook-form";
 import 'react-phone-number-input/style.css'
 import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input'
 
-const PersonalDetailsForm = () => {
+const PersonalDetailsForm = ({retrievedData}: {retrievedData: any}) => {
 
+
+    console.log(retrievedData)
     const { control, formState: {errors} } = useFormContext();
 
   return (
@@ -15,7 +17,7 @@ const PersonalDetailsForm = () => {
             <Controller
                 name="firstName"
                 control={control}
-                defaultValue=""
+                defaultValue= {retrievedData ? retrievedData.firstName : ''}
                 rules={{ required: {value: true, message: 'Enter your first name'} }}
                 render={({ field }) => <input className='font-medium border-b border-[#52c2e4] w-full outline-none' {...field} type='text' placeholder='First Name' />}
             />
@@ -26,7 +28,7 @@ const PersonalDetailsForm = () => {
             <Controller
                 name="lastName"
                 control={control}
-                defaultValue=""
+                defaultValue= {retrievedData ? retrievedData.lastName : ''}
                 rules={{ required: {value: true, message: 'Enter your last name'} }}
                 render={({ field }) => <input className='font-medium border-b border-[#52c2e4] w-full outline-none' {...field} type='text' placeholder='Last Name' />}
             />
@@ -37,7 +39,7 @@ const PersonalDetailsForm = () => {
             <Controller
                 name="DoB"
                 control={control}
-                defaultValue=""
+                defaultValue= {retrievedData ? retrievedData.DoB : ''}
                 rules={{ required: {value: true, message: 'Enter your date of birth'} }}
                 render={({ field }) => <input className='font-medium border-b border-[#52c2e4] w-full outline-none' {...field} type='date' />}
             />
@@ -45,9 +47,15 @@ const PersonalDetailsForm = () => {
         </div>
         <div className='flex flex-col items-start justify-between w-full space-y-1'>
             <label className='font-semibold'>Phone number</label>
-            <Controller name="phoneNo" control={control} rules={{ validate: (value) => isValidPhoneNumber(value) || 'Invalid number' , required: 'Enter your number', }} render={({ field: { onChange, value } }) => (
+            <Controller 
+                name="phone" 
+                control={control} 
+                defaultValue= {retrievedData ? retrievedData.phone : ''}
+                rules={{ validate: (value) => isValidPhoneNumber(value) || 'Invalid number' , required: 'Enter your number', }} 
+                render={({ field: { onChange, value } }) => (
                 <PhoneInput value={value} onChange={onChange} defaultCountry="US" className='phone-input' placeholder='Phone number' />
-            )}/>
+                )}
+            />
             {errors.phoneNo && <p className='text-xs text-red-600'>{errors.phoneNo?.message as ReactNode}</p>}
         </div>
     </div>

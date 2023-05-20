@@ -2,8 +2,9 @@ import Dropzone, { useDropzone } from 'react-dropzone';
 import { Controller, useFormContext } from "react-hook-form"
 import React, {useState, useEffect} from 'react'
 
-const DragDropFile = ({name, isFormSubmitted, setIsFormSubmitted}: {
+const DragDropFile = ({name, retrievedData, isFormSubmitted, setIsFormSubmitted}: {
   name: string, 
+  retrievedData: any,
   isFormSubmitted: boolean, 
   setIsFormSubmitted: React.Dispatch<React.SetStateAction<boolean>>,
 }) => {
@@ -24,17 +25,23 @@ const DragDropFile = ({name, isFormSubmitted, setIsFormSubmitted}: {
         <Controller
           control={control}
           name={name}
+          defaultValue={retrievedData ? retrievedData[name] : ''}
           rules={{
             required: { value: true, message: 'Upload file here' },
           }}
           render={({ field: { onChange, onBlur }, fieldState }) => (
             <Dropzone noClick 
+              accept={{"image/jpeg":[]}}
               onDrop={(acceptedFiles) => {
+                // setValue(`${name}`, acceptedFiles as unknown as FileList, {
+                //   shouldValidate: true,
+                // });
                 if (['image/jpeg', 'image/png', 'image/gif', 'application/pdf'].includes(acceptedFiles[0].type)) {
                   setValue(`${name}`, acceptedFiles as unknown as FileList, {shouldValidate: true});
                   setWrongTypeErr('')
                   setAcceptedFiles(acceptedFiles)
-                } else if (!['image/jpeg', 'image/png', 'application/pdf'].includes(acceptedFiles[0].type)) {
+                } 
+                else if (!['image/jpeg', 'image/png', 'application/pdf'].includes(acceptedFiles[0].type)) {
                   setWrongTypeErr('JPG, PNG or PDF only')
                 }
               }} 

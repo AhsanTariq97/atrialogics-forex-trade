@@ -3,8 +3,13 @@ import Link from 'next/link';
 import { useForm, Controller } from "react-hook-form";
 import validator from 'validator';
 import { useRouter } from 'next/router';
+import axios from 'axios';
+import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 export default function Home() {
+
+  const router = useRouter();
 
   function getFlagEmoji(countryCode: string) {
     return countryCode.toUpperCase().replace(/./g, char => 
@@ -23,7 +28,32 @@ export default function Home() {
     } 
   }
 
-  const router = useRouter();
+  const onSubmit = async (data: {email: string, password: string}) => {
+    validateEmail(data.email)
+
+    try {
+      const response = await axios.post('https://tradingcrowd.net/api/login', {
+      email: data.email,
+      password: data.password
+      });
+
+      const token = response.data.token
+
+      localStorage.setItem('token', token);
+
+      toast.success('Login successful');
+
+      
+      
+      console.log(response.data)
+    } catch (error) {
+      console.error(error)
+      toast.error('Login failed');
+    }
+    
+    reset();
+    router.push('/profile');
+  }
 
   return (
     <>
@@ -36,15 +66,7 @@ export default function Home() {
       <main>
       <div className='bg-[#FFFFF4] h-screen flex justify-center items-center'>
         <div className='border border-[#5290F7] rounded p-8 max-w-md mx-auto'>
-            <form className='flex flex-col items-center justify-between w-full p-8 rounded bg-[#EFF6FF] space-y-8' onSubmit={handleSubmit((data) => {
-                  console.log(data)
-                  reset();
-                  if (validateEmail(data.email)) {
-                    router.push('/login2');
-                  } else {
-                    console.log('Email is not valid');
-                  }
-                })}>
+            <form className='flex flex-col items-center justify-between w-full p-8 rounded bg-[#EFF6FF] space-y-8' onSubmit={handleSubmit(onSubmit)}>
                 <h1 className='text-4xl font-extrabold text-[#5290F7]'>Trading Crowd</h1>
                 <div className='w-full space-y-2'>
                     <div className='flex flex-col items-start justify-between w-full space-y-1'>
@@ -64,7 +86,7 @@ export default function Home() {
                             name="password"
                             control={control}
                             defaultValue=""
-                            rules={{ required: {value: true, message: 'Enter your password'}, minLength: {value:8, message: 'Password must be atleast 8 characters' } }}
+                            rules={{ required: {value: true, message: 'Enter your password'}, minLength: {value:6, message: 'Password must be atleast 8 characters' } }}
                             render={({ field }) => <input {...field} type="password" placeholder='Password' className='border border-[#BFDBFE] rounded p-2 w-full bg-[#FFFFF4]' />}
                         />
                         <p className='pl-2 text-xs text-red-600'>{errors.password?.message}</p>
@@ -75,7 +97,7 @@ export default function Home() {
             </form>
             <div className='flex flex-col items-center justify-between py-2 space-y-2'>
                 <p className='pb-2 text-sm font-medium'>Don't have an account?</p>
-                <button className='text-[#5290F7] rounded w-full border border-[#7EA1F9] text-sm font-extrabold py-3'>TRY DEMO</button>
+                <Link className='w-full' href='/login3'><button className='text-[#5290F7] rounded w-full border border-[#7EA1F9] text-sm font-extrabold py-3'>TRY DEMO</button></Link>
                 <div className='rounded border border-[#7EA1F9] text-[9px] flex justify-between items-center space-x-2 px-2'>
                     <p className='text-base'>{getFlagEmoji('gb')}</p>
                     <p>EN</p>

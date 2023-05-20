@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
-import Router from 'next/router';
+import Router, { useRouter } from 'next/router';
 import Link from 'next/link';
+import { toast } from 'react-toastify';
+import axios from 'axios';
 
 function useOutsideAlerter(ref: any, isVisible: boolean, setIsVisible: React.Dispatch<React.SetStateAction<boolean>>) {
     useEffect(() => {
@@ -26,6 +28,31 @@ const Frame54Navbar = ({ setActiveFrame54Tab }: {setActiveFrame54Tab: React.Disp
 
     useOutsideAlerter(sidebarRef, navSidebar, setNavSidebar);
     
+    const handleLogout = async () => {
+        try {
+            const token = localStorage.getItem('token')
+
+            const response = await axios.post('https://tradingcrowd.net/api/login', null, {
+                headers: {
+                  Authorization: `Bearer ${token}`
+                }
+            });
+
+            localStorage.removeItem('token');
+      
+            toast.success('Logout successful');
+            
+            console.log(response.data)
+          } catch (error) {
+            console.error(error)
+            toast.error('Login failed');
+          }
+          
+          router.push('/');
+    }
+
+    const router = useRouter();
+
 
   return (
         <nav className='flex items-center justify-between p-4 border-b'>
@@ -67,6 +94,7 @@ const Frame54Navbar = ({ setActiveFrame54Tab }: {setActiveFrame54Tab: React.Disp
                     <Link href='/frame54'><li className='cursor-pointer w-full text-center py-3 font-semibold px-6 border-b border-[#10B981]' onClick={() => setActiveFrame54Tab('COPY TRADING')}>Copy Trading</li></Link>
                     <Link href='/frame46'><li className='cursor-pointer w-full text-center py-3 font-semibold px-6 border-b border-[#10B981]'>Restart Application</li></Link>
                     <Link href='/frame46'><li className='w-full px-6 py-3 font-semibold text-center cursor-pointer'>Default</li></Link>
+                    <li className='w-full px-6 py-3 font-semibold text-center cursor-pointer' onClick={handleLogout}>Logout</li>
                 </ul>
             </div>
         </nav>

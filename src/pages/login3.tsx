@@ -5,6 +5,7 @@ import 'react-phone-number-input/style.css'
 import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input'
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import axios from 'axios';
 
 const LoginPage = () => {
 
@@ -24,8 +25,25 @@ const LoginPage = () => {
         } 
     }
 
-    const router = useRouter();
+    const onSubmit = async (data: any) => {
+        try {
+            const response = await axios.post('https://tradingcrowd.net/api/register', {
+            email: data.email,
+            password: data.password,
+            firstName: data.firstName,
+            lastName: data.lastName,
+            phone: data.phone,
+            });
+            
+            console.log(response.data)
+          } catch (error) {
+            console.error(error)
+          }
+        reset();
+        router.push('/');
+    }
 
+    const router = useRouter();
       
   return (
     <main className='bg-[#FFFFF4] h-screen'>
@@ -45,11 +63,7 @@ const LoginPage = () => {
                 <h1 className='text-4xl lg:text-6xl text-[#5290F7] font-bold md:text-right'>Open demo account</h1>
                 <p className='text-lg lg:text-2xl text-[#003960] font-semibold'>Fill out registration form</p>
             </div>
-            <form className='2-3/5 flex flex-col items-start justify-between min-w-[430px] mx-auto px-6 py-4 rounded bg-[#EFF6FF] space-y-4 border border-[#BFDBFE]' onSubmit={handleSubmit((data) => {
-                console.log(data)
-                reset();
-                router.push('/login4');
-            })}>
+            <form className='2-3/5 flex flex-col items-start justify-between min-w-[430px] mx-auto px-6 py-4 rounded bg-[#EFF6FF] space-y-4 border border-[#BFDBFE]' onSubmit={handleSubmit(onSubmit)}>
                 <h1 className='text-xl font-semibold'>Personal details</h1>
                 <div className='grid w-full grid-cols-2 gap-3'>
                     <div className='flex flex-col items-start justify-between col-span-2'>

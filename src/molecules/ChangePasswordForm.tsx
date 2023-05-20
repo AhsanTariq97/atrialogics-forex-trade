@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from 'axios';
 
 type PasswordFormInputs = {
     oldPassword: string;
@@ -12,8 +13,27 @@ const ChangePasswordForm = () => {
 
     const { handleSubmit, control, getValues, formState: { errors } } = useForm<PasswordFormInputs>();
 
-    const onSubmit = (data: PasswordFormInputs) => {
-        console.log(data);
+    const onSubmit = async (data: PasswordFormInputs) => {
+        // console.log(data);
+        try {
+            const token = localStorage.getItem('token')
+
+            const response = await axios.post('https://tradingcrowd.net/api/updatepassword', {
+            // email: data.email,
+            email: 'pol@pol.com',
+            newPassword: data.newPassword,
+            repeatNewPassword: data.repeatNewPassword
+            },
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            
+            console.log(response.data)
+          } catch (error) {
+            console.error(error)
+          }
     }
     
   return (

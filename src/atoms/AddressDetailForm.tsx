@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react'
 import { Controller, useFormContext } from "react-hook-form";
 
-const AddressDetailForm = () => {
+const AddressDetailForm = ({retrievedData}: {retrievedData: any}) => {
 
     const { control, formState: {errors} } = useFormContext();
 
@@ -13,7 +13,7 @@ const AddressDetailForm = () => {
             <Controller
                 name="city"
                 control={control}
-                defaultValue=""
+                defaultValue= {retrievedData ? retrievedData.city : ''}
                 rules={{ required: {value: true, message: 'Enter your city'} }}
                 render={({ field }) => <input className='font-medium border-b border-[#52c2e4] w-full outline-none' {...field} type='text' placeholder='City' />}
             />
@@ -24,7 +24,7 @@ const AddressDetailForm = () => {
             <Controller
                 name="ZIPCode"
                 control={control}
-                defaultValue=""
+                defaultValue= {retrievedData ? retrievedData.ZIPCode : ''}
                 rules={{ required: {value: true, message: 'Enter your postal ZIP code'} }}
                 render={({ field }) => <input className='font-medium border-b border-[#52c2e4] w-full outline-none' {...field} type='text' placeholder='Postal ZIP Code' />}
             />
@@ -35,7 +35,7 @@ const AddressDetailForm = () => {
             <Controller
                 name="country"
                 control={control}
-                defaultValue=""
+                defaultValue= {retrievedData ? retrievedData.country : ''}
                 rules={{ required: {value: true, message: 'Enter your country'} }}
                 // render={({ field }) => <input className='font-medium border-b border-[#52c2e4] w-full outline-none' {...field} type='text' placeholder='First Name' />}
                 render={({ field }) => {
@@ -293,7 +293,7 @@ const AddressDetailForm = () => {
             <Controller
                 name="state"
                 control={control}
-                defaultValue=""
+                defaultValue= {retrievedData ? retrievedData.state : ''}
                 rules={{ required: {value: true, message: 'Enter your state'} }}
                 render={({ field }) => <input className='font-medium border-b border-[#52c2e4] w-full outline-none' {...field} type='text' placeholder='State' />}
             />
