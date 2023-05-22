@@ -50,8 +50,8 @@ const Frame54Navbar = ({ setActiveFrame54Tab }: {setActiveFrame54Tab: React.Disp
                     <Link href='/security'><li className='cursor-pointer w-full text-center py-3 font-semibold px-6 border-b border-[#10B981]'>Security</li></Link>
                     <Link href='/frame51'><li className='cursor-pointer w-full text-center py-3 font-semibold px-6 border-b border-[#10B981]'>Become an IB</li></Link>
                     <Link href='/frame54'><li className='cursor-pointer w-full text-center py-3 font-semibold px-6 border-b border-[#10B981]' onClick={() => setActiveFrame54Tab('COPY TRADING')}>Copy Trading</li></Link>
-                    <Link href='/frame46'><li className='cursor-pointer w-full text-center py-3 font-semibold px-6 border-b border-[#10B981]'>Restart Application</li></Link>
-                    <Link href='/frame46'><li className='w-full px-6 py-3 font-semibold text-center cursor-pointer'>Default</li></Link>
+                    <Link href='/'><li className='cursor-pointer w-full text-center py-3 font-semibold px-6 border-b border-[#10B981]'>Restart Application</li></Link>
+                    <Link href='/'><li className='w-full px-6 py-3 font-semibold text-center cursor-pointer'>Default</li></Link>
                     <li className='w-full px-6 py-3 font-semibold text-center cursor-pointer' onClick={() => setLogoutModal(true)}>Logout</li>
                     {logoutModal && <LogoutModal setLogoutModal={setLogoutModal} />}
                 </ul>

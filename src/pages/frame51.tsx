@@ -24,7 +24,7 @@ const Frame51Page = () => {
             <div className='absolute top-0 left-0 z-20 w-full h-full bg-black/25'></div>
             <div className='fixed z-30 flex flex-col items-center justify-between w-3/4 px-8 py-10 space-y-8 -translate-x-1/2 -translate-y-1/2 md:py-16 top-1/2 left-1/2 rounded-xl bg-gradient'>
                 <h2 className='text-2xl font-semibold text-center md:text-left'>Your account is verified. Upload your documents in Profile section to proceed with Operation</h2>
-                <Link href='/frame46'><button className='p-2 text-2xl font-semibold border rounded-full'>OK</button></Link>
+                <Link href='/'><button className='p-2 text-2xl font-semibold border rounded-full'>OK</button></Link>
             </div>
             <Frame54Navbar setActiveFrame54Tab={setActiveFrame54Tab} />
             <div className='relative flex flex-col items-center justify-between px-4 py-16 pb-12 space-y-4 sm:flex-row md:px-16 sm:space-y-0'>
