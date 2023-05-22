@@ -6,7 +6,7 @@ import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input'
 const PersonalDetailsForm = ({retrievedData}: {retrievedData: any}) => {
 
 
-    console.log(retrievedData)
+    // console.log(retrievedData)
     const { control, formState: {errors} } = useFormContext();
 
   return (
@@ -37,13 +37,13 @@ const PersonalDetailsForm = ({retrievedData}: {retrievedData: any}) => {
         <div className='flex flex-col items-start justify-between w-full space-y-1'>
             <label className='font-semibold'>Date of Birth</label>
             <Controller
-                name="DoB"
+                name="date_of_birth"
                 control={control}
-                defaultValue= {retrievedData ? retrievedData.DoB : ''}
+                defaultValue= {retrievedData ? retrievedData.date_of_birth : ''}
                 rules={{ required: {value: true, message: 'Enter your date of birth'} }}
                 render={({ field }) => <input className='font-medium border-b border-[#52c2e4] w-full outline-none' {...field} type='date' />}
             />
-            {errors.DoB && <p className='text-xs text-red-600'>{errors.DoB?.message as ReactNode}</p>}
+            {errors.date_of_birth && <p className='text-xs text-red-600'>{errors.date_of_birth?.message as ReactNode}</p>}
         </div>
         <div className='flex flex-col items-start justify-between w-full space-y-1'>
             <label className='font-semibold'>Phone number</label>

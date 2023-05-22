@@ -5,6 +5,7 @@ import Frame54Navbar from '../compounds/Frame54Navbar'
 import DownloadTradingFooter from '../molecules/DownloadTradingFooter'
 import PaypalWithdraw from '../atoms/PaypalWithdraw'
 import PaymentMethodCard from '../atoms/PaymentMethodCard'
+import withAuth from '../utils/authToken'
 
 const Frame48Page = () => {
 
@@ -50,7 +51,7 @@ const Frame48Page = () => {
                     <PaymentMethodCard paymentMethod={paymentMethod} setPaymentMethod={setPaymentMethod} img='/assets/internal-transfer.svg' text='Internal Transfer' />
                 </div>
             </div>
-            <div className='bg-[#2F80ED] p-2 w-16 h-16 flex justify-center items-center rounded-full fixed bottom-24 right-8 cursor-pointer'>
+            <div className='bg-[#2F80ED] z-50 p-2 w-16 h-16 flex justify-center items-center rounded-full fixed bottom-24 right-8 cursor-pointer'>
                 <Image src='/assets/icons/earphones.svg' alt='' width={28} height={28} className='' />
             </div>
         </div>
@@ -69,4 +70,4 @@ const Frame48Page = () => {
   )
 }
 
-export default Frame48Page
+export default withAuth(Frame48Page)

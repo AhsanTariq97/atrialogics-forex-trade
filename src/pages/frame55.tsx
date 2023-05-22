@@ -5,6 +5,7 @@ import Frame54Navbar from '../compounds/Frame54Navbar'
 import DownloadTradingFooter from '../molecules/DownloadTradingFooter'
 import {IoCloseOutline, IoCheckmarkOutline} from 'react-icons/io5'
 import { MdAdd } from 'react-icons/md'
+import withAuth from '../utils/authToken'
 
 const Frame55Page = () => {
 
@@ -63,7 +64,7 @@ const Frame55Page = () => {
                 <button className='text-lg font-bold border border-white rounded-t text-[#EF4444] bg-white px-8 py-3'>PAYMENT HISTORY</button>
                 <button className='px-8 py-3 text-lg font-bold border border-white rounded-t'>TRADING HISTORY</button>
             </div>
-            <div className='bg-[#2F80ED] p-2 w-16 h-16 flex justify-center items-center rounded-full fixed bottom-24 right-8 cursor-pointer'>
+            <div className='bg-[#2F80ED] z-50 p-2 w-16 h-16 flex justify-center items-center rounded-full fixed bottom-24 right-8 cursor-pointer'>
                 <Image src='/assets/icons/earphones.svg' alt='' width={28} height={28} className='' />
             </div>
         </div>
@@ -82,4 +83,4 @@ const Frame55Page = () => {
   )
 }
 
-export default Frame55Page
+export default withAuth(Frame55Page)

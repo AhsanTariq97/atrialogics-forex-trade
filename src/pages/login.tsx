@@ -4,12 +4,24 @@ import { useForm, Controller } from "react-hook-form";
 import validator from 'validator';
 import { useRouter } from 'next/router';
 import axios from 'axios';
-import { useState } from 'react';
 import { toast } from 'react-toastify';
+import Cookies from 'universal-cookie';
 
-export default function Home() {
 
+const LoginPage = () => {
+  
   const router = useRouter();
+  
+  const cookies = new Cookies();
+
+  const checkToken = () => {
+    const token = cookies.get('token');
+    if (token) {
+      router.push('/profile');
+    }
+  };
+
+  checkToken();
 
   function getFlagEmoji(countryCode: string) {
     return countryCode.toUpperCase().replace(/./g, char => 
@@ -17,7 +29,7 @@ export default function Home() {
     );
   }
 
-  const { register, handleSubmit, reset, control, formState: { errors } } = useForm<{ email: string, password: string }>();
+  const { handleSubmit, reset, control, formState: { errors } } = useForm<{ email: string, password: string }>();
   
 
   const validateEmail = (email: string) => {
@@ -33,26 +45,30 @@ export default function Home() {
 
     try {
       const response = await axios.post('https://tradingcrowd.net/api/login', {
-      email: data.email,
-      password: data.password
+        email: data.email,
+        password: data.password
       });
 
+      if (response.data.status === 'error') {
+        return toast.error(response.data.message);
+      } else if (response.data.status === 'false') {
+        return toast.error(response.data.message);
+      } 
+
       const token = response.data.token
+      cookies.set('token', token, { path: '/' })
 
-      localStorage.setItem('token', token);
+      toast.success('Login successful')
 
-      toast.success('Login successful');
-
-      
+      reset();
+      router.push('/profile')
       
       console.log(response.data)
+
     } catch (error) {
       console.error(error)
       toast.error('Login failed');
     }
-    
-    reset();
-    router.push('/profile');
   }
 
   return (
@@ -97,7 +113,7 @@ export default function Home() {
             </form>
             <div className='flex flex-col items-center justify-between py-2 space-y-2'>
                 <p className='pb-2 text-sm font-medium'>Don't have an account?</p>
-                <Link className='w-full' href='/login3'><button className='text-[#5290F7] rounded w-full border border-[#7EA1F9] text-sm font-extrabold py-3'>TRY DEMO</button></Link>
+                <Link className='w-full' href='/signup'><button className='text-[#5290F7] rounded w-full border border-[#7EA1F9] text-sm font-extrabold py-3'>TRY DEMO</button></Link>
                 <div className='rounded border border-[#7EA1F9] text-[9px] flex justify-between items-center space-x-2 px-2'>
                     <p className='text-base'>{getFlagEmoji('gb')}</p>
                     <p>EN</p>
@@ -109,3 +125,5 @@ export default function Home() {
     </>
   )
 }
+
+export default LoginPage

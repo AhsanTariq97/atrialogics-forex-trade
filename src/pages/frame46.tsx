@@ -5,6 +5,7 @@ import Frame54Navbar from '../compounds/Frame54Navbar'
 import DownloadTradingFooter from '../molecules/DownloadTradingFooter'
 import Link from 'next/link'
 import { MdAdd } from 'react-icons/md'
+import withAuth from '../utils/authToken'
 
 const Frame46Page = () => {
 
@@ -61,7 +62,7 @@ const Frame46Page = () => {
                 <button className={`text-lg font-bold border border-white rounded-t ${activeHistoryTab === 'PAYMENT HISTORY' ? 'text-[#EF4444] bg-white' : ''} px-8 py-3`} onClick={onHistoryTabClick}>PAYMENT HISTORY</button>
                 <button className={`text-lg font-bold border border-white rounded-t ${activeHistoryTab === 'TRADING HISTORY' ? 'text-[#DAA418] bg-white' : ''} px-8 py-3 `} onClick={onHistoryTabClick}>TRADING HISTORY</button>
             </div>
-            <div className='bg-[#2F80ED] p-2 w-16 h-16 flex justify-center items-center rounded-full fixed bottom-24 right-8 cursor-pointer'>
+            <div className='bg-[#2F80ED] z-50 p-2 w-16 h-16 flex justify-center items-center rounded-full fixed bottom-24 right-8 cursor-pointer'>
                 <Image src='/assets/icons/earphones.svg' alt='' width={28} height={28} className='' />
             </div>
         </div>
@@ -101,4 +102,4 @@ const Frame46Page = () => {
   )
 }
 
-export default Frame46Page
+export default withAuth(Frame46Page)

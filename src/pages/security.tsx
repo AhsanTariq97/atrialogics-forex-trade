@@ -3,6 +3,7 @@ import Head from 'next/head'
 import Frame54Navbar from '../compounds/Frame54Navbar'
 import DownloadTradingFooter from '../molecules/DownloadTradingFooter'
 import ChangePasswordForm from '../molecules/ChangePasswordForm';
+import withAuth from '../utils/authToken';
 
 const SecurityPage = () => {
 
@@ -37,4 +38,4 @@ const SecurityPage = () => {
   )
 }
 
-export default SecurityPage
+export default withAuth(SecurityPage)

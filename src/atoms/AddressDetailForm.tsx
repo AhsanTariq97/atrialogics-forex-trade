@@ -20,15 +20,15 @@ const AddressDetailForm = ({retrievedData}: {retrievedData: any}) => {
             {errors.city && <p className='text-xs text-red-600'>{errors.city?.message as ReactNode}</p>}
         </div>
         <div className='flex flex-col items-start justify-between w-full space-y-1'>
-            <label htmlFor='ZIPCode' className='font-semibold'>Postal ZIP Code</label>
+            <label htmlFor='postal_code' className='font-semibold'>Postal ZIP Code</label>
             <Controller
-                name="ZIPCode"
+                name="postal_code"
                 control={control}
-                defaultValue= {retrievedData ? retrievedData.ZIPCode : ''}
+                defaultValue= {retrievedData ? retrievedData.postal_code : ''}
                 rules={{ required: {value: true, message: 'Enter your postal ZIP code'} }}
                 render={({ field }) => <input className='font-medium border-b border-[#52c2e4] w-full outline-none' {...field} type='text' placeholder='Postal ZIP Code' />}
             />
-            {errors.ZIPCode && <p className='text-xs text-red-600'>{errors.ZIPCode?.message as ReactNode}</p>}
+            {errors.postal_code && <p className='text-xs text-red-600'>{errors.postal_code?.message as ReactNode}</p>}
         </div>
         <div className='flex flex-col items-start justify-between w-full space-y-1'>
             <label htmlFor='country' className='font-semibold'>Country</label>

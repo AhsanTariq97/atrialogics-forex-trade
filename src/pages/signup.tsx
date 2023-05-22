@@ -15,7 +15,7 @@ const LoginPage = () => {
         );
     }
 
-    const { register, handleSubmit, control, reset, formState: { errors } } = useForm<{ firstName: string, lastName: string, email: string, password: string, phone: string }>();
+    const { handleSubmit, control, reset, formState: { errors } } = useForm<{ firstName: string, lastName: string, email: string, password: string, phone: string }>();
 
     const validateEmail = (email: string) => {
         if (validator.isEmail(email)) {
@@ -40,30 +40,30 @@ const LoginPage = () => {
             console.error(error)
           }
         reset();
-        router.push('/');
+        router.push('/login');
     }
 
-    const router = useRouter();
-      
+    const router = useRouter()
+
   return (
     <main className='bg-[#FFFFF4] h-screen'>
-        <nav className='grid items-center grid-cols-3 px-16 py-8 mx-auto'>
+        <nav className='grid items-center grid-cols-3 px-4 py-8 mx-auto sm:px-16'>
             <h1 className='text-2xl font-extrabold text-[#003960]'>Trading Crowd</h1>
-            <div className='flex items-center justify-start col-start-3 space-x-4'>
-                <div className='rounded border border-[#7EA1F9] text-[9px] flex justify-between items-center space-x-2 px-2'>
+            <div className='flex items-center justify-end col-span-2 space-x-4 lg:col-start-3'>
+                <div className='rounded border border-[#7EA1F9] text-[9px] flex justify-between items-center space-x-1 sm:space-x-2 px-1 sm:px-2'>
                     <p className='text-base'>{getFlagEmoji('gb')}</p>
                     <p>EN</p>
                 </div>
                 <p className='text-sm font-semibold text-[#003960]'>Already a user?</p>
-                <Link href='/'><button className='bg-[#5290F7] text-sm font-semibold rounded text-white py-2 px-6'>SIGN IN</button></Link>
+                <Link href='/login'><button className='bg-[#5290F7] text-sm font-semibold rounded text-white py-2 px-6'>SIGN IN</button></Link>
             </div>
         </nav>
-        <section className='flex flex-col items-center justify-center py-32 mx-auto space-y-8 md:flex-row md:space-y-0'>
+        <section className='flex flex-col items-center justify-center px-4 py-32 mx-auto space-y-8 md:flex-row md:space-y-0'>
             <div className='flex flex-col items-start justify-center col-span-2 px-8 space-y-4 md:items-end md:w-2/5'>
                 <h1 className='text-4xl lg:text-6xl text-[#5290F7] font-bold md:text-right'>Open demo account</h1>
                 <p className='text-lg lg:text-2xl text-[#003960] font-semibold'>Fill out registration form</p>
             </div>
-            <form className='2-3/5 flex flex-col items-start justify-between min-w-[430px] mx-auto px-6 py-4 rounded bg-[#EFF6FF] space-y-4 border border-[#BFDBFE]' onSubmit={handleSubmit(onSubmit)}>
+            <form className='w-full md:w-3/5 flex flex-col items-start justify-between min-w-[320px] max-w-xl mx-auto px-6 py-4 rounded bg-[#EFF6FF] space-y-4 border border-[#BFDBFE]' onSubmit={handleSubmit(onSubmit)}>
                 <h1 className='text-xl font-semibold'>Personal details</h1>
                 <div className='grid w-full grid-cols-2 gap-3'>
                     <div className='flex flex-col items-start justify-between col-span-2'>
@@ -79,8 +79,7 @@ const LoginPage = () => {
                         </div>
                         <p className='pl-2 text-xs text-red-600'>{errors.email?.message}</p>
                     </div>
-
-                    <div className='flex flex-col items-start justify-between'>
+                    <div className='flex flex-col items-start justify-between col-span-2 xs:col-auto'>
                         <div className={`${errors.password ? 'border border-red-600' : 'border border-[#BFDBFE]'} flex flex-col items-start w-full rounded p-2 bg-[#FBF6F64A] text-sm`}>
                             <label className='text-xs font-semibold'>Password</label>
                             <Controller
@@ -93,37 +92,37 @@ const LoginPage = () => {
                         </div>
                         <p className='pl-2 text-xs text-red-600'>{errors.password?.message}</p>
                     </div>
-                    <div className='flex flex-col items-start justify-between w-full col-start-1 space-y-1 '>
+                    <div className='flex flex-col items-start justify-between w-full col-span-2 space-y-1 xs:col-start-1 xs:col-span-1'>
                         <Controller
                             name="firstName"
                             control={control}
                             defaultValue=""
                             rules={{ required: {value: true, message: 'Enter your first name'} }}
-                            render={({ field }) => <input {...field} type='text' placeholder='First Name' className={`${errors.firstName ? 'border border-red-600' : 'border border-[#BFDBFE]' } font-semibold outline-none rounded p-2 bg-[#FBF6F64A] text-sm`} />}
+                            render={({ field }) => <input {...field} type='text' placeholder='First Name' className={`${errors.firstName ? 'border border-red-600' : 'border border-[#BFDBFE]' } font-semibold outline-none w-full rounded p-2 bg-[#FBF6F64A] text-sm`} />}
                         />
                         <p className='pl-2 text-xs text-red-600'>{errors.firstName?.message}</p>
                     </div>
-                    <div className='flex flex-col items-start justify-between w-full space-y-1 '>
+                    <div className='flex flex-col items-start justify-between w-full col-span-2 col-start-1 space-y-1 xs:col-span-1 xs:col-start-2'>
                     <Controller
                         name="lastName"
                         control={control}
                         defaultValue=""
                         rules={{ required: {value: true, message: 'Enter your last name'} }}
-                        render={({ field }) => <input {...field} type='text' placeholder='Last Name' className={`${errors.lastName ? 'border border-red-600' : 'border border-[#BFDBFE]' } font-semibold rounded p-2 bg-[#FBF6F64A] text-sm outline-none`} />}
+                        render={({ field }) => <input {...field} type='text' placeholder='Last Name' className={`${errors.lastName ? 'border border-red-600' : 'border border-[#BFDBFE]' } font-semibold w-full rounded p-2 bg-[#FBF6F64A] text-sm outline-none`} />}
                     />
                         <p className='pl-2 text-xs text-red-600'>{errors.lastName?.message}</p>
                     </div>
-                    <div className='flex flex-col items-start justify-between w-full space-y-1'>
-                        <div className={`${errors.phone ? 'border border-red-600' : 'border border-[#BFDBFE]'} rounded`}>
+                    <div className='flex flex-col items-start justify-between w-full col-span-2 space-y-1 xs:col-span-1'>
+                        <div className={`${errors.phone ? 'border border-red-600' : 'border border-[#BFDBFE]'} rounded w-full`}>
                             <Controller name="phone" control={control} rules={{ validate: (value) => isValidPhoneNumber(value) || 'Invalid number' , required: 'Enter your number', }} render={({ field: { onChange, value } }) => (
-                                <PhoneInput value={value} onChange={onChange} defaultCountry="US" className='phone-input' placeholder='Phone number' />
+                                <PhoneInput value={value} onChange={onChange} defaultCountry="US" className='w-full phone-input' placeholder='Phone number' />
                             )}/>
                         </div>
                         <p className='pl-2 text-xs text-red-600'>{errors.phone?.message}</p>
                     </div>
                 </div>
                 <div className='flex items-center justify-between w-full'>
-                    <Link href='/login2'><button className='border border-[#5290F7] rounded text-xs text-[#535353] font-bold py-3 px-4 self-end'>PREVIOUS STEP</button></Link>
+                    <button className='border border-[#5290F7] rounded text-xs text-[#535353] font-bold py-3 px-4 self-end' disabled>PREVIOUS STEP</button>
                     <button className='bg-[#BFDBFE] rounded text-xs text-[#5290F7] font-bold py-3 px-4 self-end'>NEXT STEP</button>
                 </div>
             </form>

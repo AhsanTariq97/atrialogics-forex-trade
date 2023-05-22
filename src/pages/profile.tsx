@@ -4,8 +4,9 @@ import Image from 'next/image'
 import Frame54Navbar from '../compounds/Frame54Navbar'
 import DownloadTradingFooter from '../molecules/DownloadTradingFooter'
 import ProfileDetailsForm from '../molecules/ProfileDetailsForm'
+import withAuth from '../utils/authToken'
 
-const Frame48Page = () => {
+const ProfilePage = () => {
 
     const [activeFrame54Tab, setActiveFrame54Tab ] = useState('TRADING COPY')
 
@@ -23,7 +24,7 @@ const Frame48Page = () => {
             <div className='flex flex-col items-center justify-between py-16'>
                 <h1 className='text-2xl font-bold'>Profile</h1>
             </div>
-            <div className='bg-[#2F80ED] p-2 w-16 h-16 flex justify-center items-center rounded-full fixed bottom-24 right-8 cursor-pointer'>
+            <div className='bg-[#2F80ED] z-50 p-2 w-16 h-16 flex justify-center items-center rounded-full fixed bottom-24 right-8 cursor-pointer'>
                 <Image src='/assets/icons/earphones.svg' alt='' width={28} height={28} className='' />
             </div>
         </div>
@@ -36,4 +37,4 @@ const Frame48Page = () => {
   )
 }
 
-export default Frame48Page
+export default withAuth(ProfilePage)

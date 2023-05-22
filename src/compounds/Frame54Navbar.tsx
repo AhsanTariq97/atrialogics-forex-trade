@@ -1,59 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
-import Router, { useRouter } from 'next/router';
 import Link from 'next/link';
-import { toast } from 'react-toastify';
-import axios from 'axios';
-
-function useOutsideAlerter(ref: any, isVisible: boolean, setIsVisible: React.Dispatch<React.SetStateAction<boolean>>) {
-    useEffect(() => {
-      function handleClickOutside(event: { target: any; }) {
-        if (ref.current && !ref.current.contains(event.target) && isVisible) {
-          
-          setIsVisible(prev => !prev)
-        }
-      }
-      document.addEventListener("mousedown", handleClickOutside);
-      return () => {
-        document.removeEventListener("mousedown", handleClickOutside);
-      };
-    }, [ref, isVisible, setIsVisible]);
-}
+import LogoutModal from '../atoms/LogoutModal';
 
 const Frame54Navbar = ({ setActiveFrame54Tab }: {setActiveFrame54Tab: React.Dispatch<React.SetStateAction<string>>;}) => {
 
     const [navSidebar, setNavSidebar] = useState(false)
+    const [logoutModal, setLogoutModal] = useState(false)
       
     const sidebarRef = useRef(null);
 
     useOutsideAlerter(sidebarRef, navSidebar, setNavSidebar);
     
-    const handleLogout = async () => {
-        try {
-            const token = localStorage.getItem('token')
-
-            const response = await axios.post('https://tradingcrowd.net/api/login', null, {
-                headers: {
-                  Authorization: `Bearer ${token}`
-                }
-            });
-
-            localStorage.removeItem('token');
-      
-            toast.success('Logout successful');
-            
-            console.log(response.data)
-          } catch (error) {
-            console.error(error)
-            toast.error('Login failed');
-          }
-          
-          router.push('/');
-    }
-
-    const router = useRouter();
-
-
   return (
         <nav className='flex items-center justify-between p-4 border-b'>
             <Link href='/frame7'><Image src='/assets/icons/backarrow.svg' alt='' width={20} height={20} /></Link>
@@ -94,7 +52,8 @@ const Frame54Navbar = ({ setActiveFrame54Tab }: {setActiveFrame54Tab: React.Disp
                     <Link href='/frame54'><li className='cursor-pointer w-full text-center py-3 font-semibold px-6 border-b border-[#10B981]' onClick={() => setActiveFrame54Tab('COPY TRADING')}>Copy Trading</li></Link>
                     <Link href='/frame46'><li className='cursor-pointer w-full text-center py-3 font-semibold px-6 border-b border-[#10B981]'>Restart Application</li></Link>
                     <Link href='/frame46'><li className='w-full px-6 py-3 font-semibold text-center cursor-pointer'>Default</li></Link>
-                    <li className='w-full px-6 py-3 font-semibold text-center cursor-pointer' onClick={handleLogout}>Logout</li>
+                    <li className='w-full px-6 py-3 font-semibold text-center cursor-pointer' onClick={() => setLogoutModal(true)}>Logout</li>
+                    {logoutModal && <LogoutModal setLogoutModal={setLogoutModal} />}
                 </ul>
             </div>
         </nav>
@@ -102,3 +61,18 @@ const Frame54Navbar = ({ setActiveFrame54Tab }: {setActiveFrame54Tab: React.Disp
 }
 
 export default Frame54Navbar
+
+function useOutsideAlerter(ref: any, isVisible: boolean, setIsVisible: React.Dispatch<React.SetStateAction<boolean>>) {
+    useEffect(() => {
+      function handleClickOutside(event: { target: any; }) {
+        if (ref.current && !ref.current.contains(event.target) && isVisible) {
+          
+          setIsVisible(prev => !prev)
+        }
+      }
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, [ref, isVisible, setIsVisible]);
+}

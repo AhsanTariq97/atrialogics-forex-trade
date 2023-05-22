@@ -6,6 +6,7 @@ import Frame54TabLive from '../molecules/Frame54TabLive'
 import Frame54TabDemo from '../molecules/Frame54TabDemo'
 import Frame54TabCopyTrading from '../molecules/Frame54TabCopyTrading'
 import DownloadTradingFooter from '../molecules/DownloadTradingFooter'
+import withAuth from '../utils/authToken'
 
 const Frame54Page = () => {
 
@@ -51,5 +52,5 @@ const Frame54Page = () => {
   )
 }
 
-export default Frame54Page;
+export default withAuth(Frame54Page);
 

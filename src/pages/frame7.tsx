@@ -9,6 +9,7 @@ import FundTradingAccountPopup from '../molecules/FundTradingAccountPopup'
 import AboutUsPopup from '../molecules/AboutUsPopup'
 
 import { ChartStoreContext } from '../utils/chartStore'
+import withAuth from '../utils/authToken'
 
 const Frame7Page = () => {
 
@@ -107,4 +108,4 @@ const Frame7Page = () => {
   )
 }
 
-export default Frame7Page
+export default withAuth(Frame7Page)

@@ -1,26 +1,59 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios';
+import Cookies from 'universal-cookie';
 
 type PasswordFormInputs = {
+    email: string;
     oldPassword: string;
     newPassword: string;
     repeatNewPassword: string;
   };
 
 import { useForm, Controller } from 'react-hook-form';
+import validator from 'validator';
 
 const ChangePasswordForm = () => {
 
+    const cookies = new Cookies()
+    
+    const [userEmail, setUserEmail] = useState('')
+
     const { handleSubmit, control, getValues, formState: { errors } } = useForm<PasswordFormInputs>();
 
+    const validateEmail = (email: string) => {
+        if (validator.isEmail(email)) {
+          return true
+        } else {
+          return 'Enter valid email'
+        } 
+    }
+
+    useEffect(() => {
+        const getUserEmail = async () => {
+            try {
+                const token = cookies.get('token')
+                
+                const response = await axios.get('https://tradingcrowd.net/api/userdetail', {
+                    headers: {
+                    Authorization: `Bearer ${token}`
+                    }
+                });
+                setUserEmail(response.data.data.email)
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        getUserEmail()
+    }, [])
+
     const onSubmit = async (data: PasswordFormInputs) => {
-        // console.log(data);
+        validateEmail(data.email)
+
         try {
-            const token = localStorage.getItem('token')
+            const token = cookies.get('token')
 
             const response = await axios.post('https://tradingcrowd.net/api/updatepassword', {
-            // email: data.email,
-            email: 'pol@pol.com',
+            email: userEmail,
             newPassword: data.newPassword,
             repeatNewPassword: data.repeatNewPassword
             },
@@ -29,7 +62,6 @@ const ChangePasswordForm = () => {
                     Authorization: `Bearer ${token}`
                 }
             });
-            
             console.log(response.data)
           } catch (error) {
             console.error(error)
@@ -38,6 +70,16 @@ const ChangePasswordForm = () => {
     
   return (
     <form noValidate onSubmit={handleSubmit(onSubmit)} className='flex flex-col items-center w-full max-w-md px-8 py-12 space-y-8 shadow-lg jusitfy-between rounded-xl text-[#535353]'>
+        <div className='flex flex-col items-start justify-between w-full space-y-2'>
+            <label htmlFor="oldPassword" className='text-lg font-semibold xs:text-xl'>Email</label>
+            <Controller
+                name="email"
+                control={control}
+                defaultValue=""
+                render={({ field }) => <input className='outline-none border-b border-[#2F80ED] w-full cursor-not-allowed' {...field} value={userEmail} type='email' disabled />}
+            />
+            {/* <p className='text-xs text-red-600'>{errors.email?.message}</p> */}
+        </div>
         <div className='flex flex-col items-start justify-between w-full space-y-2'>
             <label htmlFor="oldPassword" className='text-lg font-semibold xs:text-xl'>Current password</label>
             <Controller
