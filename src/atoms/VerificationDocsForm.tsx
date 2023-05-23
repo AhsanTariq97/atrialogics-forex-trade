@@ -46,11 +46,22 @@ const VerificationDocsForm = ({ retrievedData, isFormSubmitted, setIsFormSubmitt
                                 {({ getRootProps, getInputProps, acceptedFiles, open, isDragActive }) => (
                                     <div className={`border-dashed w-full h-full ${isDragActive ? 'bg-[#808080]' : 'bg-transprent' }`} {...getRootProps()} >
                                         <input {...getInputProps({ id: 'spreadsheet', onChange, onBlur, })} />
-                                        <button type="button" onClick={open} className='flex items-center justify-center w-full h-full'>
-                                            {!acceptedFiles.length ? <p><span className='cursor-pointer hover:underline'>Choose a file</span><br />or drag and drop</p>
-                                            : <p className='w-full break-words'>{acceptedFiles[0].name}</p> }
-                                            {/* {<p><span className='cursor-pointer hover:underline'>Choose a file</span><br />or drag and drop</p>} */}
+                                        <button type="button" onClick={!acceptedFiles[0] ? open : undefined} className='flex items-center justify-center w-full h-full'>
+                                            {!acceptedFiles.length 
+                                            ? <p>
+                                                <span className='cursor-pointer hover:underline'>Choose a file</span><br />or drag and drop
+                                              </p>
+                                            : <div className='flex flex-col justify-between w-full h-full'>
+                                                <p className='text-xs font-bold' onClick={open}>Click here to replace</p>
+                                                <span className='w-full break-words' onClick={() => window.open(URL.createObjectURL(acceptedFiles[0]), '_blank')}>
+                                                    {acceptedFiles[0].name}
+                                                </span> 
+                                            </div>}
                                         </button>
+                                        {/* {acceptedFiles[0] && (<div>
+                                            <button className='w-full break-words' onClick={() => {window.open(URL.createObjectURL(acceptedFiles[0]), '_blank')}}>{acceptedFiles[0].name}</button>
+                                            <img src={URL.createObjectURL(acceptedFiles[0])} alt="" />
+                                        </div>)} */}
                                         <div>
                                             <p className={`absolute -bottom-8 text-xs font-semibold ${fieldState.error && 'text-red-600'}`}>{fieldState.error ? fieldState.error.message : '*Document required'}</p>
                                         </div>
@@ -83,11 +94,22 @@ const VerificationDocsForm = ({ retrievedData, isFormSubmitted, setIsFormSubmitt
                                 {({ getRootProps, getInputProps, acceptedFiles, open, isDragActive }) => (
                                     <div className={`border-dashed w-full h-full ${isDragActive ? 'bg-[#808080]' : 'bg-transprent' }`} {...getRootProps()} >
                                         <input {...getInputProps({ id: 'spreadsheet', onChange, onBlur, })} />
-                                        <button type="button" onClick={open} className='flex items-center justify-center w-full h-full'>
-                                            {!acceptedFiles.length ? <p><span className='cursor-pointer hover:underline'>Choose a file</span><br />or drag and drop</p>
-                                            : <p className='w-full break-words'>{acceptedFiles[0].name}</p> }
-                                            {/* {<p><span className='cursor-pointer hover:underline'>Choose a file</span><br />or drag and drop</p>} */}
+                                        <button type="button" onClick={!acceptedFiles[0] ? open : undefined} className='flex items-center justify-center w-full h-full'>
+                                            {!acceptedFiles.length 
+                                            ? <p>
+                                                <span className='cursor-pointer hover:underline'>Choose a file</span><br />or drag and drop
+                                              </p>
+                                            : <div className='flex flex-col justify-between w-full h-full'>
+                                                <p className='text-xs font-bold' onClick={open}>Click here to replace</p>
+                                                <span className='w-full break-words' onClick={() => window.open(URL.createObjectURL(acceptedFiles[0]), '_blank')}>
+                                                    {acceptedFiles[0].name}
+                                                </span> 
+                                            </div>}
                                         </button>
+                                        {/* {acceptedFiles[0] && (<div>
+                                            <button className='w-full break-words' onClick={() => {window.open(URL.createObjectURL(acceptedFiles[0]), '_blank')}}>{acceptedFiles[0].name}</button>
+                                            <img src={URL.createObjectURL(acceptedFiles[0])} alt="" />
+                                        </div>)} */}
                                         <div>
                                             <p className={`absolute -bottom-8 text-xs font-semibold ${fieldState.error && 'text-red-600'}`}>{fieldState.error ? fieldState.error.message : '*Document required'}</p>
                                         </div>

@@ -8,10 +8,13 @@ import QuestionnaireForm from '../atoms/QuestionnaireForm'
 import { useForm, FormProvider } from "react-hook-form";
 import axios from 'axios'
 import Cookies from 'universal-cookie';
+import { Router, useRouter } from 'next/router'
 
 const ProfileDetailsForm = () => {
     
     const cookies = new Cookies()
+
+    const router = useRouter()
     
     const methods = useForm({mode: "onBlur"})
 
@@ -27,6 +30,11 @@ const ProfileDetailsForm = () => {
                 Authorization: `Bearer ${token}`
                 }
             });
+
+            if (response.data.status === 'Authorization Token not found') {
+                cookies.remove('token')
+                router.push('/login')
+            }
             
             setRetrievedData(response.data.data)
             console.log('GET', response.data);
@@ -90,7 +98,7 @@ const ProfileDetailsForm = () => {
       <form onSubmit={methods.handleSubmit(onSubmit)} noValidate className='flex flex-col items-start justify-between space-y-8 w-full text-[#535353] px-8 py-12 shadow-lg rounded-xl'>
           <VerificationDocsForm retrievedData={retrievedData} isFormSubmitted={isFormSubmitted} setIsFormSubmitted={setIsFormSubmitted} />
           <PersonalDetailsForm retrievedData={retrievedData} />
-          <AddressDetailForm retrievedData={retrievedData} />
+          <AddressDetailForm retrievedData={retrievedData} /> 
           <BankInfoForm retrievedData={retrievedData} />
           <QuestionnaireForm retrievedData={retrievedData} />
           <button className='bg-[#52c2e4] font-semibold rounded-lg text-white px-8 py-3' disabled>NEXT STEP</button>

@@ -13,9 +13,8 @@ const AddressDetailForm = ({retrievedData}: {retrievedData: any}) => {
             <Controller
                 name="city"
                 control={control}
-                defaultValue= {retrievedData ? retrievedData.city : ''}
                 rules={{ required: {value: true, message: 'Enter your city'} }}
-                render={({ field }) => <input className='font-medium border-b border-[#52c2e4] w-full outline-none' {...field} type='text' placeholder='City' />}
+                render={({ field }) => <input className='font-medium border-b border-[#52c2e4] w-full outline-none' {...field} defaultValue={retrievedData && retrievedData.city ? retrievedData.city : ''} type='text' placeholder='City' />}
             />
             {errors.city && <p className='text-xs text-red-600'>{errors.city?.message as ReactNode}</p>}
         </div>
@@ -24,9 +23,8 @@ const AddressDetailForm = ({retrievedData}: {retrievedData: any}) => {
             <Controller
                 name="postal_code"
                 control={control}
-                defaultValue= {retrievedData ? retrievedData.postal_code : ''}
                 rules={{ required: {value: true, message: 'Enter your postal ZIP code'} }}
-                render={({ field }) => <input className='font-medium border-b border-[#52c2e4] w-full outline-none' {...field} type='text' placeholder='Postal ZIP Code' />}
+                render={({ field }) => <input className='font-medium border-b border-[#52c2e4] w-full outline-none' {...field} defaultValue={retrievedData && retrievedData.postal_code ? retrievedData.postal_code : ''} type='text' placeholder='Postal ZIP Code' />}
             />
             {errors.postal_code && <p className='text-xs text-red-600'>{errors.postal_code?.message as ReactNode}</p>}
         </div>
@@ -35,12 +33,11 @@ const AddressDetailForm = ({retrievedData}: {retrievedData: any}) => {
             <Controller
                 name="country"
                 control={control}
-                defaultValue= {retrievedData ? retrievedData.country : ''}
                 rules={{ required: {value: true, message: 'Enter your country'} }}
                 // render={({ field }) => <input className='font-medium border-b border-[#52c2e4] w-full outline-none' {...field} type='text' placeholder='First Name' />}
                 render={({ field }) => {
                     return (
-                        <select {...field} className='font-medium border-b bg-transparent border-[#52c2e4] w-full outline-none py-1'>
+                        <select {...field} defaultValue={retrievedData && retrievedData.country ? retrievedData.country : ''} className='font-medium border-b bg-transparent border-[#52c2e4] w-full outline-none py-1'>
                             <option value="" defaultValue=''>Select a country</option>
                             {/* <option value="--">Not Specified</option> */}
                             <option value="AF">Afghanistan</option>
@@ -293,9 +290,8 @@ const AddressDetailForm = ({retrievedData}: {retrievedData: any}) => {
             <Controller
                 name="state"
                 control={control}
-                defaultValue= {retrievedData ? retrievedData.state : ''}
                 rules={{ required: {value: true, message: 'Enter your state'} }}
-                render={({ field }) => <input className='font-medium border-b border-[#52c2e4] w-full outline-none' {...field} type='text' placeholder='State' />}
+                render={({ field }) => <input className='font-medium border-b border-[#52c2e4] w-full outline-none' {...field} defaultValue={retrievedData && retrievedData.state ? retrievedData.state : ''} type='text' placeholder='State' />}
             />
             {errors.state && <p className='text-xs text-red-600'>{errors.state?.message as ReactNode}</p>}
         </div>

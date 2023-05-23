@@ -11,14 +11,18 @@ type PasswordFormInputs = {
 
 import { useForm, Controller } from 'react-hook-form';
 import validator from 'validator';
+import { toast } from 'react-toastify';
+import { useRouter } from 'next/router';
 
 const ChangePasswordForm = () => {
 
     const cookies = new Cookies()
+
+    const router = useRouter()
     
     const [userEmail, setUserEmail] = useState('')
 
-    const { handleSubmit, control, getValues, formState: { errors } } = useForm<PasswordFormInputs>();
+    const { handleSubmit, reset, control, getValues, formState: { errors } } = useForm<PasswordFormInputs>();
 
     const validateEmail = (email: string) => {
         if (validator.isEmail(email)) {
@@ -38,6 +42,10 @@ const ChangePasswordForm = () => {
                     Authorization: `Bearer ${token}`
                     }
                 });
+                if (response.data.status === 'Authorization Token not found') {
+                    cookies.remove('token')
+                    router.push('/login')
+                }
                 setUserEmail(response.data.data.email)
             } catch (error) {
                 console.error(error);
@@ -62,10 +70,13 @@ const ChangePasswordForm = () => {
                     Authorization: `Bearer ${token}`
                 }
             });
+            toast.success('Password change successful')
             console.log(response.data)
-          } catch (error) {
+        } catch (error) {
             console.error(error)
-          }
+            toast.error('Password change failed');
+        }
+        reset()
     }
     
   return (

@@ -13,9 +13,8 @@ const BankInfoForm = ({retrievedData}: {retrievedData: any}) => {
             <Controller
                 name="accountName"
                 control={control}
-                defaultValue= {retrievedData ? retrievedData.accountName : ''}
                 rules={{ required: {value: true, message: 'Enter your account name'} }}
-                render={({ field }) => <input className='font-medium border-b border-[#52c2e4] w-full outline-none' {...field} type='text' placeholder='Account Name' />}
+                render={({ field }) => <input className='font-medium border-b border-[#52c2e4] w-full outline-none' {...field} defaultValue={retrievedData && retrievedData.accountName ? retrievedData.accountName : ''} type='text' placeholder='Account Name' />}
             />
             {errors.accountName && <p className='text-xs text-red-600'>{errors.accountName?.message as ReactNode}</p>}
         </div>
@@ -24,9 +23,8 @@ const BankInfoForm = ({retrievedData}: {retrievedData: any}) => {
             <Controller
                 name="bankAccount"
                 control={control}
-                defaultValue= {retrievedData ? retrievedData.bankAccount : ''}
                 rules={{ required: {value: true, message: 'Enter your bank account'} }}
-                render={({ field }) => <input className='font-medium border-b border-[#52c2e4] w-full outline-none' {...field} type='text' placeholder='Bank Account' />}
+                render={({ field }) => <input className='font-medium border-b border-[#52c2e4] w-full outline-none' {...field} defaultValue={retrievedData && retrievedData.bankAccount ? retrievedData.bankAccount : ''} type='text' placeholder='Bank Account' />}
             />
             {errors.bankAccount && <p className='text-xs text-red-600'>{errors.bankAccount?.message as ReactNode}</p>}
         </div>
@@ -35,9 +33,8 @@ const BankInfoForm = ({retrievedData}: {retrievedData: any}) => {
             <Controller
                 name="bankAddress"
                 control={control}
-                defaultValue= {retrievedData ? retrievedData.bankAddress : ''}
                 rules={{ required: {value: true, message: 'Enter your bank address'} }}
-                render={({ field }) => <input className='font-medium border-b border-[#52c2e4] w-full outline-none' {...field} type='text' placeholder='Bank Address' />}
+                render={({ field }) => <input className='font-medium border-b border-[#52c2e4] w-full outline-none' {...field} defaultValue={retrievedData && retrievedData.bankAddress ? retrievedData.bankAddress : ''} type='text' placeholder='Bank Address' />}
                 />
             {errors.bankAddress && <p className='text-xs text-red-600'>{errors.bankAddress?.message as ReactNode}</p>}
         </div>
@@ -46,9 +43,8 @@ const BankInfoForm = ({retrievedData}: {retrievedData: any}) => {
             <Controller
                 name="swiftCode"
                 control={control}
-                defaultValue= {retrievedData ? retrievedData.swiftCode : ''}
                 rules={{ required: {value: true, message: 'Enter your swift code'} }}
-                render={({ field }) => <input className='font-medium border-b border-[#52c2e4] w-full outline-none' {...field} type='text' placeholder='Swift Code' />}
+                render={({ field }) => <input className='font-medium border-b border-[#52c2e4] w-full outline-none' {...field} defaultValue={retrievedData && retrievedData.swiftCode ? retrievedData.swiftCode : ''} type='text' placeholder='Swift Code' />}
                 />
             {errors.swiftCode && <p className='text-xs text-red-600'>{errors.swiftCode?.message as ReactNode}</p>}
         </div>
@@ -57,9 +53,8 @@ const BankInfoForm = ({retrievedData}: {retrievedData: any}) => {
             <Controller
                 name="bankName"
                 control={control}
-                defaultValue= {retrievedData ? retrievedData.bankName : ''}
                 rules={{ required: {value: true, message: 'Enter your bank name'} }}
-                render={({ field }) => <input className='font-medium border-b border-[#52c2e4] w-full outline-none' {...field} type='text' placeholder='Bank Name' />}
+                render={({ field }) => <input className='font-medium border-b border-[#52c2e4] w-full outline-none' {...field} defaultValue={retrievedData && retrievedData.bankName ? retrievedData.bankName : ''} type='text' placeholder='Bank Name' />}
             />
             {errors.bankName && <p className='text-xs text-red-600'>{errors.bankName?.message as ReactNode}</p>}
         </div>

@@ -6,6 +6,7 @@ import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input'
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const LoginPage = () => {
 
@@ -28,15 +29,23 @@ const LoginPage = () => {
     const onSubmit = async (data: any) => {
         try {
             const response = await axios.post('https://tradingcrowd.net/api/register', {
-            email: data.email,
-            password: data.password,
-            firstName: data.firstName,
-            lastName: data.lastName,
-            phone: data.phone,
+                email: data.email,
+                password: data.password,
+                firstName: data.firstName,
+                lastName: data.lastName,
+                phone: data.phone,
             });
             
+            if (response.data.status === 'error') {
+                if (response.data.data.email) {
+                    return toast.error(response.data.data.email[0])
+                }
+                return toast.error(response.data.message)
+            }
+            toast.success('Signup successful')
             console.log(response.data)
-          } catch (error) {
+        } catch (error) {
+            toast.error('Signup failed')
             console.error(error)
           }
         reset();

@@ -17,9 +17,8 @@ const PersonalDetailsForm = ({retrievedData}: {retrievedData: any}) => {
             <Controller
                 name="firstName"
                 control={control}
-                defaultValue= {retrievedData ? retrievedData.firstName : ''}
                 rules={{ required: {value: true, message: 'Enter your first name'} }}
-                render={({ field }) => <input className='font-medium border-b border-[#52c2e4] w-full outline-none' {...field} type='text' placeholder='First Name' />}
+                render={({ field }) => <input className='font-medium border-b border-[#52c2e4] w-full outline-none' {...field} defaultValue={retrievedData && retrievedData.firstName ? retrievedData.firstName : ''} type='text' placeholder='First Name' />}
             />
             {errors.firstName && <p className='text-xs text-red-600'>{errors.firstName?.message as ReactNode}</p>}
         </div>
@@ -28,9 +27,8 @@ const PersonalDetailsForm = ({retrievedData}: {retrievedData: any}) => {
             <Controller
                 name="lastName"
                 control={control}
-                defaultValue= {retrievedData ? retrievedData.lastName : ''}
                 rules={{ required: {value: true, message: 'Enter your last name'} }}
-                render={({ field }) => <input className='font-medium border-b border-[#52c2e4] w-full outline-none' {...field} type='text' placeholder='Last Name' />}
+                render={({ field }) => <input className='font-medium border-b border-[#52c2e4] w-full outline-none' {...field} defaultValue={retrievedData && retrievedData.lastName ? retrievedData.lastName : ''} type='text' placeholder='Last Name' />}
             />
             {errors.lastName && <p className='text-xs text-red-600'>{errors.lastName?.message as ReactNode}</p>}
         </div>
@@ -39,9 +37,8 @@ const PersonalDetailsForm = ({retrievedData}: {retrievedData: any}) => {
             <Controller
                 name="date_of_birth"
                 control={control}
-                defaultValue= {retrievedData ? retrievedData.date_of_birth : ''}
                 rules={{ required: {value: true, message: 'Enter your date of birth'} }}
-                render={({ field }) => <input className='font-medium border-b border-[#52c2e4] w-full outline-none' {...field} type='date' />}
+                render={({ field }) => <input className='font-medium border-b border-[#52c2e4] w-full outline-none' {...field} defaultValue={retrievedData && retrievedData.date_of_birth ? retrievedData.date_of_birth : ''} type='date' />}
             />
             {errors.date_of_birth && <p className='text-xs text-red-600'>{errors.date_of_birth?.message as ReactNode}</p>}
         </div>
@@ -50,13 +47,12 @@ const PersonalDetailsForm = ({retrievedData}: {retrievedData: any}) => {
             <Controller 
                 name="phone" 
                 control={control} 
-                defaultValue= {retrievedData ? retrievedData.phone : ''}
                 rules={{ validate: (value) => isValidPhoneNumber(value) || 'Invalid number' , required: 'Enter your number', }} 
                 render={({ field: { onChange, value } }) => (
-                <PhoneInput value={value} onChange={onChange} defaultCountry="US" className='phone-input' placeholder='Phone number' />
+                <PhoneInput value={value} defaultValue={retrievedData && retrievedData.phone ? retrievedData.phone : value} onChange={onChange} defaultCountry="US" className='phone-input' placeholder='Phone number' />
                 )}
             />
-            {errors.phoneNo && <p className='text-xs text-red-600'>{errors.phoneNo?.message as ReactNode}</p>}
+            {errors.phone && <p className='text-xs text-red-600'>{errors.phone?.message as ReactNode}</p>}
         </div>
     </div>
   )

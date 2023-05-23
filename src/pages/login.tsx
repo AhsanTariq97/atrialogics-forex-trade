@@ -50,8 +50,13 @@ const LoginPage = () => {
       });
 
       if (response.data.status === 'error') {
+        if (response.data.data.email) {
+          return toast.error(response.data.data.email[0])
+        }
+        console.log(response.data)
         return toast.error(response.data.message);
       } else if (response.data.status === 'false') {
+        console.log(response.data)
         return toast.error(response.data.message);
       } 
 
