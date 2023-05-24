@@ -51,28 +51,32 @@ const ProfileDetailsForm = () => {
         console.log('RHF', data)
         try {
             const token = cookies.get('token')
+
+            let formData = new FormData()
+            formData.append("aadhaarCard", data.aadhaarCard)
+            formData.append("passport", data.passport)
+            formData.append("date_of_birth", data.date_of_birth)
+            formData.append("postal_code", data.postal_code)
+            formData.append("accountName", data.accountName)
+            formData.append("bankAccount", data.bankAccount)
+            formData.append("bankAddress", data.bankAddress)
+            formData.append("bankName", data.bankName)
+            formData.append("city", data.city)
+            formData.append("country", data.country)
+            formData.append("firstName", data.firstName)
+            formData.append("futureTradeFrequency", data.futureTradeFrequency)
+            formData.append("lastName", data.lastName)
+            formData.append("phone", data.phone)
+            formData.append("qualifications", data.qualifications)
+            formData.append("spreadBetsFrequency", data.spreadBetsFrequency)
+            formData.append("state", data.state)
+            formData.append("swiftCode", data.swiftCode)
+            formData.append("workExperience", data.workExperience)
             
-            const response = await axios.post('https://tradingcrowd.net/api/updateuserdetail', {
-                date_of_birth: data.date_of_birth,
-                postal_code: data.postal_code,
-                aadhaarCard: data.aadhaarCard,
-                accountName: data.accountName,
-                bankAccount: data.bankAccount,
-                bankAddress: data.bankAddress,
-                bankName: data.bankName,
-                city: data.city,
-                country: data.country,
-                firstName: data.firstName,
-                futureTradeFrequency: data.futureTradeFrequency,
-                lastName: data.lastName,
-                passport: data.passport,
-                phoneNo: data.phoneNo,
-                qualifications: data.qualifications,
-                spreadBetsFrequency: data.spreadBetsFrequency,
-                state: data.state,
-                swiftCode: data.swiftCode,
-                workExperience: data.workExperience,
-            },
+            console.log(formData)
+
+
+            const response = await axios.post('https://tradingcrowd.net/api/updateuserdetail', formData,
             {
                 headers: {
                     Authorization: `Bearer ${token}`

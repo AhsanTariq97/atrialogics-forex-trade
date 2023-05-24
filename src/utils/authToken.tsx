@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Cookies from 'universal-cookie';
@@ -8,6 +9,26 @@ const withAuth = (WrappedComponent: any) => {
     const cookies = new Cookies()
     const router = useRouter();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    const getUserDetails = async () => {
+      try {
+          const token = cookies.get('token')
+          
+          const response = await axios.get('https://tradingcrowd.net/api/userdetail', {
+              headers: {
+              Authorization: `Bearer ${token}`
+              }
+          });
+
+          if (response.data.status === 'Authorization Token not found') {
+              cookies.remove('token')
+              router.push('/login')
+          
+          }
+      } catch (error) {
+          console.error(error);
+      }
+  }
 
     useEffect(() => {
       const checkAuthentication = async () => {
@@ -20,6 +41,7 @@ const withAuth = (WrappedComponent: any) => {
         }
       };
 
+      getUserDetails()
       checkAuthentication();
     }, []);
 
