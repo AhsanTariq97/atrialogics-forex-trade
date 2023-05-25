@@ -4,52 +4,28 @@ import { useFormContext } from "react-hook-form";
 const QuestionnaireForm = ({retrievedData}: {retrievedData: any}) => {
 
     const { register, setValue, formState: {errors} } = useFormContext();
-
-    const [futureTradeFrequency, setFutureTradeFrequency] = useState('');
-    const [spreadBetsFrequency, setSpreadBetsFrequency] = useState('');
-    const [workExperience, setWorkExperience] = useState('');
-    const [qualifications, setQualifications] = useState('');
+    const [questionnaire, setQuestionnaire] = useState({
+        futureTradeFrequency: '',
+        spreadBetsFrequency: '',
+        workExperience: '',
+        qualifications: ''
+    });
 
     useEffect(() => {
-        if (retrievedData && retrievedData.futureTradeFrequency) {
-            setFutureTradeFrequency(retrievedData.futureTradeFrequency)
-            setValue('futureTradeFrequency', retrievedData.futureTradeFrequency)
-        }
-        if (retrievedData && retrievedData.spreadBetsFrequency) {
-            setSpreadBetsFrequency(retrievedData.spreadBetsFrequency)
-            setValue('spreadBetsFrequency', retrievedData.spreadBetsFrequency)
-        }
-        if (retrievedData && retrievedData.workExperience) {
-            setWorkExperience(retrievedData.workExperience)
-            setValue('workExperience', retrievedData.workExperience)
-        }
-        if (retrievedData && retrievedData.qualifications) {
-            setQualifications(retrievedData.qualifications)
-            setValue('qualifications', retrievedData.qualifications)
-        }
+        if (retrievedData) {
+            setQuestionnaire(retrievedData);
+            Object.keys(retrievedData).forEach((key) => {
+              setValue(key, retrievedData[key]);
+            });
+          }
     }, [retrievedData, setValue]);
 
     const handleRadioChange = (value: string, groupName: string) => {
-        switch (groupName) {
-            case 'futureTradeFrequency':
-              setFutureTradeFrequency(value);
-              setValue('futureTradeFrequency', value);
-              break;
-            case 'spreadBetsFrequency':
-              setSpreadBetsFrequency(value);
-              setValue('spreadBetsFrequency', value);
-              break;
-            case 'workExperience':
-              setWorkExperience(value);
-              setValue('workExperience', value);
-              break;
-            case 'qualifications':
-              setQualifications(value);
-              setValue('qualifications', value);
-              break;
-            default:
-              break;
-          }
+        setQuestionnaire((prevFormData) => ({
+            ...prevFormData,
+            [groupName]: value
+          }));
+        setValue(groupName, value);
     };
 
 
@@ -61,7 +37,7 @@ const QuestionnaireForm = ({retrievedData}: {retrievedData: any}) => {
             <label htmlFor='frequently1'><input 
                 className='mr-2' type="radio" id='frequently1' 
                 value='Frequently'
-                defaultChecked={futureTradeFrequency === 'Frequently'}
+                defaultChecked={questionnaire.futureTradeFrequency === 'Frequently'}
                 onClick={() => handleRadioChange('Frequently', 'futureTradeFrequency')}
                 {...register("futureTradeFrequency", { required: "Please select an option" })} 
             />
@@ -69,7 +45,8 @@ const QuestionnaireForm = ({retrievedData}: {retrievedData: any}) => {
             <label htmlFor='regularly1'><input 
                 className='mr-2' type="radio" id='regularly1' 
                 value='Regularly'
-                defaultChecked={futureTradeFrequency === 'Regularly'}
+                // checked={values.futureTradeFrequency}
+                defaultChecked={questionnaire.futureTradeFrequency === 'Regularly'}
                 onClick={() => handleRadioChange('Regularly', 'futureTradeFrequency')}
                 {...register("futureTradeFrequency", { required: "Please select an option" })} 
                 />
@@ -77,7 +54,7 @@ const QuestionnaireForm = ({retrievedData}: {retrievedData: any}) => {
             <label htmlFor='occasionally1'><input 
                 className='mr-2' type="radio" id='occasionally1' 
                 value='Occasionally'
-                defaultChecked={futureTradeFrequency === 'Occasionally'}
+                defaultChecked={questionnaire.futureTradeFrequency === 'Occasionally'}
                 onClick={() => handleRadioChange('Occasionally', 'futureTradeFrequency')}
                 {...register("futureTradeFrequency", { required: "Please select an option" })} 
             />
@@ -85,7 +62,7 @@ const QuestionnaireForm = ({retrievedData}: {retrievedData: any}) => {
             <label htmlFor='never1'><input 
                 className='mr-2' type="radio" id='never1' 
                 value='Never'
-                defaultChecked={futureTradeFrequency === 'Never'}
+                defaultChecked={questionnaire.futureTradeFrequency === 'Never'}
                 onClick={() => handleRadioChange('Never', 'futureTradeFrequency')}
                 {...register("futureTradeFrequency", { required: "Please select an option" })} 
             />
@@ -97,7 +74,7 @@ const QuestionnaireForm = ({retrievedData}: {retrievedData: any}) => {
             <label htmlFor='frequently2'><input 
                 className='mr-2' type="radio" id='frequently2' 
                 value='Frequently'
-                defaultChecked={spreadBetsFrequency === 'Frequently'}
+                defaultChecked={questionnaire.spreadBetsFrequency === 'Frequently'}
                 onClick={() => handleRadioChange('Frequently', 'spreadBetsFrequency')}
                 {...register("spreadBetsFrequency", { required: "Please select an option" })} 
             />
@@ -105,7 +82,7 @@ const QuestionnaireForm = ({retrievedData}: {retrievedData: any}) => {
             <label htmlFor='regularly2'><input 
                 className='mr-2' type="radio" id='regularly2' 
                 value='Regularly'
-                defaultChecked={spreadBetsFrequency === 'Regularly'}
+                defaultChecked={questionnaire.spreadBetsFrequency === 'Regularly'}
                 onClick={() => handleRadioChange('Regularly', 'spreadBetsFrequency')}
                 {...register("spreadBetsFrequency", { required: "Please select an option" })} 
                 />
@@ -113,7 +90,7 @@ const QuestionnaireForm = ({retrievedData}: {retrievedData: any}) => {
             <label htmlFor='occasionally2'><input 
                 className='mr-2' type="radio" id='occasionally2' 
                 value='Occasionally'
-                defaultChecked={spreadBetsFrequency === 'Occasionally'}
+                defaultChecked={questionnaire.spreadBetsFrequency === 'Occasionally'}
                 onClick={() => handleRadioChange('Occasionally', 'spreadBetsFrequency')}
                 {...register("spreadBetsFrequency", { required: "Please select an option" })} 
             />
@@ -121,7 +98,7 @@ const QuestionnaireForm = ({retrievedData}: {retrievedData: any}) => {
             <label htmlFor='never2'><input 
                 className='mr-2' type="radio" id='never2' 
                 value='Never'
-                defaultChecked={spreadBetsFrequency === 'Never'}
+                defaultChecked={questionnaire.spreadBetsFrequency === 'Never'}
                 onClick={() => handleRadioChange('Never', 'spreadBetsFrequency')}
                 {...register("spreadBetsFrequency", { required: "Please select an option" })} 
             />
@@ -133,7 +110,7 @@ const QuestionnaireForm = ({retrievedData}: {retrievedData: any}) => {
             <label htmlFor='yes1'><input 
                 className='mr-2' type="radio" id='yes1' 
                 value='Yes'
-                defaultChecked={workExperience === 'Yes'}
+                defaultChecked={questionnaire.workExperience === 'Yes'}
                 onClick={() => handleRadioChange('Yes', 'workExperience')}
                 {...register("workExperience", { required: "Please select an option" })} 
             />
@@ -141,7 +118,7 @@ const QuestionnaireForm = ({retrievedData}: {retrievedData: any}) => {
             <label htmlFor='no1'><input 
                 className='mr-2' type="radio" id='no1' 
                 value='No'
-                defaultChecked={workExperience === 'No'}
+                defaultChecked={questionnaire.workExperience === 'No'}
                 onClick={() => handleRadioChange('No', 'workExperience')}
                 {...register("workExperience", { required: "Please select an option" })} 
                 />
@@ -153,7 +130,7 @@ const QuestionnaireForm = ({retrievedData}: {retrievedData: any}) => {
             <label htmlFor='yes2'><input 
                 className='mr-2' type="radio" id='yes2'
                 value='Yes'
-                defaultChecked={qualifications === 'Yes'}
+                defaultChecked={questionnaire.qualifications === 'Yes'}
                 onClick={() => handleRadioChange('Yes', 'qualifications')}
                 {...register("qualifications", { required: "Please select an option" })} 
             />
@@ -161,7 +138,7 @@ const QuestionnaireForm = ({retrievedData}: {retrievedData: any}) => {
             <label htmlFor='no2'><input 
                 className='mr-2' type="radio" id='no2'
                 value='No'
-                defaultChecked={qualifications === 'No'}
+                defaultChecked={questionnaire.qualifications === 'No'}
                 onClick={() => handleRadioChange('No', 'qualifications')}
                 {...register("qualifications", { required: "Please select an option" })} 
                 />
